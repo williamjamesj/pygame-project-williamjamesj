@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from menu import displayMenu, checkingMenu, levelSelector, checkingLevel
 import globalvariables as globals
-from actualgame import updatePlayer
+from gameplay import updatePlayer
 import os, sys
 # Defaults to Fullscreen Resolution
 globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
@@ -27,11 +27,12 @@ while globals.running: # The main loop can be stopped from any file
             checkingMenu(pygame.mouse.get_pos())
         elif (globals.gamestage == "levelselect" and event.type == MOUSEBUTTONDOWN):
             checkingLevel(pygame.mouse.get_pos())
-    if globals.gamestage == "game":
+    if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it is the most performance hungry.
         updatePlayer(pygame.key.get_pressed())
-    elif globals.gamestage =="menu" and not menurendered:
+        globals.allobjects.draw(globals.screen)
+    elif globals.gamestage =="menu" and not menurendered: # Loops while the player is in menu.
         displayMenu()
-        menurendered = True # means that the menu will only be drawn once so that the performance isn't being impeded by redrawing the background
+        menurendered = True # Means that the menu will only be drawn once so that the performance isn't being impeded by redrawing the background.
         levelrendered = False
     elif globals.gamestage == "levelselect" and not levelrendered:
         levelSelector()
@@ -39,6 +40,8 @@ while globals.running: # The main loop can be stopped from any file
     else:
         if not globals.gamestage == "menu":
             menurendered = False
+        elif not globals.gamestage == "levelselect":
+            levelrendered = False
         
     pygame.display.flip()
     fpsClock.tick(FPS)
