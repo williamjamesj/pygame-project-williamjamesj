@@ -9,11 +9,11 @@ def playGame(level):
     globals.level = level
     print(level)
     globals.screen.blit(globals.backgroundpicture, (0,0))
-    globals.playerspaceship = Spaceship([500,500],"banana",50,1,2)
+    globals.playerspaceship = Spaceship([500,500],"banana",50,0.1,0)
     globals.allobjects.add(globals.playerspaceship)
     return
 def updatePlayer(keys):
     globals.screen.blit(globals.backgroundpicture, (0,0))
-    globals.playerspaceship.update(keys[pygame.K_UP]==1,keys[pygame.K_DOWN]==1)
+    globals.playerspaceship.update(keys[pygame.K_UP]==1,keys[pygame.K_DOWN]==1,keys[pygame.K_LEFT]==1,keys[pygame.K_RIGHT]==1)
     print(globals.playerspaceship.rect.x)
     return
