@@ -15,5 +15,4 @@ def playGame(level):
 def updatePlayer(keys):
     globals.screen.blit(globals.backgroundpicture, (0,0))
     globals.playerspaceship.update(keys[pygame.K_UP]==1,keys[pygame.K_DOWN]==1,keys[pygame.K_LEFT]==1,keys[pygame.K_RIGHT]==1)
-    print(globals.playerspaceship.rect.x)
     return
