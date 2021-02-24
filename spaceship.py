@@ -10,7 +10,8 @@ class Spaceship(pygame.sprite.Sprite):
     def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed):
         super().__init__() # Very important
         self.appearance = appearance
-        self.originalimage = pygame.image.load("testpic.png")
+        print(f"resources\spaceships\{str(appearance)}\00.png")
+        self.originalimage = pygame.image.load(f"resources/spaceships/{str(appearance)}/00.png")
         self.maxspeed = maxspeed
         self.acceleration = acceleration
         self.direction = direction
@@ -34,6 +35,14 @@ class Spaceship(pygame.sprite.Sprite):
             self.speed = self.maxspeed
         if self.speed < self.maxspeed*-1:
             self.speed = self.maxspeed*-1
+        if math.floor(self.speed*-1) <= 0:
+            number = "00"
+        elif math.floor(self.speed*-1)<=9:
+            number = f"0{math.floor(self.speed*-1)}"
+        else:
+            number = f"{math.floor(self.speed*-1)}"
+        print(f"resources/spaceships/{str(self.appearance)}/{number}.png")
+        self.originalimage = pygame.image.load(f"resources/spaceships/{str(self.appearance)}/{number}.png")
         xy = findxy(self.direction)
         self.x += xy[0]*self.speed
         self.y += xy[1]*self.speed

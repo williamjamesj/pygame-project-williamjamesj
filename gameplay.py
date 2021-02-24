@@ -10,7 +10,7 @@ def playGame(level):
     globals.level = level
     print(level)
     globals.screen.blit(globals.backgroundpicture, (0,0))
-    globals.playerspaceship = Spaceship([500,500],"banana",10,0.1,0,2)
+    globals.playerspaceship = Spaceship([500,500],"yellowspaceship",10,0.1,0,2)
     globals.allobjects.add(globals.playerspaceship)
     return
 def updatePlayer(keys):
