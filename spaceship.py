@@ -7,13 +7,14 @@ def findxy(direction):
         y = math.cos(math.radians(direction))
         return [x,y]
 class Spaceship(pygame.sprite.Sprite):
-    def __init__(self,coords,appearance,maxspeed, acceleration, direction):
+    def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed):
         super().__init__() # Very important
         self.appearance = appearance
         self.originalimage = pygame.image.load("testpic.png")
         self.maxspeed = maxspeed
         self.acceleration = acceleration
         self.direction = direction
+        self.turnspeed = turnspeed
         self.speed = 0
         self.image = pygame.transform.rotate(self.originalimage,direction)
         self.rect = self.image.get_rect(center=coords)
@@ -26,15 +27,15 @@ class Spaceship(pygame.sprite.Sprite):
         if doSlow:
             self.speed += self.acceleration
         if left:
-            self.direction += 1
+            self.direction += self.turnspeed
         if right:
-            self.direction -= 1
+            self.direction -= self.turnspeed
         if self.speed > self.maxspeed:
             self.speed = self.maxspeed
-        print(self.direction)
+        if self.speed < self.maxspeed*-1:
+            self.speed = self.maxspeed*-1
         xy = findxy(self.direction)
         self.x += xy[0]*self.speed
-        print (self.x)
         self.y += xy[1]*self.speed
         self.image = pygame.transform.rotate(self.originalimage,self.direction)
         self.rect = self.image.get_rect(center=(math.floor(self.x),math.floor(self.y)))

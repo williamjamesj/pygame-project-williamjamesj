@@ -9,3 +9,4 @@ level = None
 levelobstacles = None
 playerspaceship = None
 allobjects = None
+debug = False # Gives features like fps counter, TEMPORARY

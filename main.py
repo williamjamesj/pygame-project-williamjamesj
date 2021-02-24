@@ -4,6 +4,7 @@ from menu import displayMenu, checkingMenu, levelSelector, checkingLevel
 import globalvariables as globals
 from gameplay import updatePlayer
 import os, sys
+import math
 # Defaults to Fullscreen Resolution
 globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
@@ -42,7 +43,10 @@ while globals.running: # The main loop can be stopped from any file
             menurendered = False
         elif not globals.gamestage == "levelselect":
             levelrendered = False
-        
+    if globals.debug:
+        font = pygame.font.Font('Nougat.ttf', 50)
+        textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))
+        globals.screen.blit(textobject, (0,0))
     pygame.display.flip()
     fpsClock.tick(FPS)
     #print(fpsClock.get_fps())
