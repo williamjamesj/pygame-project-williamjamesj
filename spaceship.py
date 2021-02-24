@@ -10,7 +10,6 @@ class Spaceship(pygame.sprite.Sprite):
     def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed):
         super().__init__() # Very important
         self.appearance = appearance
-        print(f"resources\spaceships\{str(appearance)}\00.png")
         self.originalimage = pygame.image.load(f"resources/spaceships/{str(appearance)}/00.png")
         self.maxspeed = maxspeed
         self.acceleration = acceleration
@@ -24,25 +23,26 @@ class Spaceship(pygame.sprite.Sprite):
         return
     def update(self,doThrust,doSlow,left,right):
         if doThrust:
-            self.speed -= self.acceleration
+            self.speed -= self.acceleration # Going forwards (what we think is forwards) is actually going backwards to pygame, so we just "slow down" to speed up and vice versa 
         if doSlow:
             self.speed += self.acceleration
         if left:
             self.direction += self.turnspeed
         if right:
             self.direction -= self.turnspeed
-        if self.speed > self.maxspeed:
-            self.speed = self.maxspeed
+        if self.speed > 0: # Stops the spaceship from going in reverse, because thats not what spaceships do.
+            self.speed = 0
         if self.speed < self.maxspeed*-1:
             self.speed = self.maxspeed*-1
+        # Finds which stage of the Animation the ship should show
         if math.floor(self.speed*-1) <= 0:
             number = "00"
         elif math.floor(self.speed*-1)<=9:
             number = f"0{math.floor(self.speed*-1)}"
         else:
             number = f"{math.floor(self.speed*-1)}"
-        print(f"resources/spaceships/{str(self.appearance)}/{number}.png")
         self.originalimage = pygame.image.load(f"resources/spaceships/{str(self.appearance)}/{number}.png")
+
         xy = findxy(self.direction)
         self.x += xy[0]*self.speed
         self.y += xy[1]*self.speed

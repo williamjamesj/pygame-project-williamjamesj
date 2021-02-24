@@ -33,10 +33,8 @@ def checkingMenu(position):
         globals.running = False
         return
 def checkingLevel(position):
-    print(globals.levelbuttonArray)
     if (globals.levelbuttonArray[-1].interacts(position)):
         globals.gamestage = "menu"
-        print("menu")
         globals.buttonArray = [] # Clears the previous inhabitants of the array
         return
     elif(globals.levelbuttonArray[0].interacts(position)):

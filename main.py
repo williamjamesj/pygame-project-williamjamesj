@@ -11,13 +11,13 @@ globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
 # Saves the current stage in the game
-pygame.display.set_caption('My Space Game')
+pygame.display.set_caption('Pygame Assignment')
 pygame.init() # initializes all of the pygame functionality including fonts
 FPS = 60
 fpsClock = pygame.time.Clock()
 menurendered = False
 levelrendered = False
-globals.backgroundpicture = pygame.image.load("background.jpg")
+globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running'''
     for event in pygame.event.get():
