@@ -49,4 +49,3 @@ while globals.running: # The main loop can be stopped from any file
         globals.screen.blit(textobject, (0,0))
     pygame.display.flip()
     fpsClock.tick(FPS)
-    #print(fpsClock.get_fps())

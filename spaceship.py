@@ -3,8 +3,8 @@ from pygame.locals import *
 import globalvariables as globals
 import math
 def findxy(direction):
-        x = math.sin(math.radians(direction))
-        y = math.cos(math.radians(direction))
+        x = math.sin(math.radians(direction)) # Trigonometry.
+        y = math.cos(math.radians(direction)) # I'm not even going to pretend I thought of this by myself: https://stackoverflow.com/questions/5346874/pygame-making-a-sprite-move-in-the-direction-it-is-facing.
         return [x,y]
 class Spaceship(pygame.sprite.Sprite):
     def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed):

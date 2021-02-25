@@ -8,7 +8,6 @@ def playGame(level):
     globals.allobjects = pygame.sprite.Group()
     globals.gamestage = "game"
     globals.level = level
-    print(level)
     globals.screen.blit(globals.backgroundpicture, (0,0))
     globals.playerspaceship = Spaceship([500,500],"yellowspaceship",10,0.1,0,2)
     globals.allobjects.add(globals.playerspaceship)
