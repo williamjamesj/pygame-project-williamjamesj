@@ -5,14 +5,15 @@ from spaceship import Spaceship
 import math
 from obstacle import Barrier
 def playGame(level):
+    globals.playerorigin = globals.dimensions[0]/2,globals.dimensions[1]/2
     globals.allobjects = pygame.sprite.Group()
     globals.allnonplayers = pygame.sprite.Group()
     globals.gamestage = "game"
     globals.level = level
-    globals.playerspaceship = Spaceship([500,500],"yellowspaceship",10,0.1,0,2)
+    globals.playerspaceship = Spaceship([0,0],"yellowspaceship",10,0.1,0,2)
     globals.allobjects.add(globals.playerspaceship)
     globals.screen.blit(globals.backgroundpicture, (0,0))
-    globals.allnonplayers.add(Barrier(100,100,1000,100))
+    globals.allnonplayers.add(Barrier(0,0,1000,100))
     return
 def updatePlayer(keys):
     globals.screen.blit(globals.backgroundpicture, (0,0))
@@ -22,4 +23,10 @@ def updatePlayer(keys):
         font = pygame.font.Font('Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))
         globals.screen.blit(textobject, (500,0))
+    for i in globals.allnonplayers:
+        collisions = pygame.sprite.collide_mask(globals.playerspaceship,i)
+    if collisions:
+        print("collid")
+    else:
+        print("not collid")
     return

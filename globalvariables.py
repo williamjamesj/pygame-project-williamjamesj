@@ -11,3 +11,4 @@ playerspaceship = None
 allobjects = None
 debug = False # Gives features like fps counter, 
 allnonplayers = False
+playerorigin = None

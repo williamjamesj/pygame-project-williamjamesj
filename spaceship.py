@@ -25,6 +25,7 @@ class Spaceship(pygame.sprite.Sprite):
         self.speed = 0
         self.image = pygame.transform.rotate(self.imagelist[0],direction)
         self.rect = self.image.get_rect(center=coords)
+        self.mask = pygame.mask.from_surface(self.image)
         self.percievedx = coords[0]
         self.percievedy = coords[1]
         return
@@ -52,7 +53,7 @@ class Spaceship(pygame.sprite.Sprite):
         self.percievedx += xy[0]*self.speed
         self.percievedy += xy[1]*self.speed
         self.image = pygame.transform.rotate(self.image,self.direction)
-        self.rect = self.image.get_rect(center=(globals.dimensions[0]/2,globals.dimensions[1]/2))
+        self.rect = self.image.get_rect(center=(globals.playerorigin))
         return
     def draw(self):
         globals.screen.blit(self.image,(self.rect.x,self.rect.y))
