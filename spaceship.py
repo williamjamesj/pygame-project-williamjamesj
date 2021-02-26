@@ -2,24 +2,31 @@ import pygame
 from pygame.locals import *
 import globalvariables as globals
 import math
+import os
 def findxy(direction):
         x = math.sin(math.radians(direction)) # Trigonometry.
         y = math.cos(math.radians(direction)) # I'm not even going to pretend I thought of this by myself: https://stackoverflow.com/questions/5346874/pygame-making-a-sprite-move-in-the-direction-it-is-facing.
         return [x,y]
+def findImages(directory):
+    fileslist = []
+    for i in os.listdir(directory):
+        fileslist.append(pygame.image.load(os.path.join(directory,i)).convert_alpha())
+    print(fileslist)
+    return fileslist
 class Spaceship(pygame.sprite.Sprite):
     def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed):
         super().__init__() # Very important
         self.appearance = appearance
-        self.originalimage = pygame.image.load(f"resources/spaceships/{str(appearance)}/00.png")
+        self.imagelist = findImages(f"resources/spaceships/{str(appearance)}/")
         self.maxspeed = maxspeed
         self.acceleration = acceleration
         self.direction = direction
         self.turnspeed = turnspeed
         self.speed = 0
-        self.image = pygame.transform.rotate(self.originalimage,direction)
+        self.image = pygame.transform.rotate(self.imagelist[0],direction)
         self.rect = self.image.get_rect(center=coords)
-        self.x = coords[0]
-        self.y = coords[1]
+        self.percievedx = coords[0]
+        self.percievedy = coords[1]
         return
     def update(self,doThrust,doSlow,left,right):
         if doThrust:
@@ -36,18 +43,16 @@ class Spaceship(pygame.sprite.Sprite):
             self.speed = self.maxspeed*-1
         # Finds which stage of the Animation the ship should show
         if math.floor(self.speed*-1) <= 0:
-            number = "00"
-        elif math.floor(self.speed*-1)<=9:
-            number = f"0{math.floor(self.speed*-1)}"
+            number = 0
         else:
-            number = f"{math.floor(self.speed*-1)}"
-        self.originalimage = pygame.image.load(f"resources/spaceships/{str(self.appearance)}/{number}.png")
+            number = math.floor(self.speed*-1)
+        self.image = self.imagelist[number]
 
         xy = findxy(self.direction)
-        self.x += xy[0]*self.speed
-        self.y += xy[1]*self.speed
-        self.image = pygame.transform.rotate(self.originalimage,self.direction)
-        self.rect = self.image.get_rect(center=(math.floor(self.x),math.floor(self.y)))
+        self.percievedx += xy[0]*self.speed
+        self.percievedy += xy[1]*self.speed
+        self.image = pygame.transform.rotate(self.image,self.direction)
+        self.rect = self.image.get_rect(center=(globals.dimensions[0]/2,globals.dimensions[1]/2))
         return
     def draw(self):
         globals.screen.blit(self.image,(self.rect.x,self.rect.y))
