@@ -9,6 +9,6 @@ level = None
 levelobstacles = None
 playerspaceship = None
 allobjects = None
-debug = False # Gives features like fps counter, 
+debug = True # Gives features like fps counter, 
 allnonplayers = False
 playerorigin = None
