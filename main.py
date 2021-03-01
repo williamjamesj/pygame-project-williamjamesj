@@ -5,7 +5,12 @@ import globalvariables as globals
 from gameplay import updatePlayer
 import os, sys
 import math
-# Defaults to Fullscreen Resolution
+import localisation
+# Sets the language to whatever is stored in resources/localisation/lastlang and reads that language to globals.languagesdict
+localisation.readlang()
+localisation.readtexts()
+print(globals.languagesdict)
+# Defaults to Fullscreen Resolution 
 globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()

@@ -16,13 +16,13 @@ def levelSelector():
     globals.levelbuttonArray.append(buttons.Button(75,75,[-100,100],globals.screen, "7",50))
     globals.levelbuttonArray.append(buttons.Button(75,75,[0,100],globals.screen, "8",50))
     globals.levelbuttonArray.append(buttons.Button(75,75,[100,100],globals.screen, "9",50))
-    globals.levelbuttonArray.append(buttons.Button(200,100,[0,globals.dimensions[1]/2-100],globals.screen, "Back",100)) # Back button offset 100 pixels from the bottom of the screen
+    globals.levelbuttonArray.append(buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100)) # Back button offset 100 pixels from the bottom of the screen
     return
 def displayMenu():
     # Play Button = 0
     globals.screen.blit(globals.backgroundpicture, (0,0))
-    globals.buttonArray.append(buttons.Button(200,100,[0,-75],globals.screen,"Play",100))
-    globals.buttonArray.append(buttons.Button(200,100,[0,75],globals.screen,"Quit",100))
+    globals.buttonArray.append(buttons.Button(200,100,[0,-75],globals.screen,globals.languagesdict["play"],100))
+    globals.buttonArray.append(buttons.Button(200,100,[0,75],globals.screen,globals.languagesdict["quit"],100))
     globals.levelbuttonArray = []
     return
 def checkingMenu(position):

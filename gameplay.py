@@ -4,16 +4,14 @@ import globalvariables as globals
 from spaceship import Spaceship
 import math
 from obstacle import Barrier
+from levels import playLevel
 def playGame(level):
     globals.playerorigin = globals.dimensions[0]/2,globals.dimensions[1]/2
     globals.allobjects = pygame.sprite.Group()
     globals.allnonplayers = pygame.sprite.Group()
     globals.gamestage = "game"
     globals.level = level
-    globals.playerspaceship = Spaceship([0,0],"yellowspaceship",10,0.1,0,2)
-    globals.allobjects.add(globals.playerspaceship)
-    globals.screen.blit(globals.backgroundpicture, (0,0))
-    globals.allnonplayers.add(Barrier(0,0,1000,100))
+    playLevel(level)
     return
 def updatePlayer(keys):
     globals.screen.blit(globals.backgroundpicture, (0,0))

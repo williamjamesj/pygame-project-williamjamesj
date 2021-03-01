@@ -53,7 +53,7 @@ class Spaceship(pygame.sprite.Sprite):
         self.percievedx += xy[0]*self.speed
         self.percievedy += xy[1]*self.speed
         self.image = pygame.transform.rotate(self.image,self.direction)
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = pygame.mask.from_surface(self.image) # Recalculate the mask so that it adapts to the new direction that it is facing, otherwise the hit box will be very wrong.
         self.rect = self.image.get_rect(center=(globals.playerorigin))
         return
     def draw(self):
