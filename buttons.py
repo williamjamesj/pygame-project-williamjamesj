@@ -7,7 +7,7 @@ class Button():
         x,y = position
         self.rectangle = pygame.Rect(0,0,width,height)
         self.rectangle.center = (globals.dimensions[0]/2+x,globals.dimensions[1]/2+y)
-        pygame.draw.rect(surface, (0,0,255), self.rectangle, border_radius = 15)
+        pygame.draw.rect(surface, (255,255,255), self.rectangle, border_radius = 15)
         font = pygame.font.Font('Nougat.ttf', size)
         textobject = font.render(text, True, (255,0,0))
         # Draws the text in the center of the rectangle, whilst offsetting the text by the width of the text, so that it remains centered, instead of being offset to the bottom right.
