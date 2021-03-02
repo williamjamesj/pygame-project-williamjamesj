@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from menu import displayMenu, checkingMenu, levelSelector, checkingLevel
+from menu import checkingSettings, displayMenu, checkingMenu, displaySettings, levelSelector, checkingLevel, displayInstructions, checkingInstructions
 import globalvariables as globals
 from gameplay import updatePlayer
 import os, sys
@@ -22,6 +22,8 @@ FPS = 60
 fpsClock = pygame.time.Clock()
 menurendered = False
 levelrendered = False
+instructionsrendered = False
+settingsrendered = False
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running'''
@@ -33,6 +35,10 @@ while globals.running: # The main loop can be stopped from any file
             checkingMenu(pygame.mouse.get_pos())
         elif (globals.gamestage == "levelselect" and event.type == MOUSEBUTTONDOWN):
             checkingLevel(pygame.mouse.get_pos())
+        elif (globals.gamestage == "instructions" and event.type == MOUSEBUTTONDOWN):
+            checkingInstructions(pygame.mouse.get_pos())
+        elif (globals.gamestage == "settings" and event.type == MOUSEBUTTONDOWN):
+            checkingSettings(pygame.mouse.get_pos())
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it is the most performance hungry.
         updatePlayer(pygame.key.get_pressed())
         globals.allobjects.draw(globals.screen)
@@ -41,14 +47,25 @@ while globals.running: # The main loop can be stopped from any file
         displayMenu()
         menurendered = True # Means that the menu will only be drawn once so that the performance isn't being impeded by redrawing the background.
         levelrendered = False
+        settingsrendered = False
     elif globals.gamestage == "levelselect" and not levelrendered:
         levelSelector()
         levelrendered = True
+    elif globals.gamestage == "instructions" and not instructionsrendered:
+        displayInstructions()
+        levelrendered = True
+        menurendered = False
+    elif globals.gamestage == "settings" and not instructionsrendered:
+        displaySettings()
+        levelrendered = True
+        menurendered = False
     else:
         if not globals.gamestage == "menu":
             menurendered = False
         elif not globals.gamestage == "levelselect":
             levelrendered = False
+        elif not globals.gamestage == "instructions":
+            instructionsrendered = False
     if globals.debug:
         font = pygame.font.Font('Nougat.ttf', 50)
         textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))
