@@ -67,7 +67,7 @@ while globals.running: # The main loop can be stopped from any file
         elif not globals.gamestage == "instructions":
             instructionsrendered = False
     if globals.debug:
-        font = pygame.font.Font('Nougat.ttf', 50)
+        font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))
         globals.screen.blit(textobject, (0,0))
     pygame.display.flip()
