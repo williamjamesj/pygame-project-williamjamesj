@@ -17,6 +17,11 @@ class Barrier(pygame.sprite.Sprite):
     def update(self):
         self.rect.x = self.x-globals.playerspaceship.percievedx
         self.rect.y = self.y-globals.playerspaceship.percievedy # The platform moves, the player stays stationary.
+        self.image.fill(self.colour)
     def draw(self):
         globals.screen.blit(self.image,(self.rect.x,self.rect.y))
         return
+class Objective(Barrier):
+    def __init__(self,x,y,width,height):
+        super().__init__(x,y,width,height)
+        self.colour = (255,255,0)

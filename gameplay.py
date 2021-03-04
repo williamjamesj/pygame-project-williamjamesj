@@ -15,12 +15,18 @@ def playGame(level):
     return
 def updatePlayer(keys):
     globals.screen.blit(globals.backgroundpicture, (0,0))
+    if keys[pygame.K_ESCAPE]==1:
+        globals.gamestage = "levelselect"
     globals.playerspaceship.update(keys[pygame.K_UP]==1,keys[pygame.K_DOWN]==1,keys[pygame.K_LEFT]==1,keys[pygame.K_RIGHT]==1)
     globals.allnonplayers.update()
+    globals.wincondition.update()
+    globals.wincondition.draw()
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))
         globals.screen.blit(textobject, (500,0))
+        textobject = font.render(f"XY: {str(math.ceil(globals.playerspaceship.percievedx)),str(math.ceil(globals.playerspaceship.percievedy))}", True, (255,0,0))
+        globals.screen.blit(textobject, (1000,0))
     for i in globals.allnonplayers:
         collisions = pygame.sprite.collide_mask(globals.playerspaceship,i)
     if collisions:
