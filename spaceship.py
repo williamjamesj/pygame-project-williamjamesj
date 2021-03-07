@@ -11,7 +11,6 @@ def findImages(directory):
     fileslist = []
     for i in os.listdir(directory):
         fileslist.append(pygame.image.load(os.path.join(directory,i)).convert_alpha())
-    print(fileslist)
     return fileslist
 class Spaceship(pygame.sprite.Sprite):
     def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed):

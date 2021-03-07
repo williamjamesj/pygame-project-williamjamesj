@@ -21,6 +21,7 @@ def updatePlayer(keys):
     globals.allnonplayers.update()
     globals.wincondition.update()
     globals.wincondition.draw()
+    collisions = []
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))
@@ -28,9 +29,6 @@ def updatePlayer(keys):
         textobject = font.render(f"XY: {str(math.ceil(globals.playerspaceship.percievedx)),str(math.ceil(globals.playerspaceship.percievedy))}", True, (255,0,0))
         globals.screen.blit(textobject, (1000,0))
     for i in globals.allnonplayers:
-        collisions = pygame.sprite.collide_mask(globals.playerspaceship,i)
-    if collisions:
-        print("collid")
-    else:
-        print("not collid")
+        if pygame.sprite.collide_mask(globals.playerspaceship,i) is not None:
+            globals.gamestage = "levelselect"
     return

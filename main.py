@@ -43,6 +43,8 @@ while globals.running: # The main loop can be stopped from any file
         updatePlayer(pygame.key.get_pressed())
         globals.allobjects.draw(globals.screen)
         globals.allnonplayers.draw(globals.screen)
+        menurendered = True
+        levelrendered = False
     elif globals.gamestage =="menu" and not menurendered: # Loops while the player is in menu.
         displayMenu()
         menurendered = True # Means that the menu will only be drawn once so that the performance isn't being impeded by redrawing the background.
