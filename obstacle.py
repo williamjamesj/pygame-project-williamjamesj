@@ -17,7 +17,7 @@ class Barrier(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
     def update(self):
         self.rect.x = self.x-globals.playerspaceship.percievedx
-        self.rect.y = self.y-globals.playerspaceship.percievedy # The platform moves, the player stays stationary.
+        self.rect.y = self.y-globals.playerspaceship.percievedy # The platform moves, the player stays stationary, so that the screen can scroll
         self.image.fill(self.colour)
     def draw(self):
         globals.screen.blit(self.image,(self.rect.x,self.rect.y))
@@ -26,3 +26,8 @@ class Objective(Barrier):
     def __init__(self,x,y,width,height):
         super().__init__(x,y,width,height)
         self.colour = (255,255,0)
+class SpawnPoint(Barrier):
+    def __init__(self,coords,width,height):
+        self.x, self.y = coords
+        super().__init__(self.x,self.y,width,height)
+        self.colour = (0,255,0)

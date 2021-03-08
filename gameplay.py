@@ -21,6 +21,8 @@ def updatePlayer(keys):
     globals.allnonplayers.update()
     globals.wincondition.update()
     globals.wincondition.draw()
+    globals.spawnPoint.update()
+    globals.spawnPoint.draw()
     collisions = []
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
@@ -30,5 +32,8 @@ def updatePlayer(keys):
         globals.screen.blit(textobject, (1000,0))
     for i in globals.allnonplayers:
         if pygame.sprite.collide_mask(globals.playerspaceship,i) is not None:
-            globals.gamestage = "levelselect"
+            globals.playerspaceship.percievedx = globals.spawnPointLocation[0]
+            globals.playerspaceship.percievedy = globals.spawnPointLocation[1]
+            globals.playerspaceship.speed = 0
+            globals.playerspaceship.direction = 0
     return
