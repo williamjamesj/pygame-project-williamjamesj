@@ -9,7 +9,12 @@ def findxy(direction):
         return [x,y]
 def findImages(directory):
     fileslist = []
+    filenames = []
     for i in os.listdir(directory):
+        filenames.append(i)
+    filenames.sort()
+    print(filenames)
+    for i in filenames:
         fileslist.append(pygame.image.load(os.path.join(directory,i)).convert_alpha())
     return fileslist
 class Spaceship(pygame.sprite.Sprite):
