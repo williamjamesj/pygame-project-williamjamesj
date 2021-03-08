@@ -26,7 +26,7 @@ instructionsrendered = False
 settingsrendered = False
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 while globals.running: # The main loop can be stopped from any file
-    '''Main Loop - Always running'''
+    '''Main Loop - Always running, until the game stops.'''
     for event in pygame.event.get():
         if event.type == QUIT:
             globals.running = False

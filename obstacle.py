@@ -3,6 +3,7 @@ from pygame.locals import *
 import buttons
 import globalvariables as globals
 class Barrier(pygame.sprite.Sprite):
+    '''Draws an obstacle'''
     def __init__(self,x,y,width,height):
         super().__init__()
         self.x = x+globals.playerorigin[0]; self.y = y+globals.playerorigin[1]
