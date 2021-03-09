@@ -11,7 +11,7 @@ localisation.readlang()
 localisation.readtexts()
 print(globals.languagesdict)
 # Defaults to Fullscreen Resolution 
-globals.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN|pygame.NOFRAME)
+globals.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
