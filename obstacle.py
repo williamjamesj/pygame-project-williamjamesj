@@ -31,3 +31,8 @@ class SpawnPoint(Barrier):
         self.x, self.y = coords
         super().__init__(self.x,self.y,width,height)
         self.colour = (0,255,0)
+        self.rect.centerx, self.rect.centery = coords
+    def update(self):
+        self.rect.centerx = self.x-globals.playerspaceship.percievedx
+        self.rect.centery = self.y-globals.playerspaceship.percievedy # The platform moves, the player stays stationary, so that the screen can scroll
+        self.image.fill(self.colour)

@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from menu import checkingSettings, displayMenu, checkingMenu, displaySettings, levelSelector, checkingLevel, displayInstructions, checkingInstructions
+from menu import checkingLevelOver, checkingSettings, displayLevelOver, displayMenu, checkingMenu, displaySettings, levelSelector, checkingLevel, displayInstructions, checkingInstructions
 import globalvariables as globals
 from gameplay import updatePlayer
 import os, sys
@@ -24,6 +24,7 @@ menurendered = False
 levelrendered = False
 instructionsrendered = False
 settingsrendered = False
+levelOverRendered = False
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
@@ -39,12 +40,16 @@ while globals.running: # The main loop can be stopped from any file
             checkingInstructions(pygame.mouse.get_pos())
         elif (globals.gamestage == "settings" and event.type == MOUSEBUTTONDOWN):
             checkingSettings(pygame.mouse.get_pos())
+        elif (globals.gamestage == "levelover" and event.type == MOUSEBUTTONDOWN):
+            checkingLevelOver(pygame.mouse.get_pos())
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it is the most performance hungry.
         updatePlayer(pygame.key.get_pressed())
         globals.allobjects.draw(globals.screen)
         globals.allnonplayers.draw(globals.screen)
         menurendered = True
         levelrendered = False
+        globals.leveltimer.tick()
+        globals.leveltime += globals.leveltimer.get_time()
     elif globals.gamestage =="menu" and not menurendered: # Loops while the player is in menu.
         displayMenu()
         menurendered = True # Means that the menu will only be drawn once so that the performance isn't being impeded by redrawing the background.
@@ -53,6 +58,7 @@ while globals.running: # The main loop can be stopped from any file
     elif globals.gamestage == "levelselect" and not levelrendered:
         levelSelector()
         levelrendered = True
+        levelOverRendered = False
     elif globals.gamestage == "instructions" and not instructionsrendered:
         displayInstructions()
         levelrendered = True
@@ -61,6 +67,12 @@ while globals.running: # The main loop can be stopped from any file
         displaySettings()
         levelrendered = True
         menurendered = False
+    elif globals.gamestage == "levelover" and not levelOverRendered:
+        displayLevelOver()
+        levelOverRendered = True
+        menurendered = False
+        levelrendered = False
+        instructionsrendered = False
     else:
         if not globals.gamestage == "menu":
             menurendered = False

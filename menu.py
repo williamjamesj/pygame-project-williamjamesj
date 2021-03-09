@@ -1,3 +1,4 @@
+import math
 import pygame
 from pygame.locals import *
 import buttons
@@ -34,6 +35,11 @@ def displayInstructions():
 def displaySettings():
     globals.screen.blit(globals.backgroundpicture, (0,0))
     globals.settingsbuttons.append(buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100))
+def displayLevelOver():
+    globals.screen.blit(globals.backgroundpicture, (0,0))
+    buttons.Button(600,100,[0,-100],globals.screen, f"{globals.languagesdict['time']}: {math.floor(globals.leveltime/1000)} {globals.languagesdict['seconds']}",100,(255,255,255),(0,0,0))
+    buttons.Button(600,100,[0,100],globals.screen, f"{globals.languagesdict['coinsgained']}: {math.floor(globals.coinsgained)}",100,(255,255,255),(0,0,0))
+    globals.leveloverbackbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100)
 def checkingMenu(position):
     if (globals.buttonArray[0].interacts(position)):
         globals.gamestage = "levelselect"
@@ -63,5 +69,10 @@ def checkingInstructions(position):
 def checkingSettings(position):
     if (globals.settingsbuttons[0].interacts(position)):
         globals.gamestage = "menu"
+        globals.buttonArray = []
+    return
+def checkingLevelOver(position):
+    if (globals.leveloverbackbutton.interacts(position)):
+        globals.gamestage = "levelselect"
         globals.buttonArray = []
     return

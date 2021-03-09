@@ -1,4 +1,4 @@
-# Variables imported from this file can be accessed in any other file that calls it, specifically helpful for the game loop
+# Variables imported from this file can be accessed in any other file that calls it, specifically helpful for the game loop.
 running = True # When this becomes false, the game will close
 gamestage = "menu" # The stage that the game is in
 buttonArray = []
@@ -10,7 +10,7 @@ level = None
 levelobstacles = None
 playerspaceship = None
 allobjects = None
-debug = False # Gives features like fps counter, 
+debug = True # Gives helpful features like fps counter, useful for debugging, not for the end-user to see.
 allnonplayers = False
 lang = None
 languagesdict = None
@@ -18,3 +18,9 @@ instructionsbackbutton = None
 wincondition = None
 spawnPoint = None
 spawnPointLocation = None
+unlockedlevel = 1
+leveltimer = None # The clock object that times each level.
+leveltime = 0 # The number of milliseconds elapsed since the start of the level. Reset if the player respawns.
+coins = 0
+leveloverbackbutton = None
+coinsgained = 0
