@@ -36,6 +36,9 @@ def updatePlayer(keys):
         globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100
         if globals.coinsgained<100:
             globals.coinsgained = 100
+        globals.coins+=globals.coinsgained
+        if globals.level==globals.unlockedlevel:
+            globals.unlockedlevel+=1
         globals.gamestage = "levelover"
     for i in globals.allnonplayers:
         if pygame.sprite.collide_mask(globals.playerspaceship,i) is not None:
