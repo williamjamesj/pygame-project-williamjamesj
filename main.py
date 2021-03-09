@@ -12,7 +12,7 @@ localisation.readtexts()
 print(globals.languagesdict)
 # Defaults to Fullscreen Resolution 
 pygame.display.set_caption('Cosmoracer')
-pygame.display.set_icon(pygame.image.load("resources/spaceships/yellowspaceship/10.png"))
+pygame.display.set_icon(pygame.image.load("resources/icon.png"))
 globals.screen = pygame.display.set_mode((1024,768)) # Both of these options ensure compatibility across systems.
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
