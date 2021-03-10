@@ -25,7 +25,6 @@ def updatePlayer(keys):
     globals.wincondition.draw()
     globals.spawnPoint.update()
     globals.spawnPoint.draw()
-    collisions = []
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))

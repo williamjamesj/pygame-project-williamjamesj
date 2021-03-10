@@ -9,7 +9,6 @@ import localisation
 # Sets the language to whatever is stored in resources/localisation/lastlang and reads that language to globals.languagesdict
 localisation.readlang()
 localisation.readtexts()
-print(globals.languagesdict)
 # Defaults to Fullscreen Resolution 
 pygame.display.set_caption('Cosmoracer')
 pygame.display.set_icon(pygame.image.load("resources/icon.png"))
