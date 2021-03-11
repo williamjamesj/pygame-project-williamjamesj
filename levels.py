@@ -22,55 +22,40 @@ def levelone():
     globals.wincondition = Objective(-900,200,50,50)
 def leveltwo():
     print("level two")
-    globals.level = 2
 def levelthree():
     print("level three")
-    globals.level = 3
 def levelfour():
     print("level four")
-    globals.level = 4
 def levelfive():
     print("level five")
-    globals.level = 5
 def levelsix():
     print("level six")
-    globals.level = 6
 def levelseven():
     print("level seven")
-    globals.level = 7
 def leveleight():
     print("level eight")
-    globals.level = 8
 def levelnine():
     print("level nine")
-    globals.level = 9
 def playLevel(level):
+    globals.gamestage = "game"
+    globals.level = level
     if level == 1:
-        globals.gamestage = "game"
         levelone()
     elif level == 2 and globals.unlockedlevel<=2:
-        globals.gamestage = "game"
         leveltwo()
     elif level == 3 and globals.unlockedlevel<=3:
-        globals.gamestage = "game"
         levelthree()
     elif level == 4 and globals.unlockedlevel<=4:
-        globals.gamestage = "game"
         levelfour()
     elif level == 5 and globals.unlockedlevel<=5:
-        globals.gamestage = "game"
         levelfive()
     elif level == 6 and globals.unlockedlevel<=6:
-        globals.gamestage = "game"
         levelsix()
     elif level == 7 and globals.unlockedlevel<=7:
-        globals.gamestage = "game"
         levelseven()
     elif level == 8 and globals.unlockedlevel<=8:
-        globals.gamestage = "game"
         leveleight()
     elif level == 9 and globals.unlockedlevel<=9:
-        globals.gamestage = "game"
         levelnine()
     else:
         globals.gamestage = "levelselect"
