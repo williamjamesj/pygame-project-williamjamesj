@@ -20,6 +20,39 @@ def levelone():
     globals.allnonplayers.add(Barrier(-1000,900,2000,100)) # Bottom
     globals.allnonplayers.add(Barrier(1000,0,100,1000)) # Right
     globals.wincondition = Objective(-900,200,50,50)
+def leveltwo():
+    print("level two")
+def levelthree():
+    print("level three")
+def levelfour():
+    print("level four")
+def levelfive():
+    print("level five")
+def levelsix():
+    print("level six")
+def levelseven():
+    print("level seven")
+def leveleight():
+    print("level eight")
+def levelnine():
+    print("level nine")
 def playLevel(level):
+    globals.level = level
     if level == 1:
         levelone()
+    if level == 2 and globals.unlockedlevel<=2:
+        leveltwo()
+    if level == 3 and globals.unlockedlevel<=3:
+        levelthree()
+    if level == 4 and globals.unlockedlevel<=4:
+        levelfour()
+    if level == 5 and globals.unlockedlevel<=5:
+        levelfive()
+    if level == 6 and globals.unlockedlevel<=6:
+        levelsix()
+    if level == 7 and globals.unlockedlevel<=7:
+        levelseven()
+    if level == 8 and globals.unlockedlevel<=8:
+        leveleight()
+    if level == 9 and globals.unlockedlevel<=9:
+        levelnine()
