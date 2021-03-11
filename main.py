@@ -6,6 +6,7 @@ from gameplay import updatePlayer
 import os, sys
 import math
 import localisation
+from persistantdata import load,save
 # Sets the language to whatever is stored in resources/localisation/lastlang and reads that language to globals.languagesdict
 localisation.readlang()
 localisation.readtexts()
@@ -26,6 +27,7 @@ instructionsrendered = False
 settingsrendered = False
 levelOverRendered = False
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
+globals.coins,globals.unlockedlevel = load()
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
     for event in pygame.event.get():
@@ -86,3 +88,4 @@ while globals.running: # The main loop can be stopped from any file
         globals.screen.blit(textobject, (0,0))
     pygame.display.flip()
     fpsClock.tick(FPS)
+save(globals.coins,globals.unlockedlevel)

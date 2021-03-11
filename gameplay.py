@@ -11,8 +11,6 @@ def playGame(level):
     globals.playerorigin = globals.dimensions[0]/2,globals.dimensions[1]/2
     globals.allobjects = pygame.sprite.Group()
     globals.allnonplayers = pygame.sprite.Group()
-    globals.gamestage = "game"
-    globals.level = level
     playLevel(level)
     return
 def updatePlayer(keys):
@@ -35,7 +33,7 @@ def updatePlayer(keys):
         globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100
         if globals.coinsgained<100:
             globals.coinsgained = 100
-        globals.coins+=globals.coinsgained
+        globals.coins+=math.floor(globals.coinsgained)
         if globals.level==globals.unlockedlevel:
             globals.unlockedlevel+=1
         globals.gamestage = "levelover"
