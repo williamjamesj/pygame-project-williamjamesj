@@ -11,18 +11,20 @@ def playGame(level):
     globals.playerorigin = globals.dimensions[0]/2,globals.dimensions[1]/2
     globals.allobjects = pygame.sprite.Group()
     globals.allnonplayers = pygame.sprite.Group()
+    globals.bullets = pygame.sprite.Group()
     playLevel(level)
     return
 def updatePlayer(keys):
     globals.screen.blit(globals.backgroundpicture, (0,0))
     if keys[pygame.K_ESCAPE]==1:
         globals.gamestage = "levelselect"
-    globals.playerspaceship.update(keys[pygame.K_UP]==1,keys[pygame.K_DOWN]==1,keys[pygame.K_LEFT]==1,keys[pygame.K_RIGHT]==1)
+    globals.playerspaceship.update(keys[pygame.K_UP]==1,keys[pygame.K_DOWN]==1,keys[pygame.K_LEFT]==1,keys[pygame.K_RIGHT]==1,keys[pygame.K_SPACE])
     globals.allnonplayers.update()
     globals.wincondition.update()
     globals.wincondition.draw()
     globals.spawnPoint.update()
     globals.spawnPoint.draw()
+    globals.bullets.update()
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))
@@ -39,6 +41,7 @@ def updatePlayer(keys):
         globals.gamestage = "levelover"
     for i in globals.allnonplayers:
         if pygame.sprite.collide_mask(globals.playerspaceship,i) is not None:
+            globals.bullets.empty()
             globals.playerspaceship.percievedx = globals.spawnPointLocation[0]
             globals.playerspaceship.percievedy = globals.spawnPointLocation[1]
             globals.playerspaceship.speed = 0

@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-import buttons
 import globalvariables as globals
 class Barrier(pygame.sprite.Sprite):
     '''Draws an obstacle'''

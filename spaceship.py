@@ -3,6 +3,7 @@ from pygame.locals import *
 import globalvariables as globals
 import math
 import os
+from bullet import Bullet
 def findxy(direction):
         x = math.sin(math.radians(direction)) # Trigonometry.
         y = math.cos(math.radians(direction)) # I'm not even going to pretend I thought of this by myself: https://stackoverflow.com/questions/5346874/pygame-making-a-sprite-move-in-the-direction-it-is-facing.
@@ -32,7 +33,7 @@ class Spaceship(pygame.sprite.Sprite):
         self.percievedx = coords[0]
         self.percievedy = coords[1]
         return
-    def update(self,doThrust,doSlow,left,right):
+    def update(self,doThrust,doSlow,left,right,doshoot):
         if doThrust:
             self.speed -= self.acceleration # Going forwards (what we think is forwards) is actually going backwards to pygame, so we just "slow down" to speed up and vice versa 
         if doSlow:
@@ -41,6 +42,8 @@ class Spaceship(pygame.sprite.Sprite):
             self.direction += self.turnspeed
         if right:
             self.direction -= self.turnspeed
+        if doshoot:
+            globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 10))
         if self.speed > 0: # Stops the spaceship from going in reverse, because thats not what spaceships do.
             self.speed = 0
         if self.speed < self.maxspeed*-1:

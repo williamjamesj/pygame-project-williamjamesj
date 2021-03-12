@@ -48,6 +48,7 @@ while globals.running: # The main loop can be stopped from any file
         updatePlayer(pygame.key.get_pressed())
         globals.allobjects.draw(globals.screen)
         globals.allnonplayers.draw(globals.screen)
+        globals.bullets.draw(globals.screen)
         menurendered = True
         levelrendered = False
         globals.leveltimer.tick()

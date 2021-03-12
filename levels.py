@@ -37,9 +37,9 @@ def leveleight():
 def levelnine():
     print("level nine")
 def playLevel(level):
-    globals.gamestage = "game"
     globals.level = level
     if level == 1:
+        globals.gamestage = "game"
         levelone()
     elif level == 2 and globals.unlockedlevel<=2:
         leveltwo()
