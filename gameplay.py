@@ -12,7 +12,7 @@ def playGame(level):
     globals.leveltime = 0
     globals.playerorigin = globals.dimensions[0]/2,globals.dimensions[1]/2
     globals.allobjects = pygame.sprite.Group()
-    globals.allnonplayers = pygame.sprite.Group()
+    globals.walls = pygame.sprite.Group()
     globals.bullets = pygame.sprite.Group()
     globals.destroyables = pygame.sprite.Group()
     playLevel(level)
@@ -22,7 +22,7 @@ def updateGame(keys):
     if keys[pygame.K_ESCAPE]==1:
         globals.gamestage = "levelselect"
     globals.playerspaceship.update(keys[pygame.K_UP]==1,keys[pygame.K_DOWN]==1,keys[pygame.K_LEFT]==1,keys[pygame.K_RIGHT]==1,keys[pygame.K_SPACE])
-    globals.allnonplayers.update()
+    globals.walls.update()
     globals.wincondition.update()
     globals.destroyables.update()
     globals.spawnPoint.update()
@@ -44,8 +44,9 @@ def updateGame(keys):
             globals.unlockedlevel+=1
         globals.gamestage = "levelover"
     groupcollide(globals.bullets,globals.destroyables,True,True) # Destroys any platforms that are shot and can be shot.
+    groupcollide(globals.bullets,globals.walls,True,False) # Destroys any bullet that hits a platform.
     listeronitony = []
-    for i in globals.allnonplayers:
+    for i in globals.walls:
         listeronitony.append(i)
     for i in globals.destroyables:
         listeronitony.append(i)

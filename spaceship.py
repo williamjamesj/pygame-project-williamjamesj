@@ -66,6 +66,6 @@ class Spaceship(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image) # Recalculate the mask so that it adapts to the new direction that it is facing, otherwise the hit box will be very wrong.
         self.rect = self.image.get_rect(center=(globals.playerorigin))
         return
-    def draw(self):
-        globals.screen.blit(self.image,(self.rect.x,self.rect.y))
+    def draw(self,screen):
+        screen.blit(self.image,(self.rect.x,self.rect.y))
         return

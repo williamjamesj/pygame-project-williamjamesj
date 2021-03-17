@@ -48,8 +48,8 @@ while globals.running: # The main loop can be stopped from any file
             globals.playerspaceship.canshoot = True
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
         updateGame(pygame.key.get_pressed())
-        globals.allobjects.draw(globals.screen)
-        globals.allnonplayers.draw(globals.screen)
+        globals.playerspaceship.draw(globals.screen)
+        globals.walls.draw(globals.screen)
         globals.bullets.draw(globals.screen)
         globals.destroyables.draw(globals.screen)
         menurendered = True
