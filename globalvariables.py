@@ -25,3 +25,4 @@ coins = 0
 leveloverbackbutton = None
 coinsgained = 0
 bullets = None
+destroyables = None

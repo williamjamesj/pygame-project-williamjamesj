@@ -32,6 +32,7 @@ class Spaceship(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.percievedx = coords[0]
         self.percievedy = coords[1]
+        self.canshoot = True
         return
     def update(self,doThrust,doSlow,left,right,doshoot):
         if doThrust:
@@ -42,8 +43,10 @@ class Spaceship(pygame.sprite.Sprite):
             self.direction += self.turnspeed
         if right:
             self.direction -= self.turnspeed
-        if doshoot:
+        if doshoot and self.canshoot:
             globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 10))
+            pygame.time.set_timer(USEREVENT + 1, 1000)
+            self.canshoot = False
         if self.speed > 0: # Stops the spaceship from going in reverse, because thats not what spaceships do.
             self.speed = 0
         if self.speed < self.maxspeed*-1:

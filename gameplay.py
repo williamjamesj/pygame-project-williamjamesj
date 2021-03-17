@@ -1,9 +1,11 @@
 import pygame
 from pygame.locals import *
+from pygame.sprite import groupcollide
 import globalvariables as globals
 from spaceship import Spaceship
 import math
-from obstacle import Barrier
+from obstacle import Barrier, Destroyable
+from levels import *
 from levels import playLevel
 def playGame(level):
     globals.leveltimer = pygame.time.Clock()
@@ -12,6 +14,7 @@ def playGame(level):
     globals.allobjects = pygame.sprite.Group()
     globals.allnonplayers = pygame.sprite.Group()
     globals.bullets = pygame.sprite.Group()
+    globals.destroyables = pygame.sprite.Group()
     playLevel(level)
     return
 def updatePlayer(keys):
@@ -21,8 +24,9 @@ def updatePlayer(keys):
     globals.playerspaceship.update(keys[pygame.K_UP]==1,keys[pygame.K_DOWN]==1,keys[pygame.K_LEFT]==1,keys[pygame.K_RIGHT]==1,keys[pygame.K_SPACE])
     globals.allnonplayers.update()
     globals.wincondition.update()
-    globals.wincondition.draw()
+    globals.destroyables.update()
     globals.spawnPoint.update()
+    globals.wincondition.draw()
     globals.spawnPoint.draw()
     globals.bullets.update()
     if globals.debug:
@@ -39,7 +43,13 @@ def updatePlayer(keys):
         if globals.level==globals.unlockedlevel:
             globals.unlockedlevel+=1
         globals.gamestage = "levelover"
+    groupcollide(globals.bullets,globals.destroyables,True,True) # Destroys any platforms that are shot and can be shot.
+    listeronitony = []
     for i in globals.allnonplayers:
+        listeronitony.append(i)
+    for i in globals.destroyables:
+        listeronitony.append(i)
+    for i in listeronitony: # Collision between obstacles and player.
         if pygame.sprite.collide_mask(globals.playerspaceship,i) is not None:
             globals.bullets.empty()
             globals.playerspaceship.percievedx = globals.spawnPointLocation[0]
@@ -47,4 +57,5 @@ def updatePlayer(keys):
             globals.playerspaceship.speed = 0
             globals.playerspaceship.direction = 0
             globals.leveltime = 0
+            playGame(globals.level)
     return

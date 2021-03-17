@@ -44,11 +44,14 @@ while globals.running: # The main loop can be stopped from any file
             checkingSettings(pygame.mouse.get_pos())
         elif (globals.gamestage == "levelover" and event.type == MOUSEBUTTONDOWN):
             checkingLevelOver(pygame.mouse.get_pos())
-    if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it is the most performance hungry.
+        elif event.type == USEREVENT + 1 and globals.gamestage == "game":
+            globals.playerspaceship.canshoot = True
+    if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
         updatePlayer(pygame.key.get_pressed())
         globals.allobjects.draw(globals.screen)
         globals.allnonplayers.draw(globals.screen)
         globals.bullets.draw(globals.screen)
+        globals.destroyables.draw(globals.screen)
         menurendered = True
         levelrendered = False
         globals.leveltimer.tick()

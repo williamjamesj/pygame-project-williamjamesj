@@ -35,3 +35,7 @@ class SpawnPoint(Barrier):
         self.rect.centerx = self.x-globals.playerspaceship.percievedx
         self.rect.centery = self.y-globals.playerspaceship.percievedy # The platform moves, the player stays stationary, so that the screen can scroll
         self.image.fill(self.colour)
+class Destroyable(Barrier):
+    def __init__(self, x, y, width, height):
+        super().__init__(x, y, width, height)
+        self.colour = (255,0,0)
