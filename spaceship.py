@@ -45,10 +45,10 @@ class Spaceship(pygame.sprite.Sprite):
         if right:
             self.direction -= self.turnspeed
         if doshoot and self.canshoot:
-            globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 10))
+            globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
             pygame.time.set_timer(USEREVENT + 1, self.firerate*1000)
             self.canshoot = False
-        if self.speed > 0: # Stops the spaceship from going in reverse, because thats not what spaceships do.
+        if self.speed > 0: # Stops the spaceship from going in reverse, because the idea of a spaceship reversing makes me uncomfortable.
             self.speed = 0
         if self.speed < self.maxspeed*-1:
             self.speed = self.maxspeed*-1

@@ -29,8 +29,11 @@ def leveltwo():
     globals.allnonplayers.add(Barrier(500,300,50,600)) # Wall 1
     globals.destroyables.add(Destroyable(500,100,50,200)) # Wall 1 Destroyable
     globals.allnonplayers.add(Barrier(200,100,50,600)) # Wall 2
+    globals.destroyables.add(Destroyable(200,700,50,200)) # Wall 2 Destroyable
     globals.allnonplayers.add(Barrier(-100,300,50,600)) # Wall 3
+    globals.destroyables.add(Destroyable(-100,100,50,200)) # Wall 3 Destroyable
     globals.allnonplayers.add(Barrier(-400,100,50,600)) # Wall 4
+    globals.destroyables.add(Destroyable(-400,700,50,200)) # Wall 4 Destroyable
     globals.allnonplayers.add(Barrier(-800,650,400,50)) # Wall 5
     globals.allnonplayers.add(Barrier(-1000,0,2000,100)) # Top
     globals.allnonplayers.add(Barrier(-1100,0,100,1000)) # Left
@@ -56,22 +59,22 @@ def playLevel(level):
     if level == 1:
         globals.gamestage = "game"
         levelone()
-    elif level == 2 and globals.unlockedlevel<=2:
+    elif level == 2 and globals.unlockedlevel>=2:
         globals.gamestage = "game"
         leveltwo()
-    elif level == 3 and globals.unlockedlevel<=3:
+    elif level == 3 and globals.unlockedlevel>=3:
         levelthree()
-    elif level == 4 and globals.unlockedlevel<=4:
+    elif level == 4 and globals.unlockedlevel>=4:
         levelfour()
-    elif level == 5 and globals.unlockedlevel<=5:
+    elif level == 5 and globals.unlockedlevel>=5:
         levelfive()
-    elif level == 6 and globals.unlockedlevel<=6:
+    elif level == 6 and globals.unlockedlevel>=6:
         levelsix()
-    elif level == 7 and globals.unlockedlevel<=7:
+    elif level == 7 and globals.unlockedlevel>=7:
         levelseven()
-    elif level == 8 and globals.unlockedlevel<=8:
+    elif level == 8 and globals.unlockedlevel>=8:
         leveleight()
-    elif level == 9 and globals.unlockedlevel<=9:
+    elif level == 9 and globals.unlockedlevel>=9:
         levelnine()
     else:
         globals.gamestage = "levelselect"
