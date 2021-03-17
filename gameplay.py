@@ -17,7 +17,7 @@ def playGame(level):
     globals.destroyables = pygame.sprite.Group()
     playLevel(level)
     return
-def updatePlayer(keys):
+def updateGame(keys):
     globals.screen.blit(globals.backgroundpicture, (0,0))
     if keys[pygame.K_ESCAPE]==1:
         globals.gamestage = "levelselect"

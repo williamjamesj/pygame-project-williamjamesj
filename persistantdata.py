@@ -21,3 +21,4 @@ def save(coins,level_complete):
     """)
     cursy.connection.commit()
     cursy.close()
+    return

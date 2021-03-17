@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from menu import checkingLevelOver, checkingSettings, displayLevelOver, displayMenu, checkingMenu, displaySettings, levelSelector, checkingLevel, displayInstructions, checkingInstructions
 import globalvariables as globals
-from gameplay import updatePlayer
+from gameplay import updateGame
 import os, sys
 import math
 import localisation
@@ -47,7 +47,7 @@ while globals.running: # The main loop can be stopped from any file
         elif event.type == USEREVENT + 1 and globals.gamestage == "game":
             globals.playerspaceship.canshoot = True
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
-        updatePlayer(pygame.key.get_pressed())
+        updateGame(pygame.key.get_pressed())
         globals.allobjects.draw(globals.screen)
         globals.allnonplayers.draw(globals.screen)
         globals.bullets.draw(globals.screen)

@@ -18,7 +18,7 @@ def findImages(directory):
         fileslist.append(pygame.image.load(os.path.join(directory,i)).convert_alpha())
     return fileslist
 class Spaceship(pygame.sprite.Sprite):
-    def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed):
+    def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed, firerate=1):
         super().__init__() # Very important
         self.appearance = appearance
         self.imagelist = findImages(f"resources/spaceships/{str(appearance)}/")
@@ -33,6 +33,7 @@ class Spaceship(pygame.sprite.Sprite):
         self.percievedx = coords[0]
         self.percievedy = coords[1]
         self.canshoot = True
+        self.firerate = firerate
         return
     def update(self,doThrust,doSlow,left,right,doshoot):
         if doThrust:
@@ -45,7 +46,7 @@ class Spaceship(pygame.sprite.Sprite):
             self.direction -= self.turnspeed
         if doshoot and self.canshoot:
             globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 10))
-            pygame.time.set_timer(USEREVENT + 1, 1000)
+            pygame.time.set_timer(USEREVENT + 1, self.firerate*1000)
             self.canshoot = False
         if self.speed > 0: # Stops the spaceship from going in reverse, because thats not what spaceships do.
             self.speed = 0

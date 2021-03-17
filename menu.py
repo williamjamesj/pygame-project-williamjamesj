@@ -41,14 +41,17 @@ def displayMenu():
 def displayInstructions():
     globals.screen.blit(globals.backgroundpicture, (0,0))
     globals.instructionsbackbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100)
+    return
 def displaySettings():
     globals.screen.blit(globals.backgroundpicture, (0,0))
     globals.settingsbuttons.append(buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100))
+    return
 def displayLevelOver():
     globals.screen.blit(globals.backgroundpicture, (0,0))
     buttons.Button(600,100,[0,-100],globals.screen, f"{globals.languagesdict['time']}: {math.floor(globals.leveltime/1000)} {globals.languagesdict['seconds']}",100,(255,255,255),(0,0,0))
     buttons.Button(800,100,[0,100],globals.screen, f"{globals.languagesdict['coinsgained']}: {math.floor(globals.coinsgained)}",100,(255,255,255),(0,0,0))
     globals.leveloverbackbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100)
+    return
 def checkingMenu(position):
     if (globals.buttonArray[0].interacts(position)):
         globals.gamestage = "levelselect"
@@ -66,34 +69,25 @@ def checkingLevel(position):
     if (globals.levelbuttonArray[-1].interacts(position)):
         globals.gamestage = "menu"
         globals.buttonArray = [] # Clears the previous inhabitants of the array
-        return
     elif(globals.levelbuttonArray[0].interacts(position)):
         game.playGame(1)
-        return
     elif(globals.levelbuttonArray[1].interacts(position)):
         game.playGame(2)
-        return
     elif(globals.levelbuttonArray[2].interacts(position)):
         game.playGame(3)
-        return
     elif(globals.levelbuttonArray[3].interacts(position)):
         game.playGame(4)
-        return
     elif(globals.levelbuttonArray[4].interacts(position)):
         game.playGame(5)
-        return
     elif(globals.levelbuttonArray[5].interacts(position)):
         game.playGame(6)
-        return
     elif(globals.levelbuttonArray[6].interacts(position)):
         game.playGame(7)
-        return
     elif(globals.levelbuttonArray[7].interacts(position)):
         game.playGame(8)
-        return
     elif(globals.levelbuttonArray[8].interacts(position)):
         game.playGame(9)
-        return
+    return
 def checkingInstructions(position):
     if (globals.instructionsbackbutton.interacts(position)):
         globals.gamestage = "menu"

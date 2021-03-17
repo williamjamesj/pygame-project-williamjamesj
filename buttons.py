@@ -14,6 +14,7 @@ class Button():
         textw = self.rectangle.centerx - textobject.get_width()/2
         texth = self.rectangle.centery - textobject.get_height()/2
         surface.blit((textobject), (textw,texth))
+        return
     def interacts(self, mouseposition): # I probably should have just made it a sprite and used sprite collision code.
         mx,my = mouseposition
         topx,topy = self.rectangle.topleft

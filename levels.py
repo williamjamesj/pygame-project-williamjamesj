@@ -7,7 +7,7 @@ from obstacle import Barrier, Destroyable,Objective, SpawnPoint
 def levelone():
     globals.spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = Spaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,4)
+    globals.playerspaceship = Spaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
     globals.allobjects.add(globals.playerspaceship)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.allnonplayers.add(Barrier(500,300,50,600)) # Wall 1
@@ -23,11 +23,11 @@ def levelone():
 def leveltwo():
     globals.spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = Spaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,4)
+    globals.playerspaceship = Spaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
     globals.allobjects.add(globals.playerspaceship)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.allnonplayers.add(Barrier(500,300,50,600)) # Wall 1
-    globals.destroyables.add(Destroyable(500,100,50,200)) # Wall 1
+    globals.destroyables.add(Destroyable(500,100,50,200)) # Wall 1 Destroyable
     globals.allnonplayers.add(Barrier(200,100,50,600)) # Wall 2
     globals.allnonplayers.add(Barrier(-100,300,50,600)) # Wall 3
     globals.allnonplayers.add(Barrier(-400,100,50,600)) # Wall 4
