@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from pygame.sprite import groupcollide
 import globalvariables as globals
-from spaceship import Spaceship
+from spaceship import PlayerSpaceship
 import math
 from obstacle import Barrier, Destroyable
 from levels import *
@@ -15,6 +15,7 @@ def playGame(level):
     globals.walls = pygame.sprite.Group()
     globals.bullets = pygame.sprite.Group()
     globals.destroyables = pygame.sprite.Group()
+    globals.enemySpaceships = pygame.sprite.Group()
     playLevel(level)
     return
 def updateGame(keys):
@@ -26,9 +27,10 @@ def updateGame(keys):
     globals.wincondition.update()
     globals.destroyables.update()
     globals.spawnPoint.update()
+    globals.bullets.update()
+    globals.enemySpaceships.update()
     globals.wincondition.draw()
     globals.spawnPoint.draw()
-    globals.bullets.update()
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))

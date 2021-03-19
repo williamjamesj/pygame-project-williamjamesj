@@ -17,7 +17,7 @@ def findImages(directory):
     for i in filenames:
         fileslist.append(pygame.image.load(os.path.join(directory,i)).convert_alpha())
     return fileslist
-class Spaceship(pygame.sprite.Sprite):
+class PlayerSpaceship(pygame.sprite.Sprite):
     def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed, firerate=1):
         super().__init__() # Very important
         self.appearance = appearance
@@ -69,3 +69,14 @@ class Spaceship(pygame.sprite.Sprite):
     def draw(self,screen):
         screen.blit(self.image,(self.rect.x,self.rect.y))
         return
+class EnemySpaceship(PlayerSpaceship):
+    def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate):
+        super().__init__(coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate=firerate)
+        self.x = coords[0]+globals.playerorigin[0]
+        self.y = coords[1]+globals.playerorigin[1]
+        return
+    def update(self):
+        self.rect.centerx = self.x-globals.playerspaceship.percievedx
+        self.rect.centery = self.y-globals.playerspaceship.percievedy
+    def draw(self,screen):
+        super().draw(self,screen)

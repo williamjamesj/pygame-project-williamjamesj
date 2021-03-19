@@ -32,3 +32,4 @@ spawnPoint = None # The green square that the spaceship spawns at, the starting 
 spawnPointLocation = None # The location of the little green square mentioned above and the location at which the player spawns upon level start, or upon death. 
 bullets = None # The sprite group that contains all of the bullets that have been fired.
 destroyables = None # The sprite group that pertains to all of the walls that can be shot to be destroyed.
+enemySpaceships = None # The sprite group that contains all of the enemy spaceships.

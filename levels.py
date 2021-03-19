@@ -1,13 +1,13 @@
 import pygame
 from pygame.locals import *
 import globalvariables as globals
-from spaceship import Spaceship
+from spaceship import EnemySpaceship, PlayerSpaceship
 import math
 from obstacle import Barrier, Destroyable,Objective, SpawnPoint
 def levelone():
     globals.spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = Spaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
+    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.walls.add(Barrier(500,300,50,600)) # Wall 1
     globals.walls.add(Barrier(200,100,50,600)) # Wall 2
@@ -22,7 +22,7 @@ def levelone():
 def leveltwo():
     globals.spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = Spaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
+    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.walls.add(Barrier(500,300,50,600)) # Wall 1
     globals.destroyables.add(Destroyable(500,100,50,200)) # Wall 1 Destroyable
@@ -39,7 +39,16 @@ def leveltwo():
     globals.walls.add(Barrier(1000,0,100,1000)) # Right
     globals.wincondition = Objective(-900,200,50,50)
 def levelthree():
-    print("level three")
+    globals.spawnPointLocation = (800,500)
+    globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
+    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
+    globals.screen.blit(globals.backgroundpicture, (0,0)) 
+    globals.walls.add(Barrier(-1000,0,2000,100)) # Top
+    globals.walls.add(Barrier(-1100,0,100,1000)) # Left
+    globals.walls.add(Barrier(-1000,900,2000,100)) # Bottom
+    globals.walls.add(Barrier(1000,0,100,1000)) # Right
+    globals.enemySpaceships.add(EnemySpaceship((800,500),"yellowspaceship",10,0.1,0,3,1))
+    globals.wincondition = Objective(-900,200,50,50)
 def levelfour():
     print("level four")
 def levelfive():
@@ -61,6 +70,7 @@ def playLevel(level):
         globals.gamestage = "game"
         leveltwo()
     elif level == 3 and globals.unlockedlevel>=3:
+        globals.gamestage = "game"
         levelthree()
     elif level == 4 and globals.unlockedlevel>=4:
         levelfour()
