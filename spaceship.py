@@ -4,10 +4,13 @@ import globalvariables as globals
 import math
 import os
 from bullet import Bullet
+import random
 def findxy(direction):
         x = math.sin(math.radians(direction)) # Trigonometry.
-        y = math.cos(math.radians(direction)) # I'm not even going to pretend I thought of this by myself: https://stackoverflow.com/questions/5346874/pygame-making-a-sprite-move-in-the-direction-it-is-facing.
+        y = math.cos(math.radians(direction)) # Thank you Stack Overflow!: https://stackoverflow.com/questions/5346874/pygame-making-a-sprite-move-in-the-direction-it-is-facing.
         return [x,y]
+def findDirection(xy):
+    return(math.degrees(math.atan2(xy[0],xy[1])))
 def findImages(directory):
     fileslist = []
     filenames = []
@@ -37,7 +40,7 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         return
     def update(self,doThrust,doSlow,left,right,doshoot):
         if doThrust:
-            self.speed -= self.acceleration # Going forwards (what we think is forwards) is actually going backwards to pygame, so we just "slow down" to speed up and vice versa 
+            self.speed -= self.acceleration # Going forwards (what we think is forwards) is actually going backwards in this code, so we just "slow down" to speed up and vice versa 
         if doSlow:
             self.speed += self.acceleration
         if left:
@@ -72,11 +75,17 @@ class PlayerSpaceship(pygame.sprite.Sprite):
 class EnemySpaceship(PlayerSpaceship):
     def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate):
         super().__init__(coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate=firerate)
-        self.x = coords[0]+globals.playerorigin[0]
-        self.y = coords[1]+globals.playerorigin[1]
+        self.x = coords[0]
+        self.y = coords[1]
         return
     def update(self):
-        self.rect.centerx = self.x-globals.playerspaceship.percievedx
-        self.rect.centery = self.y-globals.playerspaceship.percievedy
+        distancetoplayer = math.sqrt((self.x-globals.playerspaceship.percievedx)**2+(self.y-globals.playerspaceship.percievedy)**2)
+        print(findDirection([self.x-globals.playerspaceship.percievedx,self.y-globals.playerspaceship.percievedy]))
+        self.direction = findDirection([self.x-globals.playerspaceship.percievedx,self.y-globals.playerspaceship.percievedy])
+        self.image = self.imagelist[0]
+        self.image = pygame.transform.rotate(self.image,self.direction)
+        self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
+        if random.randint(0,50) == 5:
+            globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
     def draw(self,screen):
         super().draw(self,screen)
