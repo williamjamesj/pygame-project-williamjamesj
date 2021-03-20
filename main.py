@@ -53,6 +53,7 @@ while globals.running: # The main loop can be stopped from any file
         globals.bullets.draw(globals.screen)
         globals.destroyables.draw(globals.screen)
         globals.enemySpaceships.draw(globals.screen)
+        globals.enemyBullets.draw(globals.screen)
         menurendered = True
         levelrendered = False
         globals.leveltimer.tick()

@@ -16,6 +16,7 @@ def playGame(level):
     globals.bullets = pygame.sprite.Group()
     globals.destroyables = pygame.sprite.Group()
     globals.enemySpaceships = pygame.sprite.Group()
+    globals.enemyBullets = pygame.sprite.Group()
     playLevel(level)
     return
 def updateGame(keys):
@@ -29,6 +30,7 @@ def updateGame(keys):
     globals.spawnPoint.update()
     globals.bullets.update()
     globals.enemySpaceships.update()
+    globals.enemyBullets.update()
     globals.wincondition.draw()
     globals.spawnPoint.draw()
     if globals.debug:
@@ -47,10 +49,12 @@ def updateGame(keys):
         globals.gamestage = "levelover"
     groupcollide(globals.bullets,globals.destroyables,True,True) # Destroys any platforms that are shot and can be shot.
     groupcollide(globals.bullets,globals.walls,True,False) # Destroys any bullet that hits a platform.
-    listeronitony = []
+    listeronitony = [] # Everything that can kill the player.
     for i in globals.walls:
         listeronitony.append(i)
     for i in globals.destroyables:
+        listeronitony.append(i)
+    for i in globals.enemyBullets:
         listeronitony.append(i)
     for i in listeronitony: # Collision between obstacles and player.
         if pygame.sprite.collide_mask(globals.playerspaceship,i) is not None:

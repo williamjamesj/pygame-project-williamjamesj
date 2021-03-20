@@ -86,6 +86,6 @@ class EnemySpaceship(PlayerSpaceship):
         self.image = pygame.transform.rotate(self.image,self.direction)
         self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
         if random.randint(0,50) == 5:
-            globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
+            globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
     def draw(self,screen):
         super().draw(self,screen)
