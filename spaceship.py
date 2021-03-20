@@ -74,18 +74,18 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         return
 class EnemySpaceship(PlayerSpaceship):
     def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate):
-        super().__init__(coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate=firerate)
+        super().__init__(coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate)
         self.x = coords[0]
         self.y = coords[1]
         return
     def update(self):
         distancetoplayer = math.sqrt((self.x-globals.playerspaceship.percievedx)**2+(self.y-globals.playerspaceship.percievedy)**2)
-        print(findDirection([self.x-globals.playerspaceship.percievedx,self.y-globals.playerspaceship.percievedy]))
         self.direction = findDirection([self.x-globals.playerspaceship.percievedx,self.y-globals.playerspaceship.percievedy])
         self.image = self.imagelist[0]
         self.image = pygame.transform.rotate(self.image,self.direction)
         self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
-        if random.randint(0,50) == 5:
+        self.mask = pygame.mask.from_surface(self.image)
+        if random.randint(0,150) == 5:
             globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
     def draw(self,screen):
         super().draw(self,screen)

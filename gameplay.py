@@ -40,15 +40,23 @@ def updateGame(keys):
         textobject = font.render(f"XY: {str(math.ceil(globals.playerspaceship.percievedx)),str(math.ceil(globals.playerspaceship.percievedy))} Timer: {math.floor(globals.leveltime/1000)}", True, (255,0,0))
         globals.screen.blit(textobject, (1000,0))
     if pygame.sprite.collide_mask(globals.playerspaceship,globals.wincondition) is not None:
-        globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100
-        if globals.coinsgained<100:
-            globals.coinsgained = 100
-        globals.coins+=math.floor(globals.coinsgained)
-        if globals.level==globals.unlockedlevel:
-            globals.unlockedlevel+=1
-        globals.gamestage = "levelover"
+        if len(globals.enemySpaceships)==0:
+            globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100
+            if globals.coinsgained<100:
+                globals.coinsgained = 100
+            globals.coins+=math.floor(globals.coinsgained)
+            if globals.level==globals.unlockedlevel:
+                globals.unlockedlevel+=1
+            globals.gamestage = "levelover"
     groupcollide(globals.bullets,globals.destroyables,True,True) # Destroys any platforms that are shot and can be shot.
     groupcollide(globals.bullets,globals.walls,True,False) # Destroys any bullet that hits a platform.
+    groupcollide(globals.enemyBullets,globals.walls,True,False) # Destroys any enemy's bullet that hits a platform.
+    # Enemies can't destroy platforms or destroyables.
+    for bullet in globals.bullets:
+        for spaceship in globals.enemySpaceships:
+            if pygame.sprite.collide_mask(bullet,spaceship) is not None:
+                spaceship.kill()
+                bullet.kill()
     listeronitony = [] # Everything that can kill the player.
     for i in globals.walls:
         listeronitony.append(i)
