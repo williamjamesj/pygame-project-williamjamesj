@@ -5,7 +5,7 @@ running = True # When this becomes false, the game will close
 gamestage = "menu" # The stage that the game is in
 screen = None # The PyGame surface object for the entire game.
 backgroundpicture = None # The background that is displayed.
-debug = True # Gives helpful features like fps counter, useful for debugging, not for the end-user to see.
+debug = False # Gives helpful features like fps counter, useful for debugging, not for the end-user to see.
 
 '''Persistant Global Variables - Loaded each time the game runs'''
 lang = None # The currently selected language, read from localisation/lastlang on game initialisation.

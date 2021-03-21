@@ -1,3 +1,4 @@
+from shop import displayShop, updateShop
 import pygame
 from pygame.locals import *
 from menu import checkingLevelOver, checkingSettings, displayLevelOver, displayMenu, checkingMenu, displaySettings, levelSelector, checkingLevel, displayInstructions, checkingInstructions
@@ -14,6 +15,7 @@ localisation.readtexts()
 pygame.display.set_caption('Cosmoracer')
 pygame.display.set_icon(pygame.image.load("resources/icon.png"))
 globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
+# globals.screen = pygame.display.set_mode((1024,768))
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
@@ -44,6 +46,8 @@ while globals.running: # The main loop can be stopped from any file
             checkingSettings(pygame.mouse.get_pos())
         elif (globals.gamestage == "levelover" and event.type == MOUSEBUTTONDOWN):
             checkingLevelOver(pygame.mouse.get_pos())
+        elif (globals.gamestage == "shop" and event.type == MOUSEBUTTONDOWN):
+            updateShop(pygame.mouse.get_pos())
         elif event.type == USEREVENT + 1 and globals.gamestage == "game":
             globals.playerspaceship.canshoot = True
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
@@ -78,6 +82,12 @@ while globals.running: # The main loop can be stopped from any file
     elif globals.gamestage == "levelover" and not levelOverRendered:
         displayLevelOver()
         levelOverRendered = True
+        menurendered = False
+        levelrendered = False
+        instructionsrendered = False
+    elif globals.gamestage == "shop":
+        displayShop()
+        levelOverRendered = False
         menurendered = False
         levelrendered = False
         instructionsrendered = False

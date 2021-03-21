@@ -32,10 +32,11 @@ def displayMenu():
     # Play Button = 0
     globals.screen.blit(globals.backgroundpicture, (0,0))
     buttons.Button(0,0,[0,-300],globals.screen,globals.languagesdict["gamename"],200)
-    globals.menuButtonArray.append(buttons.Button(400,100,[0,-75],globals.screen,globals.languagesdict["play"],100))
-    globals.menuButtonArray.append(buttons.Button(400,100,[0,50],globals.screen,globals.languagesdict["instructions"],75))
-    globals.menuButtonArray.append(buttons.Button(400,100,[0,175],globals.screen,globals.languagesdict["settings"],100))
-    globals.menuButtonArray.append(buttons.Button(400,100,[0,300],globals.screen,globals.languagesdict["quit"],100))
+    globals.menuButtonArray.append(buttons.Button(400,75,[0,-75],globals.screen,globals.languagesdict["play"],75))
+    globals.menuButtonArray.append(buttons.Button(400,75,[0,25],globals.screen,globals.languagesdict["instructions"],50))
+    globals.menuButtonArray.append(buttons.Button(400,75,[0,125],globals.screen,globals.languagesdict["shop"],75))
+    globals.menuButtonArray.append(buttons.Button(400,75,[0,225],globals.screen,globals.languagesdict["settings"],75))
+    globals.menuButtonArray.append(buttons.Button(400,75,[0,325],globals.screen,globals.languagesdict["quit"],75))
     globals.levelbuttonArray = []
     return
 def displayInstructions():
@@ -58,11 +59,14 @@ def checkingMenu(position):
         globals.levelbuttonArray = [] # Clears the previous inhabitants of the array
     if (globals.menuButtonArray[1].interacts(position)):
         globals.gamestage = "instructions"
-        globals.levelbuttonArray = [] # Clears the previous inhabitants of the array
+        globals.levelbuttonArray = []
     if (globals.menuButtonArray[2].interacts(position)):
-        globals.gamestage = "settings"
-        globals.levelbuttonArray = [] # Clears the previous inhabitants of the array
+        globals.gamestage = "levelselect"
+        globals.levelbuttonArray = []
     if (globals.menuButtonArray[3].interacts(position)):
+        globals.gamestage = "settings"
+        globals.levelbuttonArray = []
+    if (globals.menuButtonArray[4].interacts(position)):
         globals.running = False
     return
 def checkingLevel(position):

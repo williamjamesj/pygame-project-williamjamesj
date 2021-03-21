@@ -47,7 +47,7 @@ def levelthree():
     globals.walls.add(Barrier(-1100,0,100,1000)) # Left
     globals.walls.add(Barrier(-1000,900,2000,100)) # Bottom
     globals.walls.add(Barrier(1000,0,100,1000)) # Right
-    globals.walls.add(Barrier(700,400,10,200))
+    globals.walls.add(Barrier(700,400,10,200)) # Barrier
     globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,0,3,1))
     globals.enemySpaceships.add(EnemySpaceship((0,600),"greenspaceship",10,0.1,0,3,1))
     globals.wincondition = Objective(-900,200,50,50)
