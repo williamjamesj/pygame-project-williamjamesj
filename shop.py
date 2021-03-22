@@ -7,10 +7,10 @@ class shopScreen():
     def __init__(self):
         self.backbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100)
         self.arrows = [pygame.image.load("resources/arrow_left.png"),pygame.image.load("resources/arrow_right.png")]
-        self.spaceships = ["yellowspaceship","greenspaceship"]
+        self.spaceships = [["yellowspaceship"],["greenspaceship"]] # The lists store ships in order: appearance,maxspeed,acceleration,turnspeed,firerate
         self.spaceshipimages = []
         for i in self.spaceships:
-            self.spaceshipimages.append(pygame.image.load(f"resources/spaceships/{i}/shop.png"))
+            self.spaceshipimages.append(pygame.image.load(f"resources/spaceships/{i[0]}/shop.png"))
         self.currentship = 0
     def displayShop(self):
         if self.currentship>len(self.spaceships)-1:

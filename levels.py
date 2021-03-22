@@ -41,7 +41,7 @@ def leveltwo():
 def levelthree():
     globals.spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
+    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",20,0.1,0,3)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.walls.add(Barrier(-1000,0,2000,100)) # Top
     globals.walls.add(Barrier(-1100,0,100,1000)) # Left

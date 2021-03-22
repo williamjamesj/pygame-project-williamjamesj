@@ -60,7 +60,10 @@ class PlayerSpaceship(pygame.sprite.Sprite):
             number = 0
         else:
             number = math.floor(self.speed*-1)
-        self.image = self.imagelist[number]
+        if number>len(self.imagelist)-1: # In case the ship goes faster than there are animation frames.
+            self.image = self.imagelist[-1] 
+        else:
+            self.image = self.imagelist[number]
 
         xy = findxy(self.direction)
         self.percievedx += xy[0]*self.speed
