@@ -7,7 +7,7 @@ screen = None # The PyGame surface object for the entire game.
 backgroundpicture = None # The background that is displayed.
 debug = False # Gives helpful features like fps counter, useful for debugging, not for the end-user to see.
 shop = None # The shop object, containing all of the functions regarding the shop.
-allPlayerShips = ["yellowspaceship","greenspaceship"] # List of all of the ships the player can purchase.
+ownedShips = ["yellowspaceship"] # List of all of the ships the player can purchase.
 
 '''Persistant Global Variables - Loaded each time the game runs'''
 lang = None # The currently selected language, read from localisation/lastlang on game initialisation.
