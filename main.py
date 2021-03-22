@@ -33,24 +33,6 @@ globals.coins,globals.unlockedlevel = load()
 shop = shopScreen()
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            globals.running = False
-        # Checks if any buttons have been pressed in the menu stage.
-        elif (globals.gamestage == "menu" and event.type == MOUSEBUTTONDOWN):
-            checkingMenu(pygame.mouse.get_pos())
-        elif (globals.gamestage == "levelselect" and event.type == MOUSEBUTTONDOWN):
-            checkingLevel(pygame.mouse.get_pos())
-        elif (globals.gamestage == "instructions" and event.type == MOUSEBUTTONDOWN):
-            checkingInstructions(pygame.mouse.get_pos())
-        elif (globals.gamestage == "settings" and event.type == MOUSEBUTTONDOWN):
-            checkingSettings(pygame.mouse.get_pos())
-        elif (globals.gamestage == "levelover" and event.type == MOUSEBUTTONDOWN):
-            checkingLevelOver(pygame.mouse.get_pos())
-        elif (globals.gamestage == "shop" and event.type == MOUSEBUTTONDOWN):
-            shop.updateShop(pygame.mouse.get_pos())
-        elif event.type == USEREVENT + 1 and globals.gamestage == "game":
-            globals.playerspaceship.canshoot = True
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
         updateGame(pygame.key.get_pressed())
         globals.playerspaceship.draw(globals.screen)
@@ -96,6 +78,24 @@ while globals.running: # The main loop can be stopped from any file
             levelrendered = False
         elif not globals.gamestage == "instructions":
             instructionsrendered = False
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            globals.running = False
+        # Checks if any buttons have been pressed in the menu stage.
+        elif (globals.gamestage == "menu" and event.type == MOUSEBUTTONDOWN):
+            checkingMenu(pygame.mouse.get_pos())
+        elif (globals.gamestage == "levelselect" and event.type == MOUSEBUTTONDOWN):
+            checkingLevel(pygame.mouse.get_pos())
+        elif (globals.gamestage == "instructions" and event.type == MOUSEBUTTONDOWN):
+            checkingInstructions(pygame.mouse.get_pos())
+        elif (globals.gamestage == "settings" and event.type == MOUSEBUTTONDOWN):
+            checkingSettings(pygame.mouse.get_pos())
+        elif (globals.gamestage == "levelover" and event.type == MOUSEBUTTONDOWN):
+            checkingLevelOver(pygame.mouse.get_pos())
+        elif (globals.gamestage == "shop" and event.type == MOUSEBUTTONDOWN):
+            shop.updateShop(pygame.mouse.get_pos())
+        elif event.type == USEREVENT + 1 and globals.gamestage == "game":
+            globals.playerspaceship.canshoot = True
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))
@@ -103,3 +103,4 @@ while globals.running: # The main loop can be stopped from any file
     pygame.display.flip()
     fpsClock.tick(FPS)
 save(globals.coins,globals.unlockedlevel)
+sys.exit()

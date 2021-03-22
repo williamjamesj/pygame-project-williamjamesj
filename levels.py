@@ -13,7 +13,7 @@ def levelone():
     globals.walls.add(Barrier(200,100,50,600)) # Wall 2
     globals.walls.add(Barrier(-100,300,50,600)) # Wall 3
     globals.walls.add(Barrier(-400,100,50,600)) # Wall 4
-    globals.walls.add(Barrier(-800,650,400,50)) # Wall 5
+    globals.walls.add(Barrier(-800,650,450,50)) # Wall 5
     globals.walls.add(Barrier(-1000,0,2000,100)) # Top
     globals.walls.add(Barrier(-1100,0,100,1000)) # Left
     globals.walls.add(Barrier(-1000,900,2000,100)) # Bottom
@@ -32,7 +32,7 @@ def leveltwo():
     globals.destroyables.add(Destroyable(-100,100,50,200)) # Wall 3 Destroyable
     globals.walls.add(Barrier(-400,100,50,600)) # Wall 4
     globals.destroyables.add(Destroyable(-400,700,50,200)) # Wall 4 Destroyable
-    globals.walls.add(Barrier(-800,650,400,50)) # Wall 5
+    globals.walls.add(Barrier(-800,650,450,50)) # Wall 5
     globals.walls.add(Barrier(-1000,0,2000,100)) # Top
     globals.walls.add(Barrier(-1100,0,100,1000)) # Left
     globals.walls.add(Barrier(-1000,900,2000,100)) # Bottom
@@ -41,7 +41,7 @@ def leveltwo():
 def levelthree():
     globals.spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",20,0.1,0,3)
+    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.walls.add(Barrier(-1000,0,2000,100)) # Top
     globals.walls.add(Barrier(-1100,0,100,1000)) # Left
