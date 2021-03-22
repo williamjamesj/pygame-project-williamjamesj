@@ -10,7 +10,7 @@ class shopScreen():
         self.spaceships = [["yellowspaceship"],["greenspaceship"]] # The lists store ships in order: appearance,maxspeed,acceleration,turnspeed,firerate
         self.spaceshipimages = []
         for i in self.spaceships:
-            self.spaceshipimages.append(pygame.image.load(f"resources/spaceships/{i[0]}/shop.png"))
+            self.spaceshipimages.append(pygame.image.load(f"resources/spaceships/shopimages/{i[0]}.png"))
         self.currentship = 0
     def displayShop(self):
         if self.currentship>len(self.spaceships)-1:
