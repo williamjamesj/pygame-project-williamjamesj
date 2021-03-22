@@ -1,4 +1,4 @@
-from shop import displayShop, updateShop
+from shop import shopScreen
 import pygame
 from pygame.locals import *
 from menu import checkingLevelOver, checkingSettings, displayLevelOver, displayMenu, checkingMenu, displaySettings, levelSelector, checkingLevel, displayInstructions, checkingInstructions
@@ -30,6 +30,7 @@ settingsrendered = False
 levelOverRendered = False
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 globals.coins,globals.unlockedlevel = load()
+shop = shopScreen()
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
     for event in pygame.event.get():
@@ -47,7 +48,7 @@ while globals.running: # The main loop can be stopped from any file
         elif (globals.gamestage == "levelover" and event.type == MOUSEBUTTONDOWN):
             checkingLevelOver(pygame.mouse.get_pos())
         elif (globals.gamestage == "shop" and event.type == MOUSEBUTTONDOWN):
-            updateShop(pygame.mouse.get_pos())
+            shop.updateShop(pygame.mouse.get_pos())
         elif event.type == USEREVENT + 1 and globals.gamestage == "game":
             globals.playerspaceship.canshoot = True
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
@@ -86,11 +87,8 @@ while globals.running: # The main loop can be stopped from any file
         levelrendered = False
         instructionsrendered = False
     elif globals.gamestage == "shop":
-        displayShop()
-        levelOverRendered = False
+        shop.displayShop()
         menurendered = False
-        levelrendered = False
-        instructionsrendered = False
     else:
         if not globals.gamestage == "menu":
             menurendered = False

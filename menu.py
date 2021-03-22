@@ -32,11 +32,11 @@ def displayMenu():
     # Play Button = 0
     globals.screen.blit(globals.backgroundpicture, (0,0))
     buttons.Button(0,0,[0,-300],globals.screen,globals.languagesdict["gamename"],200)
-    globals.menuButtonArray.append(buttons.Button(400,75,[0,-75],globals.screen,globals.languagesdict["play"],75))
-    globals.menuButtonArray.append(buttons.Button(400,75,[0,25],globals.screen,globals.languagesdict["instructions"],50))
-    globals.menuButtonArray.append(buttons.Button(400,75,[0,125],globals.screen,globals.languagesdict["shop"],75))
-    globals.menuButtonArray.append(buttons.Button(400,75,[0,225],globals.screen,globals.languagesdict["settings"],75))
-    globals.menuButtonArray.append(buttons.Button(400,75,[0,325],globals.screen,globals.languagesdict["quit"],75))
+    globals.menuButtonArray.append(buttons.Button(300,75,[0,-75],globals.screen,globals.languagesdict["play"],75))
+    globals.menuButtonArray.append(buttons.Button(300,75,[0,25],globals.screen,globals.languagesdict["instructions"],50))
+    globals.menuButtonArray.append(buttons.Button(300,75,[0,125],globals.screen,globals.languagesdict["shop"],75))
+    globals.menuButtonArray.append(buttons.Button(300,75,[0,225],globals.screen,globals.languagesdict["settings"],75))
+    globals.menuButtonArray.append(buttons.Button(300,75,[0,325],globals.screen,globals.languagesdict["quit"],75))
     globals.levelbuttonArray = []
     return
 def displayInstructions():
@@ -61,7 +61,7 @@ def checkingMenu(position):
         globals.gamestage = "instructions"
         globals.levelbuttonArray = []
     if (globals.menuButtonArray[2].interacts(position)):
-        globals.gamestage = "levelselect"
+        globals.gamestage = "shop"
         globals.levelbuttonArray = []
     if (globals.menuButtonArray[3].interacts(position)):
         globals.gamestage = "settings"
