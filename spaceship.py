@@ -51,7 +51,7 @@ class PlayerSpaceship(pygame.sprite.Sprite):
             globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
             pygame.time.set_timer(USEREVENT + 1, self.firerate*1000)
             self.canshoot = False
-        if self.speed > 0: # Stops the spaceship from going in reverse, because the idea of a spaceship reversing makes me uncomfortable.
+        if self.speed > 0: # Stops the spaceship from going in reverse, because thats just not going to happen.
             self.speed = 0
         if self.speed < self.maxspeed*-1:
             self.speed = self.maxspeed*-1
@@ -78,14 +78,16 @@ class EnemySpaceship(PlayerSpaceship):
         self.x = coords[0]
         self.y = coords[1]
         return
-    def update(self):
-        distancetoplayer = math.sqrt((self.x-globals.playerspaceship.percievedx)**2+(self.y-globals.playerspaceship.percievedy)**2)
+    def update(self): # Overrides the player 
+        distancetoplayer = math.sqrt((self.x-globals.playerspaceship.percievedx)**2+(self.y-globals.playerspaceship.percievedy)**2) # This *could* be useful some day.
         self.direction = findDirection([self.x-globals.playerspaceship.percievedx,self.y-globals.playerspaceship.percievedy])
-        self.image = self.imagelist[0]
+        self.image = self.imagelist[0] # Only show the first animation, as the ship is stationary.
         self.image = pygame.transform.rotate(self.image,self.direction)
         self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
         self.mask = pygame.mask.from_surface(self.image)
         if random.randint(0,150) == 5:
             globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
+        return
     def draw(self,screen):
-        super().draw(self,screen)
+        super().draw(self,screen) # Uses the existing draw function.
+        return
