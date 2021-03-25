@@ -36,3 +36,4 @@ bullets = None # The sprite group that contains all of the bullets that have bee
 destroyables = None # The sprite group that pertains to all of the walls that can be shot to be destroyed.
 enemySpaceships = None # The sprite group that contains all of the enemy spaceships.
 enemyBullets = None # This contains the bullets fired by the enemies, that can destroy the player.
+powerups = None

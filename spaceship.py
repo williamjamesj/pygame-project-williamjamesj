@@ -36,6 +36,7 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         self.percievedx = coords[0]
         self.percievedy = coords[1]
         self.canshoot = True
+        self.originalfirerate = firerate
         self.firerate = firerate
         return
     def update(self,doThrust,doSlow,left,right,doshoot):
@@ -49,7 +50,7 @@ class PlayerSpaceship(pygame.sprite.Sprite):
             self.direction -= self.turnspeed
         if doshoot and self.canshoot:
             globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
-            pygame.time.set_timer(USEREVENT + 1, self.firerate*1000)
+            pygame.time.set_timer(USEREVENT + 1, int(self.firerate*1000))
             self.canshoot = False
         if self.speed > 0: # Stops the spaceship from going in reverse, because thats just not going to happen.
             self.speed = 0

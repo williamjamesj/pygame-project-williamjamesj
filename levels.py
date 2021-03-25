@@ -3,7 +3,7 @@ from pygame.locals import *
 import globalvariables as globals
 from spaceship import EnemySpaceship, PlayerSpaceship
 import math
-from obstacle import Barrier, Destroyable,Objective, SpawnPoint
+from obstacle import Barrier, Destroyable,Objective, SpawnPoint, powerUp
 def levelone():
     globals.spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
@@ -50,6 +50,7 @@ def levelthree():
     globals.walls.add(Barrier(700,400,10,200)) # Barrier
     globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,0,3,1))
     globals.enemySpaceships.add(EnemySpaceship((0,600),"greenspaceship",10,0.1,0,3,1))
+    globals.powerups.add(powerUp(800,300,50,50))
     globals.wincondition = Objective(-900,200,50,50)
 def levelfour():
     print("level four")

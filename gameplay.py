@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-from pygame.sprite import groupcollide
 import globalvariables as globals
 from spaceship import PlayerSpaceship
 import math
@@ -17,6 +16,7 @@ def playGame(level):
     globals.destroyables = pygame.sprite.Group()
     globals.enemySpaceships = pygame.sprite.Group()
     globals.enemyBullets = pygame.sprite.Group()
+    globals.powerups = pygame.sprite.Group()
     playLevel(level)
     return
 def updateGame(keys):
@@ -31,6 +31,7 @@ def updateGame(keys):
     globals.bullets.update()
     globals.enemySpaceships.update()
     globals.enemyBullets.update()
+    globals.powerups.update()
     globals.wincondition.draw()
     globals.spawnPoint.draw()
     if globals.debug:
@@ -48,10 +49,15 @@ def updateGame(keys):
             if globals.level==globals.unlockedlevel:
                 globals.unlockedlevel+=1
             globals.gamestage = "levelover"
-    groupcollide(globals.bullets,globals.destroyables,True,True) # Destroys any platforms that are shot and can be shot.
-    groupcollide(globals.bullets,globals.walls,True,False) # Destroys any bullet that hits a platform.
-    groupcollide(globals.enemyBullets,globals.walls,True,False) # Destroys any enemy's bullet that hits a platform.
+    pygame.sprite.groupcollide(globals.bullets,globals.destroyables,True,True) # Destroys any platforms that are shot and can be shot.
+    pygame.sprite.groupcollide(globals.bullets,globals.walls,True,False) # Destroys any bullet that hits a platform.
+    pygame.sprite.groupcollide(globals.enemyBullets,globals.walls,True,False) # Destroys any enemy's bullet that hits a platform.
     # Enemies can't destroy platforms or destroyables.
+    for i in globals.powerups:
+        if pygame.sprite.collide_mask(i,globals.playerspaceship) is not None:
+            i.kill()
+            globals.playerspaceship.firerate = 0.1
+            pygame.time.set_timer(USEREVENT + 2, 10000)
     for bullet in globals.bullets:
         for spaceship in globals.enemySpaceships:
             if pygame.sprite.collide_mask(bullet,spaceship) is not None:
@@ -71,6 +77,7 @@ def updateGame(keys):
             globals.playerspaceship.percievedy = globals.spawnPointLocation[1]
             globals.playerspaceship.speed = 0
             globals.playerspaceship.direction = 0
+            globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
             globals.leveltime = 0
             playGame(globals.level)
     return

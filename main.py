@@ -14,8 +14,8 @@ localisation.readtexts()
 # Defaults to Fullscreen Resolution 
 pygame.display.set_caption('Cosmoracer')
 pygame.display.set_icon(pygame.image.load("resources/icon.png"))
-# globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
-globals.screen = pygame.display.set_mode((1024,768))
+globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
+# globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
@@ -41,6 +41,7 @@ while globals.running: # The main loop can be stopped from any file
         globals.destroyables.draw(globals.screen)
         globals.enemySpaceships.draw(globals.screen)
         globals.enemyBullets.draw(globals.screen)
+        globals.powerups.draw(globals.screen)
         menurendered = True
         levelrendered = False
         globals.leveltimer.tick()
@@ -96,6 +97,8 @@ while globals.running: # The main loop can be stopped from any file
             shop.updateShop(pygame.mouse.get_pos())
         elif event.type == USEREVENT + 1 and globals.gamestage == "game":
             globals.playerspaceship.canshoot = True
+        elif event.type == USEREVENT + 2 and globals.gamestage == "game":
+            globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))
