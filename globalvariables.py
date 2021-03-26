@@ -1,13 +1,14 @@
 # Variables imported from this file can be accessed in any other file that calls it, specifically helpful for the game loop.
 # All of the variables declared to be None are just placeholders to be set in another file.
 '''General Global Variables'''
-running = True # When this becomes false, the game will close
-gamestage = "menu" # The stage that the game is in
+running = True # When this becomes false, the game will close.
+gamestage = "menu" # The stage that the game is in.
 screen = None # The PyGame surface object for the entire game.
 backgroundpicture = None # The background that is displayed.
-debug = False # Gives helpful features like fps counter, useful for debugging, not for the end-user to see.
+debug = False # Gives helpful features like fps counter, useful for debugging and object placement, not for the end-user to see.
 shop = None # The shop object, containing all of the functions regarding the shop.
 ownedShips = ["yellowspaceship"] # List of all of the ships the player can purchase.
+playercurrentship = ["yellowspaceship",10,0.1,3,1] # The current spaceship that the player spawns with.
 
 '''Persistant Global Variables - Loaded each time the game runs'''
 lang = None # The currently selected language, read from localisation/lastlang on game initialisation.
