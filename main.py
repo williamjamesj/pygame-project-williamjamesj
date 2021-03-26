@@ -14,8 +14,8 @@ localisation.readtexts()
 # Defaults to Fullscreen Resolution 
 pygame.display.set_caption('Cosmoracer')
 pygame.display.set_icon(pygame.image.load("resources/icon.png"))
-# globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
-globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
+globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
+# globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
@@ -29,7 +29,9 @@ instructionsrendered = False
 settingsrendered = False
 levelOverRendered = False
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
-globals.coins,globals.unlockedlevel = load()
+globals.coins,globals.unlockedlevel,globals.ownedShips = load()
+globals.ownedShips = globals.ownedShips.split('/')
+print(globals.coins,globals.unlockedlevel,globals.ownedShips)
 shop = shopScreen()
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
@@ -105,5 +107,5 @@ while globals.running: # The main loop can be stopped from any file
         globals.screen.blit(textobject, (0,0))
     pygame.display.flip()
     fpsClock.tick(FPS)
-save(globals.coins,globals.unlockedlevel)
+save(globals.coins,globals.unlockedlevel,globals.ownedShips)
 sys.exit()

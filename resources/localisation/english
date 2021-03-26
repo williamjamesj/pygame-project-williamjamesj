@@ -9,3 +9,12 @@ seconds:seconds
 coinsgained:Coins Gained
 shop:Shop
 coins:Coins
+selected:Selected
+select:Select
+name:Name
+maximumspeed: Maximum Speed
+acceleration: Acceleration
+turnspeed: Turning Speed
+firerate: Lasers Per Second
+yellowspaceship: Yelleroni 2000
+greenspaceship: Viridescent Vacuum
