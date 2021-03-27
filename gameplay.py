@@ -56,8 +56,9 @@ def updateGame(keys):
     for i in globals.powerups:
         if pygame.sprite.collide_mask(i,globals.playerspaceship) is not None:
             i.kill()
-            globals.playerspaceship.firerate = 0.1
+            globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate/10
             pygame.time.set_timer(USEREVENT + 2, 10000)
+            globals.playerspaceship.canshoot = True
     for bullet in globals.bullets:
         for spaceship in globals.enemySpaceships:
             if pygame.sprite.collide_mask(bullet,spaceship) is not None:
@@ -73,10 +74,9 @@ def updateGame(keys):
     for i in listeronitony: # Collision between obstacles and player.
         if pygame.sprite.collide_mask(globals.playerspaceship,i) is not None:
             globals.bullets.empty()
-            globals.playerspaceship.percievedx = globals.spawnPointLocation[0]
-            globals.playerspaceship.percievedy = globals.spawnPointLocation[1]
             globals.playerspaceship.speed = 0
             globals.playerspaceship.direction = 0
+            globals.playerspaceship.canshoot = True
             globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
             globals.leveltime = 0
             playGame(globals.level)

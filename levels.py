@@ -4,10 +4,12 @@ import globalvariables as globals
 from spaceship import EnemySpaceship, PlayerSpaceship
 import math
 from obstacle import Barrier, Destroyable,Objective, SpawnPoint, powerUp
+def spawnPlayer(spawnPointLocation):
+        globals.playerspaceship = PlayerSpaceship(spawnPointLocation,globals.playercurrentship[0],globals.playercurrentship[1],globals.playercurrentship[2],0,globals.playercurrentship[3],firerate=globals.playercurrentship[4])
 def levelone():
-    globals.spawnPointLocation = (800,500)
-    globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"redspaceship",10,0.1,0,3)
+    spawnPointLocation = (800,500)
+    globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
+    spawnPlayer(spawnPointLocation)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.walls.add(Barrier(500,300,50,600)) # Wall 1
     globals.walls.add(Barrier(200,100,50,600)) # Wall 2
@@ -20,9 +22,9 @@ def levelone():
     globals.walls.add(Barrier(1000,0,100,1000)) # Right
     globals.wincondition = Objective(-900,200,50,50)
 def leveltwo():
-    globals.spawnPointLocation = (800,500)
-    globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
+    spawnPointLocation = (800,500)
+    globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
+    spawnPlayer(spawnPointLocation)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.walls.add(Barrier(500,300,50,600)) # Wall 1
     globals.destroyables.add(Destroyable(500,100,50,200)) # Wall 1 Destroyable
@@ -39,9 +41,9 @@ def leveltwo():
     globals.walls.add(Barrier(1000,0,100,1000)) # Right
     globals.wincondition = Objective(-900,200,50,50)
 def levelthree():
-    globals.spawnPointLocation = (800,500)
-    globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
+    spawnPointLocation = (800,500)
+    globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
+    spawnPlayer(spawnPointLocation)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.walls.add(Barrier(-1000,0,2000,100)) # Top
     globals.walls.add(Barrier(-1100,0,100,1000)) # Left
