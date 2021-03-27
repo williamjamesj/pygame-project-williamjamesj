@@ -7,7 +7,7 @@ from obstacle import Barrier, Destroyable,Objective, SpawnPoint, powerUp
 def levelone():
     globals.spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(globals.spawnPointLocation,50,50)
-    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"yellowspaceship",10,0.1,0,3)
+    globals.playerspaceship = PlayerSpaceship(globals.spawnPointLocation,"redspaceship",10,0.1,0,3)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.walls.add(Barrier(500,300,50,600)) # Wall 1
     globals.walls.add(Barrier(200,100,50,600)) # Wall 2
