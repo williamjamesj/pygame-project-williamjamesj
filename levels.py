@@ -5,7 +5,7 @@ from spaceship import EnemySpaceship, PlayerSpaceship
 import math
 from obstacle import Barrier, Destroyable,Objective, SpawnPoint, powerUp
 def spawnPlayer(spawnPointLocation):
-        globals.playerspaceship = PlayerSpaceship(spawnPointLocation,globals.playercurrentship[0],globals.playercurrentship[1],globals.playercurrentship[2],0,globals.playercurrentship[3],firerate=globals.playercurrentship[4])
+        globals.playerspaceship = PlayerSpaceship(spawnPointLocation,globals.playercurrentship[0],globals.playercurrentship[1],globals.playercurrentship[2],0,globals.playercurrentship[3],globals.playercurrentship[6],firerate=globals.playercurrentship[4])
 def levelone():
     spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
@@ -52,7 +52,7 @@ def levelthree():
     globals.walls.add(Barrier(700,400,10,200)) # Barrier
     globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,1,3,1))
     globals.enemySpaceships.add(EnemySpaceship((0,600),"greenspaceship",10,0.1,1,3,1))
-    globals.powerups.add(powerUp(800,300,50,50))
+    globals.powerups.add(powerUp(800,200,50,50))
     globals.wincondition = Objective(-900,200,50,50)
 def levelfour():
     print("level four")

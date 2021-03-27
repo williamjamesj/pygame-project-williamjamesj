@@ -21,7 +21,7 @@ def findImages(directory):
         fileslist.append(pygame.image.load(os.path.join(directory,i)).convert_alpha())
     return fileslist
 class PlayerSpaceship(pygame.sprite.Sprite):
-    def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed, firerate=1):
+    def __init__(self,coords,appearance,maxspeed, acceleration, direction, turnspeed, shields, firerate=1):
         super().__init__() # Very important
         self.appearance = appearance
         self.imagelist = findImages(f"resources/spaceships/{str(appearance)}/")
@@ -38,6 +38,7 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         self.canshoot = True
         self.originalfirerate = firerate
         self.firerate = firerate
+        self.shields = shields
         return
     def update(self,doThrust,doSlow,left,right,doshoot):
         if doThrust:

@@ -34,6 +34,8 @@ def updateGame(keys):
     globals.powerups.update()
     globals.wincondition.draw()
     globals.spawnPoint.draw()
+    if globals.playerspaceship.shields > 1:
+        globals.screen.blit(pygame.font.Font('resources/fonts/Nougat.ttf', 50).render(f"Shields: {globals.playerspaceship.shields}", True, (255,255,255)), (0,0))
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))
@@ -73,11 +75,16 @@ def updateGame(keys):
         listeronitony.append(i)
     for i in listeronitony: # Collision between obstacles and player.
         if pygame.sprite.collide_mask(globals.playerspaceship,i) is not None:
-            globals.bullets.empty()
-            globals.playerspaceship.speed = 0
-            globals.playerspaceship.direction = 0
-            globals.playerspaceship.canshoot = True
-            globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
-            globals.leveltime = 0
-            playGame(globals.level)
+            if i in globals.enemyBullets or i in globals.destroyables:
+                i.kill()
+            globals.playerspaceship.shields -= 1
+    if globals.playerspaceship.shields <= 0:
+        globals.bullets.empty()
+        globals.playerspaceship.speed = 0
+        globals.playerspaceship.direction = 0
+        globals.playerspaceship.canshoot = True
+        globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
+        globals.leveltime = 0
+        playGame(globals.level)
+            
     return
