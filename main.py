@@ -99,7 +99,7 @@ while globals.running: # The main loop can be stopped from any file
             shop.updateShop(pygame.mouse.get_pos())
         elif event.type == USEREVENT + 1 and globals.gamestage == "game":
             globals.playerspaceship.canshoot = True
-        elif event.type == USEREVENT + 2 and globals.gamestage == "game":
+        elif event.type == USEREVENT + 2:
             globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)

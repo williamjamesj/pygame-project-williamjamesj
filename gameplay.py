@@ -75,7 +75,7 @@ def updateGame(keys):
         listeronitony.append(i)
     for i in listeronitony: # Collision between obstacles and player.
         if pygame.sprite.collide_mask(globals.playerspaceship,i) is not None:
-            if i in globals.enemyBullets or i in globals.destroyables:
+            if i in globals.enemyBullets or i in globals.destroyables: # Make sure the enemy is destroyed, so that the bullets don't infinitely damage.
                 i.kill()
             globals.playerspaceship.shields -= 1
     if globals.playerspaceship.shields <= 0:
