@@ -42,7 +42,7 @@ def updateGame(keys):
         globals.screen.blit(textobject, (1000,0))
     if pygame.sprite.collide_mask(globals.playerspaceship,globals.wincondition) is not None:
         if len(globals.enemySpaceships)==0:
-            globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100
+            globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100*globals.level
             if globals.coinsgained<100:
                 globals.coinsgained = 100
             globals.coins+=math.floor(globals.coinsgained)
