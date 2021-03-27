@@ -6,7 +6,7 @@ import globalvariables as globals
 class shopScreen():
     def __init__(self):
         self.backbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100)
-        self.spaceships = [["yellowspaceship",10,0.1,3,1,0,0],["greenspaceship",10,0.1,3,0.5,25000,0],["redspaceship",15,0.15,5,2,50000,2],["bigspaceship",20,0.05,1,0.1,100000,5]] # The lists store ships in this order: appearance,maxspeed,acceleration,turnspeed,firerate
+        self.spaceships = [["yellowspaceship",10,0.1,3,1,0,0],["greenspaceship",10,0.1,3,0.5,25000,0],["redspaceship",15,0.2,5,2,50000,2],["bigspaceship",20,0.05,1,0.1,100000,5]] # The lists store ships in this order: appearance,maxspeed,acceleration,turnspeed,firerate
         self.spaceshipimages = []
         for i in self.spaceships:
             self.spaceshipimages.append(pygame.image.load(f"resources/spaceships/shopimages/{i[0]}.png"))
