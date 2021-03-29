@@ -16,13 +16,6 @@ languagesdict = None # The dictionary of all words to be used in the game, allow
 coins = 0 # The number of coins the player has accumulated, read from save.data at the start of the game and saved there as the game quits. 
 unlockedlevel = 1 # The highest level that the player has completed, read from save.data at the start of the game and saved there as the game quits. 
 
-'''Navigation Buttons'''
-menuButtonArray = [] # All of the buttons used in the main menu.
-levelbuttonArray = [] # All of the buttons used in the level selector.
-settingsButtonArray = [] # All of the buttons used in the settings screen.
-leveloverbackbutton = None # The back button displayed to take the player back to the levelselector, once they have completed a level.
-instructionsbackbutton = None # The back button for the instructions screen, it is the only button on the screen so it does not require an array.
-
 '''Level Specific Global Variables'''
 leveltimer = None # The clock object that times each level.
 leveltime = 0 # The number of milliseconds elapsed since the start of the level. Reset if the player respawns.
@@ -37,4 +30,4 @@ bullets = None # The sprite group that contains all of the bullets that have bee
 destroyables = None # The sprite group that pertains to all of the walls that can be shot to be destroyed.
 enemySpaceships = None # The sprite group that contains all of the enemy spaceships.
 enemyBullets = None # This contains the bullets fired by the enemies, that can destroy the player.
-powerups = None
+powerups = None # The sprite group containing all of the powerup objects.

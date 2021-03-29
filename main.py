@@ -1,7 +1,7 @@
 from shop import shopScreen
 import pygame
 from pygame.locals import *
-from menu import checkingLevelOver, checkingSettings, displayLevelOver, displayMenu, checkingMenu, displaySettings, levelSelector, checkingLevel, displayInstructions, checkingInstructions
+from menu import MenuObject
 import globalvariables as globals
 from gameplay import updateGame
 import os, sys
@@ -23,15 +23,11 @@ globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
 pygame.init() # initializes all of the pygame functionality including fonts
 FPS = 60
 fpsClock = pygame.time.Clock()
-menurendered = False
-levelrendered = False
-instructionsrendered = False
-settingsrendered = False
-levelOverRendered = False
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 globals.coins,globals.unlockedlevel,globals.ownedShips = load()
 globals.ownedShips = globals.ownedShips.split('/')
 shop = shopScreen()
+menu = MenuObject()
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
@@ -43,57 +39,34 @@ while globals.running: # The main loop can be stopped from any file
         globals.enemySpaceships.draw(globals.screen)
         globals.enemyBullets.draw(globals.screen)
         globals.powerups.draw(globals.screen)
-        menurendered = True
-        levelrendered = False
         globals.leveltimer.tick()
         globals.leveltime += globals.leveltimer.get_time()
-    elif globals.gamestage =="menu" and not menurendered: # Loops while the player is in menu.
-        displayMenu()
-        menurendered = True # Means that the menu will only be drawn once so that the performance isn't being impeded by redrawing the background.
-        levelrendered = False
-        settingsrendered = False
-    elif globals.gamestage == "levelselect" and not levelrendered:
-        levelSelector()
-        levelrendered = True
-        levelOverRendered = False
-    elif globals.gamestage == "instructions" and not instructionsrendered:
-        displayInstructions()
-        levelrendered = True
-        menurendered = False
-    elif globals.gamestage == "settings" and not instructionsrendered:
-        displaySettings()
-        levelrendered = True
-        menurendered = False
-    elif globals.gamestage == "levelover" and not levelOverRendered:
-        displayLevelOver()
-        levelOverRendered = True
-        menurendered = False
-        levelrendered = False
-        instructionsrendered = False
+    elif globals.gamestage =="menu": # Loops while the player is in menu.
+        menu.displayMenu()
+    elif globals.gamestage == "levelselect":
+        menu.levelSelector()
+    elif globals.gamestage == "instructions":
+        menu.displayInstructions()
+    elif globals.gamestage == "settings":
+        menu.displaySettings()
+    elif globals.gamestage == "levelover":
+        menu.displayLevelOver()
     elif globals.gamestage == "shop":
         shop.displayShop()
-        menurendered = False
-    else:
-        if not globals.gamestage == "menu":
-            menurendered = False
-        elif not globals.gamestage == "levelselect":
-            levelrendered = False
-        elif not globals.gamestage == "instructions":
-            instructionsrendered = False
     for event in pygame.event.get():
         if event.type == QUIT:
             globals.running = False
         # Checks if any buttons have been pressed in the menu stage.
         elif (globals.gamestage == "menu" and event.type == MOUSEBUTTONDOWN):
-            checkingMenu(pygame.mouse.get_pos())
+            menu.checkingMenu(pygame.mouse.get_pos())
         elif (globals.gamestage == "levelselect" and event.type == MOUSEBUTTONDOWN):
-            checkingLevel(pygame.mouse.get_pos())
+            menu.checkingLevel(pygame.mouse.get_pos())
         elif (globals.gamestage == "instructions" and event.type == MOUSEBUTTONDOWN):
-            checkingInstructions(pygame.mouse.get_pos())
+            menu.checkingInstructions(pygame.mouse.get_pos())
         elif (globals.gamestage == "settings" and event.type == MOUSEBUTTONDOWN):
-            checkingSettings(pygame.mouse.get_pos())
+            menu.checkingSettings(pygame.mouse.get_pos())
         elif (globals.gamestage == "levelover" and event.type == MOUSEBUTTONDOWN):
-            checkingLevelOver(pygame.mouse.get_pos())
+            menu.checkingLevelOver(pygame.mouse.get_pos())
         elif (globals.gamestage == "shop" and event.type == MOUSEBUTTONDOWN):
             shop.updateShop(pygame.mouse.get_pos())
         elif event.type == USEREVENT + 1 and globals.gamestage == "game":

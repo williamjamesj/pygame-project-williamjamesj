@@ -34,8 +34,6 @@ def updateGame(keys):
     globals.powerups.update()
     globals.wincondition.draw()
     globals.spawnPoint.draw()
-    if globals.playerspaceship.shields > 1:
-        globals.screen.blit(pygame.font.Font('resources/fonts/Roboto-Regular.ttf', 50).render(f"Shields: {globals.playerspaceship.shields}", True, (255,255,255)), (0,0))
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))
@@ -86,5 +84,6 @@ def updateGame(keys):
         globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
         globals.leveltime = 0
         playGame(globals.level)
-            
+    if globals.playerspaceship.shields > 1:
+        globals.screen.blit(pygame.font.Font('resources/fonts/Roboto-Regular.ttf', 50).render(f"Shields: {globals.playerspaceship.shields}", True, (255,0,0)), (0,0))
     return
