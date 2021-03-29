@@ -32,13 +32,6 @@ while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
         updateGame(pygame.key.get_pressed())
-        globals.playerspaceship.draw(globals.screen)
-        globals.walls.draw(globals.screen)
-        globals.bullets.draw(globals.screen)
-        globals.destroyables.draw(globals.screen)
-        globals.enemySpaceships.draw(globals.screen)
-        globals.enemyBullets.draw(globals.screen)
-        globals.powerups.draw(globals.screen)
         globals.leveltimer.tick()
         globals.leveltime += globals.leveltimer.get_time()
     elif globals.gamestage =="menu": # Loops while the player is in menu.

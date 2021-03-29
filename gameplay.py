@@ -34,6 +34,13 @@ def updateGame(keys):
     globals.powerups.update()
     globals.wincondition.draw()
     globals.spawnPoint.draw()
+    globals.playerspaceship.draw(globals.screen)
+    globals.walls.draw(globals.screen)
+    globals.bullets.draw(globals.screen)
+    globals.destroyables.draw(globals.screen)
+    globals.enemySpaceships.draw(globals.screen)
+    globals.enemyBullets.draw(globals.screen)
+    globals.powerups.draw(globals.screen)
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))
