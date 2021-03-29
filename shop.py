@@ -41,7 +41,6 @@ class shopScreen():
     def updateShop(self,mouseposition):
         if self.backbutton.interacts(mouseposition):
             globals.gamestage = "menu"
-            print(globals.playercurrentship)
         if self.leftbutton.interacts(mouseposition):
             self.currentship -= 1
         if self.rightbutton.interacts(mouseposition):

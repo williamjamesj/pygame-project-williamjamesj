@@ -31,7 +31,6 @@ levelOverRendered = False
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 globals.coins,globals.unlockedlevel,globals.ownedShips = load()
 globals.ownedShips = globals.ownedShips.split('/')
-print(globals.coins,globals.unlockedlevel,globals.ownedShips)
 shop = shopScreen()
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
