@@ -9,7 +9,7 @@ class AudioHandler():
             self.musiclist.append(i)
         random.shuffle(self.musiclist)
         print(self.musiclist)
-        self.currentsong = -1
+        self.currentsong = 0
         self.soundDict = {}
         self.soundDict['laser'] = pygame.mixer.Sound('resources/sounds/laser.mp3')
         return
@@ -18,9 +18,11 @@ class AudioHandler():
         self.soundDict[sound].play()
         return
     def nextSong(self):
+        print(self.musiclist[self.currentsong])
         self.currentsong += 1
-        if self.currentsong > len(self.musiclist):
+        if self.currentsong >= len(self.musiclist):
             self.currentsong -= len(self.musiclist)
+            print("wrap")
         pygame.mixer.music.load(f"resources/music/{self.musiclist[self.currentsong]}")
         pygame.mixer.music.play()
         return
