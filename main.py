@@ -1,3 +1,4 @@
+from audio import AudioHandler
 from shop import shopScreen
 import pygame
 from pygame.locals import *
@@ -20,7 +21,7 @@ globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
 # Saves the current stage in the game
-pygame.init() # initializes all of the pygame functionality including fonts
+pygame.init() # initializes all of the pygame functionality including fonts and audio
 FPS = 60
 fpsClock = pygame.time.Clock()
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
@@ -28,6 +29,10 @@ globals.coins,globals.unlockedlevel,globals.ownedShips = load()
 globals.ownedShips = globals.ownedShips.split('/')
 shop = shopScreen()
 menu = MenuObject()
+endsong = USEREVENT + 3
+pygame.mixer.music.set_endevent(endsong) # This was helpful for the event handling with music https://nerdparadise.com/programming/pygame/part3
+globals.audioHandler = AudioHandler()
+globals.audioHandler.nextSong()
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
@@ -66,6 +71,8 @@ while globals.running: # The main loop can be stopped from any file
             globals.playerspaceship.canshoot = True
         elif event.type == USEREVENT + 2:
             globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
+        elif event.type == USEREVENT + 3:
+            globals.audioHandler.nextSong()
     if globals.debug:
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))

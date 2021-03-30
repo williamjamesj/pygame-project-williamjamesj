@@ -52,6 +52,7 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         if doshoot and self.canshoot:
             globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
             pygame.time.set_timer(USEREVENT + 1, int(self.firerate*1000))
+            globals.audioHandler.playSound('laser')
             self.canshoot = False
         if self.speed > 0: # Stops the spaceship from going in reverse, because thats just not going to happen.
             self.speed = 0
