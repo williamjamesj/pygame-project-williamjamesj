@@ -16,8 +16,8 @@ localisation.readtexts()
 # Defaults to Fullscreen Resolution 
 pygame.display.set_caption('Cosmoracer')
 pygame.display.set_icon(pygame.image.load("resources/icon.png"))
-# globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
-globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
+globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
+# globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
@@ -26,13 +26,18 @@ pygame.init() # initializes all of the pygame functionality including fonts and 
 FPS = 60
 fpsClock = pygame.time.Clock()
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
-globals.coins,globals.unlockedlevel,globals.ownedShips = load()
+globals.coins,globals.unlockedlevel,globals.ownedShips,globals.playercurrentship,musicvol,sfxvol = load()
 globals.ownedShips = globals.ownedShips.split('/')
+print(globals.playercurrentship)
+globals.playercurrentship = globals.playercurrentship.split('/')
+print(globals.playercurrentship)
 shop = shopScreen()
 menu = MenuObject()
 endsong = USEREVENT + 3
 pygame.mixer.music.set_endevent(endsong) # This was helpful for the event handling with music https://nerdparadise.com/programming/pygame/part3
 globals.audioHandler = AudioHandler()
+globals.audioHandler.musicvolume = musicvol
+globals.audioHandler.sfxvolume = sfxvol
 globals.audioHandler.nextSong()
 settings = settingsScreen()
 while globals.running: # The main loop can be stopped from any file
@@ -81,5 +86,8 @@ while globals.running: # The main loop can be stopped from any file
         globals.screen.blit(textobject, (0,0))
     pygame.display.flip()
     fpsClock.tick(FPS)
-save(globals.coins,globals.unlockedlevel,globals.ownedShips)
+newShip = []
+for i in globals.playercurrentship:
+    newShip.append(str(i))
+save(globals.coins,globals.unlockedlevel,globals.ownedShips,newShip,globals.audioHandler.musicvolume,globals.audioHandler.sfxvolume)
 sys.exit()

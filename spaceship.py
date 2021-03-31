@@ -25,10 +25,10 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         super().__init__() # Very important
         self.appearance = appearance
         self.imagelist = findImages(f"resources/spaceships/{str(appearance)}/")
-        self.maxspeed = maxspeed
-        self.acceleration = acceleration
-        self.direction = direction
-        self.turnspeed = turnspeed
+        self.maxspeed = int(maxspeed)
+        self.acceleration = float(acceleration)
+        self.direction = float(direction)
+        self.turnspeed = float(turnspeed)
         self.speed = 0
         self.image = pygame.transform.rotate(self.imagelist[0],direction)
         self.rect = self.image.get_rect(center=coords)
@@ -36,9 +36,9 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         self.percievedx = coords[0]
         self.percievedy = coords[1]
         self.canshoot = True
-        self.originalfirerate = firerate
-        self.firerate = firerate
-        self.shields = shields
+        self.originalfirerate = float(firerate)
+        self.firerate = float(firerate)
+        self.shields = int(shields)
         return
     def update(self,doThrust,doSlow,left,right,doshoot):
         if doThrust:
