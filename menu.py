@@ -48,7 +48,7 @@ class MenuObject():
         return
     def displayInstructions(self):
         globals.screen.blit(globals.backgroundpicture, (0,0))
-        self.instructionsbackbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100)
+        self.instructionsbackbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-75],globals.screen, globals.languagesdict["back"],100)
         buttons.Button(1000,40,[0,50-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionone"],30,font="Roboto-Regular")
         buttons.Button(1000,40,[0,100-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructiontwo"],30,font="Roboto-Regular")
         buttons.Button(1000,40,[0,150-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionthree"],30,font="Roboto-Regular")
@@ -59,6 +59,7 @@ class MenuObject():
         buttons.Button(1000,40,[0,450-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructioneight"],30,font="Roboto-Regular")
         buttons.Button(1000,40,[0,500-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionnine"],30,font="Roboto-Regular")
         buttons.Button(1000,40,[0,550-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionten"],30,font="Roboto-Regular")
+        buttons.Button(1000,40,[0,600-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructioneleven"],30,font="Roboto-Regular")
         return
     def displaySettings(self):
         globals.screen.blit(globals.backgroundpicture, (0,0))

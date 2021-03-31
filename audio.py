@@ -12,19 +12,20 @@ class AudioHandler():
         self.currentsong = 0
         self.soundDict = {}
         self.soundDict['laser'] = pygame.mixer.Sound('resources/sounds/laser.mp3')
+        self.soundDict['explosion'] = pygame.mixer.Sound('resources/sounds/explosion.mp3')
         return
     def playSound(self,sound):
+        self.soundDict[sound].set_volume(0.3)
         self.soundDict[sound].stop()
         self.soundDict[sound].play()
         return
     def nextSong(self):
-        print(self.musiclist[self.currentsong])
         self.currentsong += 1
         if self.currentsong >= len(self.musiclist):
             self.currentsong -= len(self.musiclist)
-            print("wrap")
         pygame.mixer.music.load(f"resources/music/{self.musiclist[self.currentsong]}")
         pygame.mixer.music.play()
+        pygame.mixer.music.set_volume(0.2)
         return
 # if __name__ == "__main__":
 #     pygame.mixer.init()

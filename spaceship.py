@@ -81,6 +81,7 @@ class PlayerSpaceship(pygame.sprite.Sprite):
 class EnemySpaceship(PlayerSpaceship):
     def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate):
         super().__init__(coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate)
+        self.firerate = firerate
         self.x = coords[0]
         self.y = coords[1]
         return
@@ -91,8 +92,9 @@ class EnemySpaceship(PlayerSpaceship):
         self.image = pygame.transform.rotate(self.image,self.direction)
         self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
         self.mask = pygame.mask.from_surface(self.image)
-        if random.randint(0,150) == 5:
+        if random.randint(0,self.firerate) == 5:
             globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
+            globals.audioHandler.playSound('laser')
         return
     def draw(self,screen):
         super().draw(self,screen) # Uses the existing draw function.
