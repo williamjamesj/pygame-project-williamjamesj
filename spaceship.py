@@ -27,7 +27,7 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         self.imagelist = findImages(f"resources/spaceships/{str(appearance)}/")
         self.maxspeed = int(maxspeed)
         self.acceleration = float(acceleration)
-        self.direction = float(direction)
+        self.direction = direction
         self.turnspeed = float(turnspeed)
         self.speed = 0
         self.image = pygame.transform.rotate(self.imagelist[0],direction)
