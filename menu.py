@@ -61,10 +61,6 @@ class MenuObject():
         buttons.Button(1000,40,[0,550-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionten"],30,font="Roboto-Regular")
         buttons.Button(1000,40,[0,600-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructioneleven"],30,font="Roboto-Regular")
         return
-    def displaySettings(self):
-        globals.screen.blit(globals.backgroundpicture, (0,0))
-        self.settingsButtonArray.append(buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100))
-        return
     def displayLevelOver(self):
         globals.screen.blit(globals.backgroundpicture, (0,0))
         buttons.Button(600,100,[0,-100],globals.screen, f"{globals.languagesdict['time']}: {math.floor(globals.leveltime/1000)} {globals.languagesdict['seconds']}",100,(255,255,255),(0,0,0))
@@ -112,11 +108,6 @@ class MenuObject():
         return
     def checkingInstructions(self,position):
         if (self.instructionsbackbutton.interacts(position)):
-            globals.gamestage = "menu"
-            self.menuButtonArray = []
-        return
-    def checkingSettings(self,position):
-        if (self.settingsButtonArray[0].interacts(position)):
             globals.gamestage = "menu"
             self.menuButtonArray = []
         return

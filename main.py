@@ -9,6 +9,7 @@ import os, sys
 import math
 import localisation
 from persistantdata import load,save
+from settings import settingsScreen
 # Sets the language to whatever is stored in resources/localisation/lastlang and reads that language to globals.languagesdict
 localisation.readlang()
 localisation.readtexts()
@@ -33,6 +34,7 @@ endsong = USEREVENT + 3
 pygame.mixer.music.set_endevent(endsong) # This was helpful for the event handling with music https://nerdparadise.com/programming/pygame/part3
 globals.audioHandler = AudioHandler()
 globals.audioHandler.nextSong()
+settings = settingsScreen()
 while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
@@ -46,7 +48,7 @@ while globals.running: # The main loop can be stopped from any file
     elif globals.gamestage == "instructions":
         menu.displayInstructions()
     elif globals.gamestage == "settings":
-        menu.displaySettings()
+        settings.displaySettings()
     elif globals.gamestage == "levelover":
         menu.displayLevelOver()
     elif globals.gamestage == "shop":
@@ -62,7 +64,7 @@ while globals.running: # The main loop can be stopped from any file
         elif (globals.gamestage == "instructions" and event.type == MOUSEBUTTONDOWN):
             menu.checkingInstructions(pygame.mouse.get_pos())
         elif (globals.gamestage == "settings" and event.type == MOUSEBUTTONDOWN):
-            menu.checkingSettings(pygame.mouse.get_pos())
+            settings.updateSettings(pygame.mouse.get_pos())
         elif (globals.gamestage == "levelover" and event.type == MOUSEBUTTONDOWN):
             menu.checkingLevelOver(pygame.mouse.get_pos())
         elif (globals.gamestage == "shop" and event.type == MOUSEBUTTONDOWN):
