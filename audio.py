@@ -8,7 +8,6 @@ class AudioHandler():
         for i in os.listdir("resources/music"):
             self.musiclist.append(i)
         random.shuffle(self.musiclist)
-        print(self.musiclist)
         self.currentsong = 0
         self.musicvolume = 10
         self.sfxvolume = 10

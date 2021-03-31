@@ -21,7 +21,6 @@ def load():
     return(data[0])
 def save(coins,level_complete,owned_ships,playercurrentship,musicvol,sfxvol):
     cursy = sqlite3.connect("save.data").cursor()
-    print('/'.join(playercurrentship))
     cursy.execute(f"""INSERT INTO saves(coins,level_complete,owned_ships,playercurrentship,musicvol,sfxvol) VALUES({coins},{level_complete},"{'/'.join(owned_ships)}","{'/'.join(playercurrentship)}",{musicvol},{sfxvol});
     """)
     cursy.connection.commit()
