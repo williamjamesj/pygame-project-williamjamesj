@@ -16,6 +16,7 @@ class MenuObject():
         globals.screen.blit(globals.backgroundpicture, (0,0)) # Make the screen just the background
         unlockedlistbg = []
         unlockedlistfont = []
+        self.__init__()
         for i in range(1,10):
             if globals.unlockedlevel >= i:
                 unlockedlistbg.append((255,255,255))
@@ -37,6 +38,7 @@ class MenuObject():
         return
     def displayMenu(self):
         # Play Button = 0
+        self.__init__()
         globals.screen.blit(globals.backgroundpicture, (0,0))
         buttons.Button(0,0,[0,-300],globals.screen,globals.languagesdict["gamename"],200)
         self.menuButtonArray.append(buttons.Button(300,75,[0,-75],globals.screen,globals.languagesdict["play"],75))
@@ -47,6 +49,7 @@ class MenuObject():
         self.levelbuttonArray = []
         return
     def displayInstructions(self):
+        self.__init__()
         globals.screen.blit(globals.backgroundpicture, (0,0))
         self.instructionsbackbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-75],globals.screen, globals.languagesdict["back"],100)
         buttons.Button(1000,40,[0,50-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionone"],30,font="Roboto-Regular")
@@ -62,6 +65,7 @@ class MenuObject():
         buttons.Button(1000,40,[0,600-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructioneleven"],30,font="Roboto-Regular")
         return
     def displayLevelOver(self):
+        self.__init__()
         globals.screen.blit(globals.backgroundpicture, (0,0))
         buttons.Button(600,100,[0,-100],globals.screen, f"{globals.languagesdict['time']}: {math.floor(globals.leveltime/1000)} {globals.languagesdict['seconds']}",100,(255,255,255),(0,0,0))
         buttons.Button(800,100,[0,100],globals.screen, f"{globals.languagesdict['coinsgained']}: {math.floor(globals.coinsgained)}",100,(255,255,255),(0,0,0))
