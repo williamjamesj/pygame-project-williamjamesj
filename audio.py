@@ -12,8 +12,8 @@ class AudioHandler():
         self.musicvolume = 10
         self.sfxvolume = 10
         self.soundDict = {}
-        self.soundDict['laser'] = pygame.mixer.Sound('resources/sounds/laser.mp3')
-        self.soundDict['explosion'] = pygame.mixer.Sound('resources/sounds/explosion.mp3')
+        self.soundDict['laser'] = pygame.mixer.Sound('resources/sounds/laser.ogg')
+        self.soundDict['explosion'] = pygame.mixer.Sound('resources/sounds/explosion.ogg')
         return
     def playSound(self,sound):
         self.soundDict[sound].set_volume(self.sfxvolume/10)
