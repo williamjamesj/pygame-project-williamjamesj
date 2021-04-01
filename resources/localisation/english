@@ -12,24 +12,29 @@ coins:Coins
 selected:Selected
 select:Select
 name:Name
-maximumspeed: Maximum Speed
-acceleration: Acceleration
-turnspeed: Turning Speed
-firerate: Lasers Per Second
-yellowspaceship: Yelleroni 2000
-redspaceship: Zoominator 3000
-bigspaceship: The Cargonator
+maximumspeed:Maximum Speed
+acceleration:Acceleration
+turnspeed:Turning Speed
+firerate:Lasers Per Second
+yellowspaceship:Yelleroni 2000
+redspaceship:Zoominator 3000
+bigspaceship:The Cargonator
 shielding:Shields
 instructionone:Use either the WASD keys or the arrow keys to move the spaceship.
 instructiontwo:Use the W key or Up arrow to increase the throttle.
 instructionthree:Use the S key or Down arrow to decrease the throttle.
-instructionfour: Use the A key or Left arrow to turn left.
-instructionfive: Use the D key or Right arrow to turn right.
-instructionsix: Use the Space Bar or Tab key to fire. The white square gives rapid fire.
-instructionseven: Reach the yellow square to complete the level.
-instructioneight: You must destroy all other spaceships to complete the level.
-instructionnine: Coins are earnt for each level completed.
-instructionten: The coins can be spent in the shop to get additional ships.
-instructioneleven: When playing the game, you can press the Escape (esc) key to exit.
-musicvol: Music Volume
-sfxvol: Sound Effects Volume
+instructionfour:Use the A key or Left arrow to turn left.
+instructionfive:Use the D key or Right arrow to turn right.
+instructionsix:Use the Space Bar or Tab key to fire. The white square gives rapid fire.
+instructionseven:Reach the yellow square to complete the level.
+instructioneight:You must destroy all other spaceships to complete the level.
+instructionnine:Coins are earnt for each level completed.
+instructionten:The coins can be spent in the shop to get additional ships.
+instructioneleven:When playing the game, you can press the Escape (esc) key to exit.
+musicvol:Music Volume
+sfxvol:Sound Effects Volume
+musicsettings:Music Settings
+languagesettings:Language Settings
+english:English
+spanish:Spanish
+credits:Credits
