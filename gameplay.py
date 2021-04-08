@@ -15,6 +15,7 @@ def playGame(level):
     globals.bullets = pygame.sprite.Group()
     globals.destroyables = pygame.sprite.Group()
     globals.enemySpaceships = pygame.sprite.Group()
+    globals.optionalEnemySpaceships = pygame.sprite.Group()
     globals.enemyBullets = pygame.sprite.Group()
     globals.powerups = pygame.sprite.Group()
     playLevel(level)
@@ -30,6 +31,7 @@ def updateGame(keys):
     globals.spawnPoint.update()
     globals.bullets.update()
     globals.enemySpaceships.update()
+    globals.optionalEnemySpaceships.update()
     globals.enemyBullets.update()
     globals.powerups.update()
     globals.wincondition.draw()
@@ -39,6 +41,7 @@ def updateGame(keys):
     globals.bullets.draw(globals.screen)
     globals.destroyables.draw(globals.screen)
     globals.enemySpaceships.draw(globals.screen)
+    globals.optionalEnemySpaceships.draw(globals.screen)
     globals.enemyBullets.draw(globals.screen)
     globals.powerups.draw(globals.screen)
     if globals.debug:
@@ -59,15 +62,20 @@ def updateGame(keys):
     pygame.sprite.groupcollide(globals.bullets,globals.destroyables,True,True) # Destroys any platforms that are shot and can be shot.
     pygame.sprite.groupcollide(globals.bullets,globals.walls,True,False) # Destroys any bullet that hits a platform.
     pygame.sprite.groupcollide(globals.enemyBullets,globals.walls,True,False) # Destroys any enemy's bullet that hits a platform.
-    # Enemies can't destroy platforms or destroyables.
+    pygame.sprite.groupcollide(globals.enemyBullets,globals.destroyables,True,True) # Allows the enemy's bullets to destroy platforms.
     for i in globals.powerups:
         if pygame.sprite.collide_mask(i,globals.playerspaceship) is not None:
             i.kill()
             globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate/10
             pygame.time.set_timer(USEREVENT + 2, 10000)
             globals.playerspaceship.canshoot = True
+    enemies = []
+    for i in globals.optionalEnemySpaceships:
+        enemies.append(i)
+    for i in globals.enemySpaceships:
+        enemies.append(i)
     for bullet in globals.bullets:
-        for spaceship in globals.enemySpaceships:
+        for spaceship in enemies:
             if pygame.sprite.collide_mask(bullet,spaceship) is not None:
                 spaceship.kill()
                 bullet.kill()

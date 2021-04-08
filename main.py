@@ -16,8 +16,8 @@ localisation.readtexts()
 # Defaults to Fullscreen Resolution 
 pygame.display.set_caption('Cosmoracer')
 pygame.display.set_icon(pygame.image.load("resources/icon.png"))
-# globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
-globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
+globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
+# globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
@@ -28,8 +28,8 @@ fpsClock = pygame.time.Clock()
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 globals.coins,globals.unlockedlevel,globals.ownedShips,globals.playercurrentship,musicvol,sfxvol = load()
 globals.ownedShips = globals.ownedShips.split('/')
-globals.playercurrentship = globals.playercurrentship.split('/')
-shop = shopScreen()
+globals.playercurrentship = globals.playercurrentship.split('/') # The SQLite database replaces the commas with slashes so its easier to store.
+shop = shopScreen() # Initialize the objects used to draw menus, which contain all of the buttons and other elements in the menus.
 menu = MenuObject()
 endsong = USEREVENT + 3
 pygame.mixer.music.set_endevent(endsong) # This was helpful for the event handling with music https://nerdparadise.com/programming/pygame/part3
@@ -78,14 +78,14 @@ while globals.running: # The main loop can be stopped from any file
             globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
         elif event.type == USEREVENT + 3:
             globals.audioHandler.nextSong()
-    if globals.debug:
+    if globals.debug: # When in debug mode, display the FPS in the top left of the screen.
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))
         globals.screen.blit(textobject, (0,0))
     pygame.display.flip()
     fpsClock.tick(FPS)
 newShip = []
-for i in globals.playercurrentship:
+for i in globals.playercurrentship: # Changes every element in the playercurrentship array into a string, as otherwise SQLite doesn't like it.
     newShip.append(str(i))
-save(globals.coins,globals.unlockedlevel,globals.ownedShips,newShip,globals.audioHandler.musicvolume,globals.audioHandler.sfxvolume)
+save(globals.coins,globals.unlockedlevel,globals.ownedShips,newShip,globals.audioHandler.musicvolume,globals.audioHandler.sfxvolume) # Save all of the player's progress and preferences.
 sys.exit()
