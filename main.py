@@ -16,8 +16,8 @@ localisation.readtexts()
 # Defaults to Fullscreen Resolution 
 pygame.display.set_caption('Cosmoracer')
 pygame.display.set_icon(pygame.image.load("resources/icon.png"))
-# globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options ensure compatibility across systems.
-globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
+globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options (FULLSCREEN and NOFRAME) ensure compatibility across systems.
+# globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
@@ -42,8 +42,7 @@ while globals.running: # The main loop can be stopped from any file
     '''Main Loop - Always running, until the game stops.'''
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
         updateGame(pygame.key.get_pressed())
-        globals.leveltimer.tick()
-        globals.leveltime += globals.leveltimer.get_time()
+        globals.leveltime += fpsClock.get_time()
     elif globals.gamestage =="menu": # Loops while the player is in menu.
         menu.displayMenu()
     elif globals.gamestage == "levelselect":

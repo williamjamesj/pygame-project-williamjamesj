@@ -7,9 +7,9 @@ from obstacle import Barrier, Destroyable
 from levels import *
 from levels import playLevel
 def playGame(level):
-    globals.leveltimer = pygame.time.Clock()
-    globals.leveltime = 0
-    globals.playerorigin = globals.dimensions[0]/2,globals.dimensions[1]/2
+    globals.leveltime = 0 # Starts the counter of how long the player has taken to complete the level.
+    globals.playerorigin = globals.dimensions[0]/2,globals.dimensions[1]/2 # The player will always be displayed in the exact center of the screen.
+    # Initialize all of the sprite groups.
     globals.allobjects = pygame.sprite.Group()
     globals.walls = pygame.sprite.Group()
     globals.bullets = pygame.sprite.Group()
@@ -81,7 +81,7 @@ def updateGame(keys):
                 bullet.kill()
                 globals.audioHandler.playSound('explosion')
     listeronitony = [] # Everything that can kill the player.
-    for i in globals.walls:
+    for i in globals.walls: # These for loops go and identify everything that will destroy the player's ship on collision. 
         listeronitony.append(i)
     for i in globals.destroyables:
         listeronitony.append(i)

@@ -23,7 +23,7 @@ class Button():
         bottomx,bottomy = self.rectangle.bottomright
         # Checks if the position of the mouse is inside the bounds of the rectangle
         if ((mx>=topx and my>=topy) and (mx<=bottomx and my<=bottomy)):
-            return True # There was definitely a better way to do this.
+            return True
         else:
             return False
     def draw(self,surface):

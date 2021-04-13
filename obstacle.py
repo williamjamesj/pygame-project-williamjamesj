@@ -43,7 +43,7 @@ class SpawnPoint(Barrier):
 class powerUp(Barrier):
     def __init__(self, x, y, width, height):
         super().__init__(x, y, width, height)
-        self.colour = (146,211,202)
+        self.colour = (173,3,252)
         return
 class Destroyable(Barrier):
     def __init__(self, x, y, width, height):
