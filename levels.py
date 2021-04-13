@@ -58,19 +58,16 @@ def levelthree():
     globals.wincondition = Objective(-900,200,50,50)
     return
 def levelfour():
-    spawnPointLocation = (800,500)
+    spawnPointLocation = (800,300)
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
     spawnPlayer(spawnPointLocation)
     globals.screen.blit(globals.backgroundpicture, (0,0)) 
     globals.walls.add(Barrier(-1000,0,2000,100)) # Top
-    globals.walls.add(Barrier(-1100,0,100,1000)) # Left
-    globals.walls.add(Barrier(-1000,900,2000,100)) # Bottom
-    globals.walls.add(Barrier(1000,0,100,1000)) # Right
-    globals.walls.add(Barrier(700,400,10,200)) # Barrier
-    globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,1,3,100))
-    globals.optionalEnemySpaceships.add(EnemySpaceship((0,600),"orangespaceship",10,0.1,1,3,100))
+    globals.walls.add(Barrier(-1100,0,100,700)) # Left
+    globals.walls.add(Barrier(-1000,600,2000,100)) # Bottom
+    globals.walls.add(Barrier(1000,0,100,700)) # Right
     globals.powerups.add(powerUp(800,200,50,50))
-    globals.wincondition = Objective(-900,200,50,50)
+    globals.wincondition = Objective(-900,325,50,50)
     return
 def levelfive():
     print("level five")

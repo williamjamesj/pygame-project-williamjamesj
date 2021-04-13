@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 import globalvariables as globals
 class Button():
+    """Basic class to draw buttons. Buttons can be compared against a position (typically of the mouse pointer) to detect interaction, or simply used to display text without interaction."""
     # Draws a button with the given width and height, at a position offset from the center of the screen, which allows for the change of resolutions
     def __init__(self,width,height,position,surface,text,size,buttoncolour=(50,50,50),textcolour=(255,255,255),font="Nougat"):
         self.buttoncolour = buttoncolour
