@@ -116,6 +116,8 @@ def levelsix():
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
     spawnPlayer(spawnPointLocation)
     globals.wincondition = Objective(-2000,0,50,50)
+    globals.walls.add(Barrier(-1000,-600,1100,50)) # Top Wall
+    globals.walls.add(Barrier(-150,-350,50,400)) 
     return
 def levelseven():
     print("level seven")

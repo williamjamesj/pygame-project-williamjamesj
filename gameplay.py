@@ -60,10 +60,22 @@ def updateGame(keys):
             if globals.level==globals.unlockedlevel:
                 globals.unlockedlevel+=1
             globals.gamestage = "levelover"
-    pygame.sprite.groupcollide(globals.bullets,globals.destroyables,True,True) # Destroys any platforms that are shot and can be shot.
-    pygame.sprite.groupcollide(globals.bullets,globals.walls,True,False) # Destroys any bullet that hits a platform.
-    pygame.sprite.groupcollide(globals.enemyBullets,globals.walls,True,False) # Destroys any enemy's bullet that hits a platform.
-    pygame.sprite.groupcollide(globals.enemyBullets,globals.destroyables,True,True) # Allows the enemy's bullets to destroy platforms.
+    for wall in globals.walls:
+        for bullet in globals.bullets:
+            if pygame.sprite.collide_mask(wall,bullet) is not None:
+                bullet.kill()
+        for enemyBullet in globals.enemyBullets:
+            if pygame.sprite.collide_mask(wall,enemyBullet) is not None:
+                enemyBullet.kill()
+    for destroyable in globals.destroyables:
+        for bullet in globals.bullets:
+            if pygame.sprite.collide_mask(destroyable,bullet) is not None:
+                bullet.kill()
+                destroyable.kill()
+        for enemyBullet in globals.enemyBullets:
+            if pygame.sprite.collide_mask(destroyable,enemyBullet) is not None:
+                enemyBullet.kill()
+                destroyable.kill()
     for i in globals.powerups:
         if pygame.sprite.collide_mask(i,globals.playerspaceship) is not None:
             i.kill()
