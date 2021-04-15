@@ -19,6 +19,7 @@ def playGame(level):
     globals.enemyBullets = pygame.sprite.Group()
     globals.powerups = pygame.sprite.Group()
     playLevel(level)
+    globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
     return
 def updateGame(keys):
     globals.screen.blit(globals.backgroundpicture, (0,0))

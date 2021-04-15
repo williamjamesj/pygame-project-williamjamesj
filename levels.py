@@ -79,19 +79,43 @@ def levelfour():
     globals.destroyables.add(Destroyable(-350,200,200,20)) # 3 Top
     globals.destroyables.add(Destroyable(-350,400,200,20)) # 3 Bottom
     # Enemies
-    globals.optionalEnemySpaceships.add(EnemySpaceship([450,100],"orangespaceship",0,0,0,0,150)) # 1 Top
-    globals.optionalEnemySpaceships.add(EnemySpaceship([450,500],"orangespaceship",0,0,0,0,150)) # 1 Bottom
-    globals.optionalEnemySpaceships.add(EnemySpaceship([100,100],"orangespaceship",0,0,0,0,150)) # 2 Top
-    globals.optionalEnemySpaceships.add(EnemySpaceship([100,500],"orangespaceship",0,0,0,0,150)) # 2 Bottom
-    globals.optionalEnemySpaceships.add(EnemySpaceship([-250,100],"orangespaceship",0,0,0,0,150)) # 3 Top
-    globals.optionalEnemySpaceships.add(EnemySpaceship([-250,500],"orangespaceship",0,0,0,0,150)) # 3 Bottom
+    globals.optionalEnemySpaceships.add(EnemySpaceship([450,100],"orangespaceship",0,0,0,0,100)) # 1 Top
+    globals.optionalEnemySpaceships.add(EnemySpaceship([450,500],"orangespaceship",0,0,0,0,100)) # 1 Bottom
+    globals.optionalEnemySpaceships.add(EnemySpaceship([100,100],"orangespaceship",0,0,0,0,100)) # 2 Top
+    globals.optionalEnemySpaceships.add(EnemySpaceship([100,500],"orangespaceship",0,0,0,0,100)) # 2 Bottom
+    globals.optionalEnemySpaceships.add(EnemySpaceship([-250,100],"orangespaceship",0,0,0,0,100)) # 3 Top
+    globals.optionalEnemySpaceships.add(EnemySpaceship([-250,500],"orangespaceship",0,0,0,0,100)) # 3 Bottom
     globals.wincondition = Objective(-900,300,50,50)
     return
 def levelfive():
-    print("level five")
+    spawnPointLocation = (800,500)
+    globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
+    spawnPlayer(spawnPointLocation)
+    globals.screen.blit(globals.backgroundpicture, (0,0)) 
+    globals.walls.add(Barrier(500,300,50,600)) # Wall 1
+    globals.destroyables.add(Destroyable(500,100,50,200)) # Wall 1 Destroyable
+    globals.enemySpaceships.add(EnemySpaceship([400,800],"greenspaceship",0,0,0,0,200)) # Section 1 Enemy
+    globals.walls.add(Barrier(200,100,50,600)) # Wall 2
+    globals.destroyables.add(Destroyable(200,700,50,200)) # Wall 2 Destroyable
+    globals.enemySpaceships.add(EnemySpaceship([50,200],"greenspaceship",0,0,0,0,175)) # Section 2 Enemy
+    globals.walls.add(Barrier(-100,300,50,600)) # Wall 3
+    globals.destroyables.add(Destroyable(-100,100,50,200)) # Wall 3 Destroyable
+    globals.enemySpaceships.add(EnemySpaceship([-250,800],"greenspaceship",0,0,0,0,125)) # Section 3 Enemy
+    globals.walls.add(Barrier(-400,100,50,600)) # Wall 4
+    globals.destroyables.add(Destroyable(-400,700,50,200)) # Wall 4 Destroyable
+    globals.enemySpaceships.add(EnemySpaceship([-900,600],"greenspaceship",0,0,0,0,75)) # Final Enemy
+    globals.walls.add(Barrier(-800,650,450,50)) # Wall 5
+    globals.walls.add(Barrier(-1000,0,2000,100)) # Top
+    globals.walls.add(Barrier(-1100,0,100,1000)) # Left
+    globals.walls.add(Barrier(-1000,900,2000,100)) # Bottom
+    globals.walls.add(Barrier(1000,0,100,1000)) # Right
+    globals.wincondition = Objective(-900,200,50,50)
     return
 def levelsix():
-    print("level six")
+    spawnPointLocation = (0,0)
+    globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
+    spawnPlayer(spawnPointLocation)
+    globals.wincondition = Objective(-2000,0,50,50)
     return
 def levelseven():
     print("level seven")
@@ -117,8 +141,10 @@ def playLevel(level):
         globals.gamestage = "game"
         levelfour()
     elif level == 5 and globals.unlockedlevel>=5:
+        globals.gamestage = "game"
         levelfive()
     elif level == 6 and globals.unlockedlevel>=6:
+        globals.gamestage = "game"
         levelsix()
     elif level == 7 and globals.unlockedlevel>=7:
         levelseven()

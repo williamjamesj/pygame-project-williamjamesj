@@ -16,12 +16,12 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.originalimage.get_rect(center=(x,y))
         self.mask = pygame.mask.from_surface(self.originalimage)
         self.image = pygame.transform.rotate(self.originalimage,self.direction)
+        self.draw()
         return
     def update(self):
         x,y = findxy(self.direction)
         self.x += x*-1*self.speed
         self.y += y*-1*self.speed
-        self.mask = pygame.mask.from_surface(self.image) # Recalculate the mask so that it adapts to the new direction that it is facing, otherwise the hit box will be very wrong.
         self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx,self.y-globals.playerspaceship.percievedy))
     def draw(self):
         globals.screen.blit(self.image,(self.rect.x,self.rect.y))
