@@ -26,6 +26,7 @@ def updateGame(keys):
     if keys[pygame.K_ESCAPE]==1:
         globals.gamestage = "levelselect"
     globals.playerspaceship.update(keys[pygame.K_UP]==1 or keys[pygame.K_w],keys[pygame.K_DOWN]==1 or keys[pygame.K_s],keys[pygame.K_LEFT]==1 or keys[pygame.K_a],keys[pygame.K_RIGHT] or keys[pygame.K_d]==1,keys[pygame.K_SPACE] or keys[pygame.K_TAB])
+    '''Update and draw EVERYTHING'''
     globals.walls.update()
     globals.wincondition.update()
     globals.destroyables.update()
@@ -45,7 +46,7 @@ def updateGame(keys):
     globals.optionalEnemySpaceships.draw(globals.screen)
     globals.enemyBullets.draw(globals.screen)
     globals.powerups.draw(globals.screen)
-    if globals.debug:
+    if globals.debug: # Show speed, position and timer for debug purposes. 
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(f"Speed: {str(math.ceil(globals.playerspaceship.speed))}", True, (255,0,0))
         globals.screen.blit(textobject, (500,0))
@@ -53,13 +54,14 @@ def updateGame(keys):
         globals.screen.blit(textobject, (1000,0))
     if pygame.sprite.collide_mask(globals.playerspaceship,globals.wincondition) is not None:
         if len(globals.enemySpaceships)==0:
-            globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100*globals.level
-            if globals.coinsgained<100:
+            globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100*globals.level # Calculates the coins gained from the level.
+            if globals.coinsgained<100: # Stops the player from recieving less than 100 coins, so that there is no chance of getting negative coins.
                 globals.coinsgained = 100
             globals.coins+=math.floor(globals.coinsgained)
             if globals.level==globals.unlockedlevel:
-                globals.unlockedlevel+=1
+                globals.unlockedlevel+=1 # Unlocks the next level.
             globals.gamestage = "levelover"
+    """Wall/Destroyable - Bullet Collision Checking"""
     for wall in globals.walls:
         for bullet in globals.bullets:
             if pygame.sprite.collide_mask(wall,bullet) is not None:
@@ -76,13 +78,13 @@ def updateGame(keys):
             if pygame.sprite.collide_mask(destroyable,enemyBullet) is not None:
                 enemyBullet.kill()
                 destroyable.kill()
-    for i in globals.powerups:
+    for i in globals.powerups: # Check if the player has recieved a powerup
         if pygame.sprite.collide_mask(i,globals.playerspaceship) is not None:
             i.kill()
             globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate/10
             pygame.time.set_timer(USEREVENT + 2, 10000)
             globals.playerspaceship.canshoot = True
-    enemies = []
+    enemies = [] # A list of all enemies that can be shot.
     for i in globals.optionalEnemySpaceships:
         enemies.append(i)
     for i in globals.enemySpaceships:
@@ -90,7 +92,7 @@ def updateGame(keys):
     for bullet in globals.bullets:
         for spaceship in enemies:
             if pygame.sprite.collide_mask(bullet,spaceship) is not None:
-                spaceship.kill()
+                spaceship.kill() # Destroy both the bullet and the spaceship that it hit.
                 bullet.kill()
                 globals.audioHandler.playSound('explosion')
     listeronitony = [] # Everything that can kill the player.
@@ -105,8 +107,8 @@ def updateGame(keys):
             if i in globals.enemyBullets or i in globals.destroyables: # Make sure the bullet is destroyed, so that the bullets don't infinitely damage.
                 i.kill()
             globals.playerspaceship.shields -= 1
-    if globals.playerspaceship.shields <= 0:
-        globals.audioHandler.playSound('explosion')
+    if globals.playerspaceship.shields <= 0: # Only destroy the spaceship if it has reached 0 shields.
+        globals.audioHandler.playSound('explosion') 
         globals.bullets.empty()
         globals.playerspaceship.speed = 0
         globals.playerspaceship.direction = 0

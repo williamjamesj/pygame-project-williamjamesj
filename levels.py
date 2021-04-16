@@ -116,8 +116,11 @@ def levelsix():
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
     spawnPlayer(spawnPointLocation)
     globals.wincondition = Objective(-2000,0,50,50)
-    globals.walls.add(Barrier(-1000,-600,1100,50)) # Top Wall
-    globals.walls.add(Barrier(-150,-350,50,400)) 
+    globals.walls.add(Barrier(-900,-600,1000,50)) # Top Tunnel Top Wall
+    globals.walls.add(Barrier(-900,-600,50,300))
+    globals.walls.add(Barrier(-600,-350,500,50))  # Top Tunnel Bottom Wall
+    globals.walls.add(Barrier(-150,-350,50,450)) # Left Initial Tunnel Wall
+    globals.walls.add(Barrier(100,-600,50,700)) # Right Initial Tunnel Wall
     return
 def levelseven():
     print("level seven")
