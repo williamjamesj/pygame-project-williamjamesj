@@ -16,7 +16,6 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.originalimage.get_rect(center=(x,y))
         self.mask = pygame.mask.from_surface(self.originalimage)
         self.image = pygame.transform.rotate(self.originalimage,self.direction)
-        self.draw()
         return
     def update(self):
         x,y = findxy(self.direction)

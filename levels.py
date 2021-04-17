@@ -115,12 +115,31 @@ def levelsix():
     spawnPointLocation = (0,0)
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
     spawnPlayer(spawnPointLocation)
-    globals.wincondition = Objective(-2000,0,50,50)
+    globals.wincondition = Objective(-2000,150,50,50)
     globals.walls.add(Barrier(-900,-600,1000,50)) # Top Tunnel Top Wall
-    globals.walls.add(Barrier(-900,-600,50,300))
+    globals.walls.add(Barrier(-900,-600,50,300)) # Left Tunnel Top Wall
     globals.walls.add(Barrier(-600,-350,500,50))  # Top Tunnel Bottom Wall
-    globals.walls.add(Barrier(-150,-350,50,450)) # Left Initial Tunnel Wall
-    globals.walls.add(Barrier(100,-600,50,700)) # Right Initial Tunnel Wall
+    globals.walls.add(Barrier(-150,-350,50,1050)) # Left Initial Tunnel Wall
+    globals.walls.add(Barrier(100,-600,50,900)) # Right Initial Tunnel Wall
+    globals.walls.add(Barrier(-150,300,300,50)) # Bottom Initial Tunnel Wall
+    globals.walls.add(Barrier(-2250,650,2100,50)) # Bottom Box Wall
+    globals.walls.add(Barrier(-2250,-350,1350,50)) # Top Box Wall
+    globals.walls.add(Barrier(-2250,-350,50,1050)) # Right Box Wall
+    globals.destroyables.add(Destroyable(-850,-350,250,50)) # Destroyable Segment
+    globals.powerups.add(powerUp(-750,-500,50,50)) # Rapid Fire Power Up
+    globals.powerups.add(powerUp(-750,150,50,50)) # Rapid Fire Power Up
+    globals.walls.add(Barrier(-900,-150,50,200)) # Barrier 1
+    globals.walls.add(Barrier(-900,300,50,200)) # Barrier 2
+    # Enemies
+    globals.enemySpaceships.add(EnemySpaceship([-1200,-50],"greenspaceship",0,0,0,0,200))
+    globals.enemySpaceships.add(EnemySpaceship([-1200,400],"greenspaceship",0,0,0,0,200))
+    globals.enemySpaceships.add(EnemySpaceship([-1350,0],"greenspaceship",0,0,0,0,200))
+    globals.enemySpaceships.add(EnemySpaceship([-1350,350],"greenspaceship",0,0,0,0,200))
+    globals.enemySpaceships.add(EnemySpaceship([-1500,50],"greenspaceship",0,0,0,0,200))
+    globals.enemySpaceships.add(EnemySpaceship([-1500,300],"greenspaceship",0,0,0,0,200))
+    globals.enemySpaceships.add(EnemySpaceship([-1650,100],"greenspaceship",0,0,0,0,200))
+    globals.enemySpaceships.add(EnemySpaceship([-1650,250],"greenspaceship",0,0,0,0,200))
+    globals.enemySpaceships.add(EnemySpaceship([-1800,175],"greenspaceship",0,0,0,0,200))
     return
 def levelseven():
     print("level seven")

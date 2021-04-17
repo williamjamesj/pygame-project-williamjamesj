@@ -19,6 +19,7 @@ firerate:Lasers Per Second
 yellowspaceship:Yelleroni 2000
 redspaceship:Zoominator 3000
 bigspaceship:The Cargonator
+blackspaceship:Bob
 shielding:Shields
 instructionone:Use either the WASD keys or the arrow keys to move the spaceship.
 instructiontwo:Use the W key or Up arrow to increase the throttle.

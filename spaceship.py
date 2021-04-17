@@ -50,7 +50,7 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         if right:
             self.direction -= self.turnspeed
         if doshoot and self.canshoot:
-            globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
+            globals.bullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 35))
             pygame.time.set_timer(USEREVENT + 1, int(self.firerate*1000))
             globals.audioHandler.playSound('laser')
             self.canshoot = False
@@ -92,8 +92,8 @@ class EnemySpaceship(PlayerSpaceship):
         self.image = pygame.transform.rotate(self.image,self.direction)
         self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
         self.mask = pygame.mask.from_surface(self.image)
-        if random.randint(0,self.firerate) == 5:
-            globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction, 20))
+        if random.randint(0,self.firerate) == 0: # Means there is a 1 in *firerate* chance of firing
+            globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction+random.randint(-10,10), 20))
             globals.audioHandler.playSound('laser')
         return
     def draw(self,screen):

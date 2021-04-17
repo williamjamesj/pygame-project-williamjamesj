@@ -6,7 +6,7 @@ import globalvariables as globals
 class shopScreen():
     def __init__(self):
         self.backbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100)
-        self.spaceships = [["yellowspaceship",10,0.1,3,1,0,1],["redspaceship",15,0.2,5,2,10000,2],["bigspaceship",20,0.1,1,0.5,25000,5]] # The lists store ships in this order: appearance,maxspeed,acceleration,turnspeed,firerate
+        self.spaceships = [["yellowspaceship",10,0.1,3,1,0,1],["redspaceship",15,0.2,5,2,10000,2],["bigspaceship",20,0.1,1,0.7,25000,5],["blackspaceship",20,0.2,4,0.6,50000,5]] # The lists store ships in this order: appearance,maxspeed,acceleration,turnspeed,firerate,cost,shields
         self.spaceshipimages = []
         for i in self.spaceships:
             self.spaceshipimages.append(pygame.image.load(f"resources/spaceships/shopimages/{i[0]}.png"))
@@ -36,7 +36,7 @@ class shopScreen():
         buttons.Button(500,60,[globals.dimensions[0]/2-250,315-globals.dimensions[1]/2],globals.screen,f"{globals.languagesdict['maximumspeed']}: {str(self.spaceships[self.currentship][1])}",50)
         buttons.Button(500,60,[globals.dimensions[0]/2-250,380-globals.dimensions[1]/2],globals.screen,f"{globals.languagesdict['acceleration']}: {str(self.spaceships[self.currentship][2]*10)}",50)
         buttons.Button(500,60,[globals.dimensions[0]/2-250,445-globals.dimensions[1]/2],globals.screen,f"{globals.languagesdict['turnspeed']}: {str(self.spaceships[self.currentship][3])}",50)
-        buttons.Button(500,60,[globals.dimensions[0]/2-250,510-globals.dimensions[1]/2],globals.screen,f"{globals.languagesdict['firerate']}: {str(1/self.spaceships[self.currentship][4])}",50)
+        buttons.Button(500,60,[globals.dimensions[0]/2-250,510-globals.dimensions[1]/2],globals.screen,f"{globals.languagesdict['firerate']}: {str(round(1/self.spaceships[self.currentship][4],1))}",50)
         buttons.Button(500,60,[globals.dimensions[0]/2-250,575-globals.dimensions[1]/2],globals.screen,f"{globals.languagesdict['shielding']}: {str(self.spaceships[self.currentship][6])}",50)
     def updateShop(self,mouseposition):
         if self.backbutton.interacts(mouseposition):
