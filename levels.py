@@ -131,18 +131,29 @@ def levelsix():
     globals.walls.add(Barrier(-900,-150,50,200)) # Barrier 1
     globals.walls.add(Barrier(-900,300,50,200)) # Barrier 2
     # Enemies
-    globals.enemySpaceships.add(EnemySpaceship([-1200,-50],"greenspaceship",0,0,0,0,200))
-    globals.enemySpaceships.add(EnemySpaceship([-1200,400],"greenspaceship",0,0,0,0,200))
-    globals.enemySpaceships.add(EnemySpaceship([-1350,0],"greenspaceship",0,0,0,0,200))
-    globals.enemySpaceships.add(EnemySpaceship([-1350,350],"greenspaceship",0,0,0,0,200))
-    globals.enemySpaceships.add(EnemySpaceship([-1500,50],"greenspaceship",0,0,0,0,200))
-    globals.enemySpaceships.add(EnemySpaceship([-1500,300],"greenspaceship",0,0,0,0,200))
-    globals.enemySpaceships.add(EnemySpaceship([-1650,100],"greenspaceship",0,0,0,0,200))
-    globals.enemySpaceships.add(EnemySpaceship([-1650,250],"greenspaceship",0,0,0,0,200))
-    globals.enemySpaceships.add(EnemySpaceship([-1800,175],"greenspaceship",0,0,0,0,200))
+    globals.enemySpaceships.add(EnemySpaceship([-1200,-50],"greenspaceship",0,0,0,0,150))
+    globals.enemySpaceships.add(EnemySpaceship([-1200,400],"greenspaceship",0,0,0,0,150))
+    globals.enemySpaceships.add(EnemySpaceship([-1350,0],"greenspaceship",0,0,0,0,150))
+    globals.enemySpaceships.add(EnemySpaceship([-1350,350],"greenspaceship",0,0,0,0,150))
+    globals.enemySpaceships.add(EnemySpaceship([-1500,50],"greenspaceship",0,0,0,0,150))
+    globals.enemySpaceships.add(EnemySpaceship([-1500,300],"greenspaceship",0,0,0,0,150))
+    globals.enemySpaceships.add(EnemySpaceship([-1650,100],"greenspaceship",0,0,0,0,150))
+    globals.enemySpaceships.add(EnemySpaceship([-1650,250],"greenspaceship",0,0,0,0,150))
+    globals.enemySpaceships.add(EnemySpaceship([-1800,175],"greenspaceship",0,0,0,0,20))
     return
 def levelseven():
-    print("level seven")
+    spawnPointLocation = (0,0)
+    globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
+    spawnPlayer(spawnPointLocation)
+    globals.wincondition = Objective(-2000,150,50,50)
+    globals.optionalEnemySpaceships.add(EnemySpaceship([0,500],"orangespaceship",0,0,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([0,-500],"orangespaceship",0,0,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([500,0],"orangespaceship",0,0,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([-500,0],"orangespaceship",0,0,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([500,500],"orangespaceship",0,0,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([-500,500],"orangespaceship",0,0,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([500,-500],"orangespaceship",0,0,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([-500,-500],"orangespaceship",0,0,0,0,100))
     return
 def leveleight():
     print("level eight")
@@ -171,6 +182,7 @@ def playLevel(level):
         globals.gamestage = "game"
         levelsix()
     elif level == 7 and globals.unlockedlevel>=7:
+        globals.gamestage = "game"
         levelseven()
     elif level == 8 and globals.unlockedlevel>=8:
         leveleight()

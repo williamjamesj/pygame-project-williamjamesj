@@ -74,7 +74,7 @@ class settingsScreen():
     def checkLanguageOptions(self,mouseposition):
         if self.englishButton.interacts(mouseposition):
             localisation.setlang("english")
-            globals.lang = "spanish"
+            globals.lang = "english"
             localisation.readtexts()
             print(globals.languagesdict)
             self.__init__() # Reloads all of the buttons on the screen, so that the language is changed.
