@@ -86,15 +86,29 @@ class EnemySpaceship(PlayerSpaceship):
         self.y = coords[1]
         return
     def update(self): # Overrides the player 
-        distancetoplayer = math.sqrt((self.x-globals.playerspaceship.percievedx)**2+(self.y-globals.playerspaceship.percievedy)**2) # This *could* be useful some day.
+        distancetoplayer = math.sqrt((self.x-globals.playerspaceship.percievedx)**2+(self.y-globals.playerspaceship.percievedy)**2) # This *could* be useful some day. Thanks past Will, this is rather helpful!
         self.direction = findDirection([self.x-globals.playerspaceship.percievedx,self.y-globals.playerspaceship.percievedy])
         self.image = self.imagelist[0] # Only show the first animation, as the ship is stationary.
         self.image = pygame.transform.rotate(self.image,self.direction)
         self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
         self.mask = pygame.mask.from_surface(self.image)
         if random.randint(0,self.firerate) == 0: # Means there is a 1 in *firerate* chance of firing
-            globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.percievedx,globals.playerorigin[1]+self.percievedy, self.direction+random.randint(-10,10), 20))
+            globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.x,globals.playerorigin[1]+self.y, self.direction+random.randint(-10,10), 20))
             globals.audioHandler.playSound('laser')
+        # Movement Code
+        if self.maxspeed != 0 and self.acceleration != 0:
+            canAccelerate = self.speed <= self.maxspeed
+            canDeccelerate = self.speed >= 0
+            shouldStop = distancetoplayer<200
+            if canAccelerate and not shouldStop:
+                self.speed += self.acceleration
+            elif canDeccelerate:
+                self.speed -= 1
+            if shouldStop and self.speed < 1:
+                self.speed = 0
+            x,y = findxy(self.direction)
+            self.x+=x*self.speed*-1
+            self.y+=y*self.speed*-1
         return
     def draw(self,screen):
         super().draw(self,screen) # Uses the existing draw function.

@@ -52,8 +52,8 @@ def levelthree():
     globals.walls.add(Barrier(-1000,900,2000,100)) # Bottom
     globals.walls.add(Barrier(1000,0,100,1000)) # Right
     globals.walls.add(Barrier(700,400,10,200)) # Barrier
-    globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,1,3,100))
-    globals.enemySpaceships.add(EnemySpaceship((0,600),"greenspaceship",10,0.1,1,3,100))
+    globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,0,0,100))
+    globals.enemySpaceships.add(EnemySpaceship((0,600),"greenspaceship",10,0.1,0,0,100))
     globals.powerups.add(powerUp(800,200,50,50))
     globals.wincondition = Objective(-900,200,50,50)
     return
@@ -145,17 +145,16 @@ def levelseven():
     spawnPointLocation = (0,0)
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
     spawnPlayer(spawnPointLocation)
+    globals.playerspaceship.direction = 90
     globals.wincondition = Objective(-2100,0,50,50)
-    globals.optionalEnemySpaceships.add(EnemySpaceship([0,500],"orangespaceship",0,0,0,0,100))
-    globals.optionalEnemySpaceships.add(EnemySpaceship([0,-500],"orangespaceship",0,0,0,0,100))
-    globals.optionalEnemySpaceships.add(EnemySpaceship([500,0],"orangespaceship",0,0,0,0,100))
-    globals.optionalEnemySpaceships.add(EnemySpaceship([-500,0],"orangespaceship",0,0,0,0,100))
-    globals.optionalEnemySpaceships.add(EnemySpaceship([500,500],"orangespaceship",0,0,0,0,100))
-    globals.optionalEnemySpaceships.add(EnemySpaceship([-500,500],"orangespaceship",0,0,0,0,100))
-    globals.optionalEnemySpaceships.add(EnemySpaceship([500,-500],"orangespaceship",0,0,0,0,100))
-    globals.optionalEnemySpaceships.add(EnemySpaceship([-500,-500],"orangespaceship",0,0,0,0,100))
-    globals.optionalEnemySpaceships.add(EnemySpaceship([-1850,300],"orangespaceship",0,0,0,0,1))
-    globals.optionalEnemySpaceships.add(EnemySpaceship([-1850,-300],"orangespaceship",0,0,0,0,1))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([0,500],"orangespaceship",10,0.1,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([0,-500],"orangespaceship",10,0.1,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([500,0],"orangespaceship",10,0.1,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([-500,0],"orangespaceship",10,0.1,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([500,500],"orangespaceship",10,0.1,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([-500,500],"orangespaceship",10,0.1,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([500,-500],"orangespaceship",10,0.1,0,0,100))
+    globals.optionalEnemySpaceships.add(EnemySpaceship([-500,-500],"orangespaceship",10,0.1,0,0,100))
     globals.walls.add(Barrier(-600,600,1200,50))
     globals.walls.add(Barrier(-600,-600,1200,50))
     globals.walls.add(Barrier(600,-600,50,1250))
