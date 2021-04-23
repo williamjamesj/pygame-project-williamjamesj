@@ -79,11 +79,12 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         screen.blit(self.image,(self.rect.x,self.rect.y))
         return
 class EnemySpaceship(PlayerSpaceship):
-    def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate):
+    def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate,brakingdistance=200):
         super().__init__(coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate)
         self.firerate = firerate
         self.x = coords[0]
         self.y = coords[1]
+        self.brakingdistance = brakingdistance
         return
     def update(self): # Overrides the player 
         distancetoplayer = math.sqrt((self.x-globals.playerspaceship.percievedx)**2+(self.y-globals.playerspaceship.percievedy)**2) # This *could* be useful some day. Thanks past Will, this is rather helpful!
@@ -95,11 +96,11 @@ class EnemySpaceship(PlayerSpaceship):
         if random.randint(0,self.firerate) == 0: # Means there is a 1 in *firerate* chance of firing
             globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.x,globals.playerorigin[1]+self.y, self.direction+random.randint(-10,10), 20))
             globals.audioHandler.playSound('laser')
-        # Movement Code
+        # Movement Code - Enemies will fly toward the player, coming to a full stop once they're 200 units (?) from the player.
         if self.maxspeed != 0 and self.acceleration != 0:
             canAccelerate = self.speed <= self.maxspeed
             canDeccelerate = self.speed >= 0
-            shouldStop = distancetoplayer<200
+            shouldStop = distancetoplayer<self.brakingdistance
             if canAccelerate and not shouldStop:
                 self.speed += self.acceleration
             elif canDeccelerate:

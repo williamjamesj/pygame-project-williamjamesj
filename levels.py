@@ -6,6 +6,7 @@ import math
 from obstacle import Barrier, Destroyable,Objective, SpawnPoint, powerUp
 def spawnPlayer(spawnPointLocation):
         globals.playerspaceship = PlayerSpaceship(spawnPointLocation,globals.playercurrentship[0],globals.playercurrentship[1],globals.playercurrentship[2],0,globals.playercurrentship[3],globals.playercurrentship[6],firerate=globals.playercurrentship[4])
+        globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
 def levelone():
     spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
@@ -51,9 +52,9 @@ def levelthree():
     globals.walls.add(Barrier(-1100,0,100,1000)) # Left
     globals.walls.add(Barrier(-1000,900,2000,100)) # Bottom
     globals.walls.add(Barrier(1000,0,100,1000)) # Right
-    globals.walls.add(Barrier(700,400,10,200)) # Barrier
-    globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,0,0,100))
-    globals.enemySpaceships.add(EnemySpaceship((0,600),"greenspaceship",10,0.1,0,0,100))
+    globals.walls.add(Barrier(700,400,100,200)) # Barrier
+    globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,0,0,100,400))
+    globals.enemySpaceships.add(EnemySpaceship((0,600),"greenspaceship",10,0.1,0,0,100,400))
     globals.powerups.add(powerUp(800,200,50,50))
     globals.wincondition = Objective(-900,200,50,50)
     return
@@ -161,10 +162,8 @@ def levelseven():
     globals.walls.add(Barrier(-600,-600,50,500))
     globals.walls.add(Barrier(-600,150,50,450))
     globals.destroyables.add(Destroyable(-600,-100,50,250))
-    globals.walls.add(Barrier(-2250,-150,300,50))
-    globals.walls.add(Barrier(-2250,150,300,50))
-    globals.walls.add(Barrier(-1750,-150,1150,50))
-    globals.walls.add(Barrier(-1750,150,1150,50))
+    globals.walls.add(Barrier(-2250,-150,1650,50))
+    globals.walls.add(Barrier(-2250,150,1650,50))
     globals.walls.add(Barrier(-2250,-150,50,300))
     return
 def leveleight():

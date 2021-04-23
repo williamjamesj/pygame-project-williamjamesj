@@ -95,6 +95,14 @@ def updateGame(keys):
                 spaceship.kill() # Destroy both the bullet and the spaceship that it hit.
                 bullet.kill()
                 globals.audioHandler.playSound('explosion')
+    walls = []
+    for i in globals.walls:
+        walls.append(i)
+    for enemy in enemies:
+        for wall in walls:
+            if pygame.sprite.collide_mask(wall,enemy) is not None:
+                enemy.kill()
+                globals.audioHandler.playSound('explosion')
     listeronitony = [] # Everything that can kill the player.
     for i in globals.walls: # These for loops go and identify everything that will destroy the player's ship on collision. 
         listeronitony.append(i)
