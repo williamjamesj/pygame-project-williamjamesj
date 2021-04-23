@@ -52,9 +52,9 @@ def levelthree():
     globals.walls.add(Barrier(-1100,0,100,1000)) # Left
     globals.walls.add(Barrier(-1000,900,2000,100)) # Bottom
     globals.walls.add(Barrier(1000,0,100,1000)) # Right
-    globals.walls.add(Barrier(700,400,100,200)) # Barrier
-    globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,0,0,100,400))
-    globals.enemySpaceships.add(EnemySpaceship((0,600),"greenspaceship",10,0.1,0,0,100,400))
+    globals.walls.add(Barrier(650,300,50,400)) # Barrier
+    globals.enemySpaceships.add(EnemySpaceship((0,400),"greenspaceship",10,0.1,0,0,100,450))
+    globals.enemySpaceships.add(EnemySpaceship((0,600),"greenspaceship",10,0.1,0,0,100,450))
     globals.powerups.add(powerUp(800,200,50,50))
     globals.wincondition = Objective(-900,200,50,50)
     return
@@ -147,7 +147,7 @@ def levelseven():
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
     spawnPlayer(spawnPointLocation)
     globals.playerspaceship.direction = 90
-    globals.wincondition = Objective(-2100,0,50,50)
+    globals.wincondition = Objective(-2100,1000,50,50)
     globals.optionalEnemySpaceships.add(EnemySpaceship([0,500],"orangespaceship",10,0.1,0,0,100))
     globals.optionalEnemySpaceships.add(EnemySpaceship([0,-500],"orangespaceship",10,0.1,0,0,100))
     globals.optionalEnemySpaceships.add(EnemySpaceship([500,0],"orangespaceship",10,0.1,0,0,100))
@@ -160,14 +160,21 @@ def levelseven():
     globals.walls.add(Barrier(-600,-600,1200,50))
     globals.walls.add(Barrier(600,-600,50,1250))
     globals.walls.add(Barrier(-600,-600,50,500))
-    globals.walls.add(Barrier(-600,150,50,450))
+    globals.walls.add(Barrier(-600,150,50,1050))
     globals.destroyables.add(Destroyable(-600,-100,50,250))
     globals.walls.add(Barrier(-2250,-150,1650,50))
-    globals.walls.add(Barrier(-2250,150,1650,50))
-    globals.walls.add(Barrier(-2250,-150,50,300))
+    globals.walls.add(Barrier(-2250,-150,50,1350))
+    globals.walls.add(Barrier(-2250,1200,1700,50))
     return
 def leveleight():
-    print("level eight")
+    spawnPointLocation = (0,0)
+    globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
+    spawnPlayer(spawnPointLocation)
+    globals.playerspaceship.direction = 90
+    globals.walls.add(Barrier(-7800,-500,8000,50))
+    globals.walls.add(Barrier(-7800,500,8000,50))
+    globals.walls.add(Barrier(200,))
+    globals.wincondition = Objective(-7500,0,50,50)
     return
 def levelnine():
     print("level nine")
@@ -196,6 +203,7 @@ def playLevel(level):
         globals.gamestage = "game"
         levelseven()
     elif level == 8 and globals.unlockedlevel>=8:
+        globals.gamestage = "game"
         leveleight()
     elif level == 9 and globals.unlockedlevel>=9:
         levelnine()
