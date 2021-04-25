@@ -3,6 +3,7 @@ import _thread
 import globalvariables as globals
 import math
 import time
+import json
 class HostConnectionHandler():
     def __init__(self):
         _thread.start_new_thread(self.recvthread,())
@@ -14,10 +15,8 @@ class HostConnectionHandler():
         sock.bind(("0.0.0.0", 5005))
         try:
             while globals.connecting:
-                response = ""
-                for i in globals.allplayers:
-                    response += f"{i},{math.floor(int(globals.allplayers[i][0]))},{math.floor(int(globals.allplayers[i][1]))},"
-                response = str.encode(response)
+                response = globals.allplayers
+                response = str.encode(str(response))
                 data, addr = sock.recvfrom(1024)
                 self.dataLog.append(str(data.decode()))
                 sock.sendto(response,(addr[0],5006))
@@ -52,7 +51,10 @@ class ClientConnectionHandler():
         try:
             while globals.connecting:
                 data, addr = sock.recvfrom(1024)
-                self.dataLog.append(str(data))
+                data = str(data.decode())
+                data = data.replace("'",'"')
+                data = json.loads(data)
+                self.dataLog.append(data)
         except Exception as E:
             print(E)
         print("A sad day for socketkind")
@@ -61,8 +63,15 @@ class ClientConnectionHandler():
     def sayHello(self):
         message = str.encode(f"{globals.name},{math.floor(globals.playerspaceship.percievedx)},{math.floor(globals.playerspaceship.percievedy)},{math.floor(globals.playerspaceship.direction)}")
         self.sock.sendto(message,(self.ip,5005))
+        self.updateList()
         return
     def getData(self):
         tempdata = self.dataLog
-        self.dataLog =[]
+        self.dataLog = []
         return tempdata
+    def updateList(self):
+        data = self.getData()
+        for i in data:
+            for name in i:
+                globals.allplayers[name] = i[name]
+        return

@@ -6,7 +6,7 @@ from pygame.locals import *
 import buttons
 import globalvariables as globals
 from pygame.locals import *
-
+import json
 class MultiplayerMenu():
     def __init__(self):
         self.stringInput = ""
@@ -65,13 +65,11 @@ class MultiplayerMenu():
         globals.playerspaceship.update(keys[pygame.K_UP]==1 or keys[pygame.K_w],keys[pygame.K_DOWN]==1 or keys[pygame.K_s],keys[pygame.K_LEFT]==1 or keys[pygame.K_a],keys[pygame.K_RIGHT] or keys[pygame.K_d]==1,keys[pygame.K_SPACE] or keys[pygame.K_TAB])
         globals.playerspaceship.draw(globals.screen)
         self.connection.sayHello()
-        print(globals.allplayers)
         for i in globals.allplayers:
             if i == globals.name:
                 pass
             elif i in self.otherplayers:
                 self.otherplayers[i].x, self.otherplayers[i].y, self.otherplayers[i].direction = globals.allplayers[i]
-                print("here")
             else:
                 self.otherplayers[i] = DummySpaceship()
         for i in self.otherplayers:
