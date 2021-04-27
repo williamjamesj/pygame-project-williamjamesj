@@ -114,3 +114,14 @@ class EnemySpaceship(PlayerSpaceship):
     def draw(self,screen):
         super().draw(self,screen) # Uses the existing draw function.
         return
+class DummySpaceship(PlayerSpaceship):
+    def __init__(self):
+        super().__init__([0,0], "yellowspaceship", 0, 0, 0, 0, 0)
+        self.x = 0
+        self.y = 0
+        return
+    def update(self):
+        self.image = self.imagelist[0]
+        self.image = pygame.transform.rotate(self.image,int(self.direction))
+        self.rect = self.image.get_rect(center=(int(self.x)-math.floor(globals.playerspaceship.percievedx)+globals.playerorigin[0],int(self.y)-math.floor(globals.playerspaceship.percievedy)+globals.playerorigin[1]))
+        return

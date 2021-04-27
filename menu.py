@@ -24,7 +24,8 @@ class MenuObject():
             else:
                 unlockedlistbg.append((50,50,50))
                 unlockedlistfont.append((255,255,255))
-        # This took far too long and there was definitely a better way to do this.
+
+        self.multiplayerbutton = (buttons.Button(400,100,[0,100-globals.dimensions[1]/2],globals.screen, globals.languagesdict["multiplayer"],100))
         self.levelbuttonArray.append(buttons.Button(75,75,[-100,-100],globals.screen, "1",50,unlockedlistbg[0],unlockedlistfont[0])) 
         self.levelbuttonArray.append(buttons.Button(75,75,[0,-100],globals.screen, "2",50,unlockedlistbg[1],unlockedlistfont[1]))
         self.levelbuttonArray.append(buttons.Button(75,75,[100,-100],globals.screen, "3",50,unlockedlistbg[2],unlockedlistfont[2]))
@@ -90,7 +91,7 @@ class MenuObject():
     def checkingLevel(self,position):
         if (self.levelbuttonArray[-1].interacts(position)):
             globals.gamestage = "menu"
-            globals.menuButtonArray = [] # Clears the previous inhabitants of the array
+            self.menuButtonArray = []
         elif(self.levelbuttonArray[0].interacts(position)):
             game.playGame(1)
         elif(self.levelbuttonArray[1].interacts(position)):
@@ -109,6 +110,10 @@ class MenuObject():
             game.playGame(8)
         elif(self.levelbuttonArray[8].interacts(position)):
             game.playGame(9)
+        elif(self.multiplayerbutton.interacts(position)):
+            globals.gamestage = "multiplayermenu"
+            self.levelbuttonArray = []
+            self.menuButtonArray = []
         return
     def checkingInstructions(self,position):
         if (self.instructionsbackbutton.interacts(position)):

@@ -10,6 +10,10 @@ shop = None # The shop object, containing all of the functions regarding the sho
 ownedShips = ["yellowspaceship"] # List of all of the ships the player can purchase.
 playercurrentship = None # The current spaceship that the player spawns with.
 
+'''Multiplayer Variables'''
+connecting = False
+name = "Name" # The player's selected name.
+
 '''Persistant Global Variables - Loaded each time the game runs'''
 lang = None # The currently selected language, read from localisation/lastlang on game initialisation.
 languagesdict = None # The dictionary of all words to be used in the game, allows for the game to be adapted to non-English languages. 
@@ -32,3 +36,4 @@ enemySpaceships = None # The sprite group that contains all of the enemy spacesh
 optionalEnemySpaceships = None # Any enemies that can be destroyed, but don't have to be in order to complete the level.
 enemyBullets = None # This contains the bullets fired by the enemies, that can destroy the player.
 powerups = None # The sprite group containing all of the powerup objects.
+allplayers = {} # For Multiplayer - Contains all connected players (and the host's), positions.

@@ -2,6 +2,7 @@ from pygame import font, mouse
 import globalvariables as globals
 import buttons
 import localisation
+from pygame.locals import *
 class settingsScreen():
     def __init__(self): # Define all of the buttons that can be drawn.
         self.backbutton = buttons.Button(300,100,[0,globals.dimensions[1]/2-100],globals.screen, globals.languagesdict["back"],100)
@@ -85,9 +86,19 @@ class settingsScreen():
             print(globals.languagesdict)
             self.__init__()
         return
+    def checkLanguageText(self,event):
+        if event.key == K_BACKSPACE:
+            globals.name = globals.name[:-1]
+        elif event.key == K_RETURN:
+            print("enter")
+        else:
+            if len(globals.name)<20:
+                globals.name += event.unicode
+        return
     def displayLanguageOptions(self):
         self.englishButton.draw(globals.screen)
         self.spanishButton.draw(globals.screen)
+        buttons.Button(800,60,[0,150],globals.screen,f"{globals.languagesdict['name']} : {globals.name}",75)
         return
     def displayCredits(self):
         buttons.Button(1000,50,[0,-150],globals.screen,globals.languagesdict["creditsone"],25,font='Roboto-Regular')
