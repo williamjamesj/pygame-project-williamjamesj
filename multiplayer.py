@@ -62,7 +62,7 @@ class MultiplayerMenu():
         if keys[pygame.K_ESCAPE]==1:
             globals.gamestage = "levelselect"
             globals.connecting = False
-        globals.playerspaceship.update(keys[pygame.K_UP]==1 or keys[pygame.K_w],keys[pygame.K_DOWN]==1 or keys[pygame.K_s],keys[pygame.K_LEFT]==1 or keys[pygame.K_a],keys[pygame.K_RIGHT] or keys[pygame.K_d]==1,keys[pygame.K_SPACE] or keys[pygame.K_TAB])
+        globals.playerspaceship.update(keys[pygame.K_UP]==1 or keys[pygame.K_w],keys[pygame.K_DOWN]==1 or keys[pygame.K_s],keys[pygame.K_LEFT]==1 or keys[pygame.K_a],keys[pygame.K_RIGHT] or keys[pygame.K_d]==1,False)
         globals.playerspaceship.draw(globals.screen)
         self.connection.sayHello()
         for i in globals.allplayers:

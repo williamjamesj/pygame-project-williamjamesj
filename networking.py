@@ -6,13 +6,13 @@ import time
 import json
 class HostConnectionHandler():
     def __init__(self):
-        _thread.start_new_thread(self.recvthread,())
-        self.dataLog = []
-        globals.connecting = True
-        return
-    def recvthread(self):
+        _thread.start_new_thread(self.recvthread,()) # Starts a new thread so that messages can be recieved at all times.
+        self.dataLog = [] # This is the list that all messages that the thread recieves are saved to.
+        globals.connecting = True # Once this becomes False, the thread dies (probably). 
+        return # This is a return statement. It returns.
+    def recvthread(self): # This is run as the second thread, which runs in parallel to the main PyGame code. 
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sock.bind(("0.0.0.0", 5005))
+        sock.bind(("0.0.0.0", 5005)) # The host uses port 5005. 
         try:
             while globals.connecting:
                 response = globals.allplayers
