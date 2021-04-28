@@ -10,6 +10,7 @@ shop = None # The shop object, containing all of the functions regarding the sho
 ownedShips = ["yellowspaceship"] # List of all of the ships the player can purchase.
 playercurrentship = None # The current spaceship that the player spawns with.
 
+
 '''Multiplayer Variables'''
 connecting = False
 name = "Name" # The player's selected name.

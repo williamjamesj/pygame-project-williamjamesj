@@ -173,8 +173,10 @@ def leveleight():
     globals.playerspaceship.direction = 90
     globals.walls.add(Barrier(-7800,-500,8000,50))
     globals.walls.add(Barrier(-7800,500,8000,50))
-    globals.walls.add(Barrier(200,))
+    globals.walls.add(Barrier(200,-500,50,1050))
+    globals.walls.add(Barrier(-7850,-500,50,1050))
     globals.wincondition = Objective(-7500,0,50,50)
+    # globals.optionalEnemySpaceships.add(EnemySpaceship([100,0]))
     return
 def levelnine():
     print("level nine")

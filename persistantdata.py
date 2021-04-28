@@ -17,7 +17,7 @@ def load():
                      ORDER BY id DESC
                      LIMIT 1;""").fetchall()
     if len(data) == 0:
-        data = [(0,1,"yellowspaceship","yellowspaceship/10/0.1/3/1/0/1/1",10,10)]
+        data = [(0,1,"yellowspaceship","yellowspaceship/10/0.1/3/1/0/3/1",10,10)]
     return(data[0])
 def save(coins,level_complete,owned_ships,playercurrentship,musicvol,sfxvol):
     cursy = sqlite3.connect("save.data").cursor()
