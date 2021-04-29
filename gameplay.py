@@ -6,6 +6,7 @@ import math
 from obstacle import Barrier, Destroyable
 from levels import *
 from levels import playLevel
+import buttons
 def playGame(level):
     globals.leveltime = 0 # Starts the counter of how long the player has taken to complete the level.
     globals.playerorigin = globals.dimensions[0]/2,globals.dimensions[1]/2 # The player will always be displayed in the exact center of the screen.
@@ -52,7 +53,7 @@ def updateGame(keys):
         globals.screen.blit(textobject, (500,0))
         textobject = font.render(f"XY: {str(math.ceil(globals.playerspaceship.percievedx)),str(math.ceil(globals.playerspaceship.percievedy))} Timer: {math.floor(globals.leveltime/1000)}", True, (255,0,0))
         globals.screen.blit(textobject, (1000,0))
-    if pygame.sprite.collide_mask(globals.playerspaceship,globals.wincondition) is not None:
+    if pygame.sprite.collide_mask(globals.playerspaceship,globals.wincondition) is not None and globals.level != 9:
         if len(globals.enemySpaceships)==0:
             globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100*globals.level # Calculates the coins gained from the level.
             if globals.coinsgained<100: # Stops the player from recieving less than 100 coins, so that there is no chance of getting negative coins.
@@ -99,6 +100,7 @@ def updateGame(keys):
                 else:
                     spaceship.shield -= 1
                     bullet.kill()
+    
     walls = []
     for i in globals.walls:
         walls.append(i)
@@ -119,13 +121,37 @@ def updateGame(keys):
             if i in globals.enemyBullets or i in globals.destroyables: # Make sure the bullet is destroyed, so that the bullets don't infinitely damage.
                 i.kill()
             globals.playerspaceship.shields -= 1
+    if globals.level == 9:
+        globals.boss.update()
+        globals.boss.draw(globals.screen)
+        for i in globals.bullets:
+            if pygame.sprite.collide_mask(i,globals.boss):
+                i.kill()
+                globals.boss.shield -= 1
+        if globals.boss.shield <= 0:
+            if len(globals.enemySpaceships)==0:
+                globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100*globals.level # Calculates the coins gained from the level.
+            if globals.coinsgained<100: # Stops the player from recieving less than 100 coins, so that there is no chance of getting negative coins.
+                globals.coinsgained = 100
+            globals.coins+=math.floor(globals.coinsgained)
+            if globals.level==globals.unlockedlevel:
+                globals.unlockedlevel+=1 # Unlocks the next level.
+            globals.gamestage = "levelover"
+        buttons.Button(400,100,[0,globals.dimensions[1]/2*-1+100],globals.screen,globals.languagesdict['bosshealth'],40,buttoncolour=(255,0,0))
+        buttons.Button(globals.boss.shield*8,100,[0,globals.dimensions[1]/2*-1+100],globals.screen,globals.languagesdict['bosshealth'],40,buttoncolour=(0,0,0))
+        if globals.boss.shield%10 == 0 and globals.boss.shield != 50:
+            globals.boss.shield -= 1
+            globals.powerups.add(powerUp(500,0,50,50))
+            globals.powerups.add(powerUp(600,700,50,50))
+            for i in range (1,5):
+                globals.optionalEnemySpaceships.add(EnemySpaceship([1500,random.randint(500,1000)],"orangespaceship",10,0.2,0,0,100))
     if globals.playerspaceship.shields <= 0: # Only destroy the spaceship if it has reached 0 shields.
         globals.audioHandler.playSound('explosion') 
         globals.bullets.empty()
         globals.playerspaceship.speed = 0
         globals.playerspaceship.direction = 0
         globals.playerspaceship.canshoot = True
-        globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
+        globals.playerspaceship.firerate = globals.playercurrentship[4]
         globals.leveltime = 0
         playGame(globals.level)
     if globals.playerspaceship.shields > 1:

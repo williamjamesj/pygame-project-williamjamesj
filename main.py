@@ -94,7 +94,7 @@ while globals.running: # The main loop can be stopped from any file
     if globals.debug: # When in debug mode, display the FPS in the top left of the screen.
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))
-        globals.screen.blit(textobject, (0,0))
+        globals.screen.blit(textobject, (0,500))
     pygame.display.flip()
     fpsClock.tick(FPS)
 newShip = []

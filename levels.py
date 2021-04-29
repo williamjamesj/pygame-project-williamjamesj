@@ -2,12 +2,12 @@ import random
 import pygame
 from pygame.locals import *
 import globalvariables as globals
-from spaceship import EnemySpaceship, PlayerSpaceship
+from spaceship import BossSpaceship, EnemySpaceship, PlayerSpaceship
 import math
 from obstacle import Barrier, Destroyable,Objective, SpawnPoint, powerUp
 def spawnPlayer(spawnPointLocation):
         globals.playerspaceship = PlayerSpaceship(spawnPointLocation,globals.playercurrentship[0],globals.playercurrentship[1],globals.playercurrentship[2],0,globals.playercurrentship[3],globals.playercurrentship[6],firerate=globals.playercurrentship[4])
-        globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
+        globals.playerspaceship.firerate = globals.playercurrentship[4]
 def levelone():
     spawnPointLocation = (800,500)
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
@@ -189,7 +189,21 @@ def leveleight():
             globals.destroyables.add(Destroyable(i*-1,-450,25,950))
     return
 def levelnine():
-    print("level nine")
+    spawnPointLocation = (0,0)
+    globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
+    spawnPlayer(spawnPointLocation)
+    globals.playerspaceship.direction = 270
+    globals.wincondition = Objective(-854205,769865,50,50) # Good luck finding that one. Instead, the level is complete upon the death of the boss.
+    globals.boss = BossSpaceship([1500,500],"bigboy",0,0,0,0,20,shield=50)
+    globals.powerups.add(powerUp(500,0,50,50))
+    globals.powerups.add(powerUp(600,700,50,50))
+    globals.walls.add(Barrier(-300,-200,2300,50))
+    globals.walls.add(Barrier(-300,200,800,50))
+    globals.walls.add(Barrier(-300,-200,50,400))
+    globals.walls.add(Barrier(500,200,50,1000))
+    globals.walls.add(Barrier(500,1200,1500,50))
+    globals.walls.add(Barrier(2000,-200,50,1450))
+    globals.walls.add(Barrier(800,500,75,400))
     return
 def playLevel(level):
     globals.level = level
@@ -218,6 +232,7 @@ def playLevel(level):
         globals.gamestage = "game"
         leveleight()
     elif level == 9 and globals.unlockedlevel>=9:
+        globals.gamestage = "game"
         levelnine()
     else:
         globals.gamestage = "levelselect"

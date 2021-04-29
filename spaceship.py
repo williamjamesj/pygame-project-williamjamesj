@@ -79,13 +79,14 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         screen.blit(self.image,(self.rect.x,self.rect.y))
         return
 class EnemySpaceship(PlayerSpaceship):
-    def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate,brakingdistance=200,shield=0):
+    def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate,brakingdistance=200,shield=0,bulletspeed=35):
         super().__init__(coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate)
         self.shield = shield
         self.firerate = firerate
         self.x = coords[0]
         self.y = coords[1]
         self.brakingdistance = brakingdistance
+        self.bulletspeed = bulletspeed
         return
     def update(self): # Overrides the player 
         distancetoplayer = math.sqrt((self.x-globals.playerspaceship.percievedx)**2+(self.y-globals.playerspaceship.percievedy)**2) # This *could* be useful some day. Thanks past Will, this is rather helpful!
@@ -95,7 +96,7 @@ class EnemySpaceship(PlayerSpaceship):
         self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
         self.mask = pygame.mask.from_surface(self.image)
         if random.randint(0,self.firerate) == 0: # Means there is a 1 in *firerate* chance of firing
-            globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.x,globals.playerorigin[1]+self.y, self.direction+random.randint(-10,10), 35))
+            globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.x,globals.playerorigin[1]+self.y, self.direction+random.randint(-10,10), self.bulletspeed))
             globals.audioHandler.playSound('laser')
         # Movement Code - Enemies will fly toward the player, coming to a full stop once they're 200 units (?) from the player.
         if self.maxspeed != 0 and self.acceleration != 0:
@@ -112,9 +113,6 @@ class EnemySpaceship(PlayerSpaceship):
             self.x+=x*self.speed*-1
             self.y+=y*self.speed*-1
         return
-    def draw(self,screen):
-        super().draw(self,screen) # Uses the existing draw function.
-        return
 class DummySpaceship(PlayerSpaceship):
     def __init__(self):
         super().__init__([0,0], "yellowspaceship", 0, 0, 0, 0, 0)
@@ -125,4 +123,19 @@ class DummySpaceship(PlayerSpaceship):
         self.image = self.imagelist[0]
         self.image = pygame.transform.rotate(self.image,int(self.direction))
         self.rect = self.image.get_rect(center=(int(self.x)-math.floor(globals.playerspaceship.percievedx)+globals.playerorigin[0],int(self.y)-math.floor(globals.playerspaceship.percievedy)+globals.playerorigin[1]))
+        self.direction = findDirection([self.x-globals.playerspaceship.percievedx,self.y-globals.playerspaceship.percievedy])
+        return
+class BossSpaceship(EnemySpaceship):
+    def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate, brakingdistance=200, shield=0):
+        super().__init__(coords, appearance, 0, 0, 0, 0, firerate, brakingdistance=0, shield=shield,bulletspeed=50)
+        self.bigimage = pygame.image.load("resources/spaceships/bigboy.png").convert_alpha()
+        self.sincemask = 10
+        return
+    def update(self):
+        super().update()
+        self.image = self.bigimage
+        self.image = pygame.transform.rotate(self.image,self.direction)
+        if self.sincemask >= 10:
+            self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
         return
