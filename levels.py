@@ -1,3 +1,4 @@
+import random
 import pygame
 from pygame.locals import *
 import globalvariables as globals
@@ -167,7 +168,7 @@ def levelseven():
     globals.walls.add(Barrier(-2250,1200,1700,50))
     return
 def leveleight():
-    spawnPointLocation = (0,0)
+    spawnPointLocation = (-500,0)
     globals.spawnPoint = SpawnPoint(spawnPointLocation,50,50)
     spawnPlayer(spawnPointLocation)
     globals.playerspaceship.direction = 90
@@ -176,7 +177,16 @@ def leveleight():
     globals.walls.add(Barrier(200,-500,50,1050))
     globals.walls.add(Barrier(-7850,-500,50,1050))
     globals.wincondition = Objective(-7500,0,50,50)
-    # globals.optionalEnemySpaceships.add(EnemySpaceship([100,0]))
+    globals.powerups.add(powerUp(-800,0,50,50))
+    for i in range(-400,400):
+        if random.randint(0,150) == 0:
+            globals.enemySpaceships.add(EnemySpaceship([100,i],"greenspaceship",10,0.1,0,0,100,brakingdistance=300))
+    for i in range(-400,400):
+        if random.randint(0,300) == 0:
+            globals.optionalEnemySpaceships.add(EnemySpaceship([-7500,i],"orangespaceship",10,0.1,0,0,100,brakingdistance=300))
+    for i in range(1000,7000):
+        if i%100 ==0:
+            globals.destroyables.add(Destroyable(i*-1,-450,25,950))
     return
 def levelnine():
     print("level nine")

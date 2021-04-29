@@ -79,8 +79,9 @@ class PlayerSpaceship(pygame.sprite.Sprite):
         screen.blit(self.image,(self.rect.x,self.rect.y))
         return
 class EnemySpaceship(PlayerSpaceship):
-    def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate,brakingdistance=200):
+    def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate,brakingdistance=200,shield=0):
         super().__init__(coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate)
+        self.shield = shield
         self.firerate = firerate
         self.x = coords[0]
         self.y = coords[1]
@@ -94,7 +95,7 @@ class EnemySpaceship(PlayerSpaceship):
         self.rect = self.image.get_rect(center=(self.x-globals.playerspaceship.percievedx+globals.playerorigin[0],self.y-globals.playerspaceship.percievedy+globals.playerorigin[1]))
         self.mask = pygame.mask.from_surface(self.image)
         if random.randint(0,self.firerate) == 0: # Means there is a 1 in *firerate* chance of firing
-            globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.x,globals.playerorigin[1]+self.y, self.direction+random.randint(-10,10), 20))
+            globals.enemyBullets.add(Bullet(globals.playerorigin[0]+self.x,globals.playerorigin[1]+self.y, self.direction+random.randint(-10,10), 35))
             globals.audioHandler.playSound('laser')
         # Movement Code - Enemies will fly toward the player, coming to a full stop once they're 200 units (?) from the player.
         if self.maxspeed != 0 and self.acceleration != 0:

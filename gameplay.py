@@ -92,9 +92,13 @@ def updateGame(keys):
     for bullet in globals.bullets:
         for spaceship in enemies:
             if pygame.sprite.collide_mask(bullet,spaceship) is not None:
-                spaceship.kill() # Destroy both the bullet and the spaceship that it hit.
-                bullet.kill()
-                globals.audioHandler.playSound('explosion')
+                if spaceship.shield <= 0:
+                    spaceship.kill() # Destroy both the bullet and the spaceship that it hit.
+                    bullet.kill()
+                    globals.audioHandler.playSound('explosion')
+                else:
+                    spaceship.shield -= 1
+                    bullet.kill()
     walls = []
     for i in globals.walls:
         walls.append(i)
