@@ -94,12 +94,12 @@ while globals.running: # The main loop can be stopped from any file, allowing fo
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))
         globals.screen.blit(textobject, (0,500))
-    pygame.display.flip()
-    fpsClock.tick(FPS)
+    pygame.display.flip() # Display everything.
+    fpsClock.tick(FPS) # Wait the correct amount of time so that 60 frames per second is maintained.
 teacherTracker3000(f"Quittingafter{pygame.time.get_ticks()}Coins{globals.coins}Levels{globals.unlockedlevel}") # Nothing to see here.
 newShip = []
 for i in globals.playercurrentship: # Changes every element in the playercurrentship array into a string, as otherwise SQLite doesn't like it.
     newShip.append(str(i))
 save(globals.coins,globals.unlockedlevel,globals.ownedShips,newShip,globals.audioHandler.musicvolume,globals.audioHandler.sfxvolume) # Save all of the player's progress and preferences.
-globals.connecting = False
-sys.exit()
+globals.connecting = False # Should kill any remaining sockets.
+sys.exit() # It's done.

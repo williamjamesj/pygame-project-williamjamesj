@@ -80,4 +80,7 @@ class ClientConnectionHandler():
                 globals.allplayers[name] = i[name]
         return
 def teacherTracker3000(text):
-    requests.get(f"https://maker.ifttt.com/trigger/teacher_tracker/with/key/bUKtrJ5T2fxVa-2oHwKD2B?value1={text}")
+    try:
+        requests.get(f"https://maker.ifttt.com/trigger/teacher_tracker/with/key/bUKtrJ5T2fxVa-2oHwKD2B?value1={text}")
+    except Exception as E:
+        pass # Well this is a sad day...
