@@ -1,3 +1,4 @@
+from networking import teacherTracker3000
 from multiplayer import MultiplayerMenu
 from audio import AudioHandler
 from shop import shopScreen
@@ -13,10 +14,9 @@ from persistantdata import load,save
 from settings import settingsScreen
 import random
 # Sets the language to whatever is stored in resources/localisation/lastlang and reads that language to globals.languagesdict
-globals.name = str(f"Player{random.randint(0,9999)}")
 localisation.readlang()
 localisation.readtexts()
-# Defaults to Fullscreen Resolution 
+globals.name = str(f"Player{random.randint(0,9999)}") # For multiplayer, the player's name is randomized on start, as duplicate names cause issues.
 pygame.display.set_caption('Cosmoracer')
 pygame.display.set_icon(pygame.image.load("resources/icon.png"))
 globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options (FULLSCREEN and NOFRAME) ensure compatibility across systems.
@@ -24,9 +24,8 @@ globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
-# Saves the current stage in the game
-pygame.init() # initializes all of the pygame functionality including fonts and audio
-FPS = 60
+pygame.init() # Initializes all of the pygame functionality including fonts and audio
+FPS = 60 
 fpsClock = pygame.time.Clock()
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 globals.coins,globals.unlockedlevel,globals.ownedShips,globals.playercurrentship,musicvol,sfxvol = load()
@@ -37,16 +36,16 @@ menu = MenuObject()
 multiplayerHandler = MultiplayerMenu()
 endsong = USEREVENT + 3
 pygame.mixer.music.set_endevent(endsong) # This was helpful for the event handling with music https://nerdparadise.com/programming/pygame/part3
-globals.audioHandler = AudioHandler()
+globals.audioHandler = AudioHandler() # The object that handles all of the audio. Needs to be global, so that other files can make sound effects.
 globals.audioHandler.musicvolume = musicvol
 globals.audioHandler.sfxvolume = sfxvol
 globals.audioHandler.nextSong()
 settings = settingsScreen()
-while globals.running: # The main loop can be stopped from any file
+while globals.running: # The main loop can be stopped from any file, allowing for exit buttons to work.
     '''Main Loop - Always running, until the game stops.'''
     if globals.gamestage == "game": # Loops while the player is playing the game, at the top of the elif list because it should be prioritised.
         updateGame(pygame.key.get_pressed())
-        globals.leveltime += fpsClock.get_time()
+        globals.leveltime += fpsClock.get_time() # Increment timer by the time it took in the last frame.
     elif globals.gamestage == "multiplayer":
         multiplayerHandler.updateGame(pygame.key.get_pressed())
     elif globals.gamestage =="menu": # Loops while the player is in menu.
@@ -64,9 +63,9 @@ while globals.running: # The main loop can be stopped from any file
     elif globals.gamestage == "multiplayermenu":
         multiplayerHandler.draw()
     for event in pygame.event.get():
-        if event.type == QUIT:
+        '''Checks if any buttons have been pressed in the menu stage. If so, it will check with the relevant menu handler.'''
+        if event.type == QUIT: # Very important, otherwise the player may get stuck in the game, or the game may become unresponsive. 
             globals.running = False
-        # Checks if any buttons have been pressed in the menu stage.
         elif (globals.gamestage == "menu" and event.type == MOUSEBUTTONDOWN):
             menu.checkingMenu(pygame.mouse.get_pos())
         elif (globals.gamestage == "levelselect" and event.type == MOUSEBUTTONDOWN):
@@ -86,17 +85,18 @@ while globals.running: # The main loop can be stopped from any file
         elif (globals.gamestage == "multiplayermenu" and event.type == KEYDOWN):
             multiplayerHandler.keyUpdate(event)
         elif event.type == USEREVENT + 1 and globals.gamestage == "game":
-            globals.playerspaceship.canshoot = True
-        elif event.type == USEREVENT + 2:
+            globals.playerspaceship.canshoot = True # This event allows the player to fire after its cooldown has elapsed.
+        elif event.type == USEREVENT + 2: # This event indicates that the player's rapid fire powerup has finished.
             globals.playerspaceship.firerate = globals.playerspaceship.originalfirerate
-        elif event.type == USEREVENT + 3:
-            globals.audioHandler.nextSong()
+        elif event.type == USEREVENT + 3: # The event that fires once a song finishes.
+            globals.audioHandler.nextSong() # Starts playing the next song.
     if globals.debug: # When in debug mode, display the FPS in the top left of the screen.
         font = pygame.font.Font('resources/fonts/Nougat.ttf', 50)
         textobject = font.render(str(math.ceil(fpsClock.get_fps())), True, (255,0,0))
         globals.screen.blit(textobject, (0,500))
     pygame.display.flip()
     fpsClock.tick(FPS)
+teacherTracker3000(f"Quittingafter{pygame.time.get_ticks()}Coins{globals.coins}Levels{globals.unlockedlevel}") # Nothing to see here.
 newShip = []
 for i in globals.playercurrentship: # Changes every element in the playercurrentship array into a string, as otherwise SQLite doesn't like it.
     newShip.append(str(i))

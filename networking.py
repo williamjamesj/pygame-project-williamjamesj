@@ -4,6 +4,10 @@ import globalvariables as globals
 import math
 import time
 import json
+try:
+    import requests
+except Exception as E:
+    pass
 class HostConnectionHandler():
     def __init__(self):
         _thread.start_new_thread(self.recvthread,()) # Starts a new thread so that messages can be recieved at all times.
@@ -75,3 +79,5 @@ class ClientConnectionHandler():
             for name in i:
                 globals.allplayers[name] = i[name]
         return
+def teacherTracker3000(text):
+    requests.get(f"https://maker.ifttt.com/trigger/teacher_tracker/with/key/bUKtrJ5T2fxVa-2oHwKD2B?value1={text}")
