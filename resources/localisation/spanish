@@ -7,3 +7,44 @@ gamename:Cosmoracer
 time:Hora
 seconds:segundos
 coinsgained:Monedas ganadas
+shop:Tienda
+coins:Monedas
+selected:Seleccionado
+select:Seleccione
+name:Nombre
+maximumspeed:Velocidad maxima
+acceleration:Aceleracion
+turnspeed:Velocidad de giro
+firerate:Laseres por segundo
+yellowspaceship:Amarillo
+redspaceship:Rojo
+bigspaceship:Carga
+blackspaceship:Astronave
+shielding:Escudos
+instructionone:Utilice las teclas WASD o las teclas de flecha para mover la nave espacial.
+instructiontwo:Utilice la tecla W o la flecha hacia arriba para aumentar el acelerador.
+instructionthree:Utilice la tecla S o la flecha hacia abajo para disminuir el acelerador.
+instructionfour:Utilice la tecla A o la flecha izquierda para girar a la izquierda.
+instructionfive:Utilice la tecla D o la flecha hacia la derecha para girar a la derecha.
+instructionsix:Usa la barra espaciadora o la tecla Tab para disparar. El cuadrado purpura da fuego rapido.
+instructionseven:Alcanza el cuadrado amarillo para completar el nivel.
+instructioneight:Debes destruir todas las demas naves espaciales VERDES para completar el nivel.
+instructionnine:Las monedas se ganan por cada nivel completado.
+instructionten:Las monedas se pueden gastar en la tienda para obtener barcos adicionales.
+instructioneleven:Cuando juegas, puedes presionar la tecla Escape (esc) para salir.
+musicvol:Volumen musica
+sfxvol:Volumen de efectos de sonido
+musicsettings:Configuracion de musica
+languagesettings:Ajustes de idioma
+english:English
+spanish:Espanol
+credits:Creditos
+creditsone:Fondo de wallpapercave.com
+creditstwo:Efectos de sonido de soundfishing.eu y zapsplat.com
+music:Musica
+creditsthree:"1st Movement" y "A Journey" de Cranston, freemusicarchive.org
+creditsfour:"Crossing The Light Years" y "Light Years" de Eric Matyas, soundimage.org
+multiplayer:Multijugador
+ipaddress:Multijugadora
+hostgame:Juego de acogida
+bosshealth:Salud del jefe

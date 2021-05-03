@@ -123,7 +123,7 @@ class DummySpaceship(PlayerSpaceship):
         self.image = self.imagelist[0]
         self.image = pygame.transform.rotate(self.image,int(self.direction))
         self.rect = self.image.get_rect(center=(int(self.x)-math.floor(globals.playerspaceship.percievedx)+globals.playerorigin[0],int(self.y)-math.floor(globals.playerspaceship.percievedy)+globals.playerorigin[1]))
-        self.direction = findDirection([self.x-globals.playerspaceship.percievedx,self.y-globals.playerspaceship.percievedy])
+        self.direction = findDirection([int(self.x)-globals.playerspaceship.percievedx,int(self.y)-globals.playerspaceship.percievedy])
         return
 class BossSpaceship(EnemySpaceship):
     def __init__(self, coords, appearance, maxspeed, acceleration, direction, turnspeed, firerate, brakingdistance=200, shield=0):

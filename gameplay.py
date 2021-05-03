@@ -121,14 +121,14 @@ def updateGame(keys):
             if i in globals.enemyBullets or i in globals.destroyables: # Make sure the bullet is destroyed, so that the bullets don't infinitely damage.
                 i.kill()
             globals.playerspaceship.shields -= 1
-    if globals.level == 9:
+    if globals.level == 9: # Special Mechanics only for the level 9 boss fight.
         globals.boss.update()
         globals.boss.draw(globals.screen)
         for i in globals.bullets:
-            if pygame.sprite.collide_mask(i,globals.boss):
+            if pygame.sprite.collide_mask(i,globals.boss): # Handles bullets that hit the boss.
                 i.kill()
                 globals.boss.shield -= 1
-        if globals.boss.shield <= 0:
+        if globals.boss.shield <= 0: # The game ends upon the death of the boss.
             if len(globals.enemySpaceships)==0:
                 globals.coinsgained = globals.level*1000-math.floor(globals.leveltime)/100*globals.level # Calculates the coins gained from the level.
             if globals.coinsgained<100: # Stops the player from recieving less than 100 coins, so that there is no chance of getting negative coins.
@@ -137,9 +137,9 @@ def updateGame(keys):
             if globals.level==globals.unlockedlevel:
                 globals.unlockedlevel+=1 # Unlocks the next level.
             globals.gamestage = "levelover"
-        buttons.Button(400,100,[0,globals.dimensions[1]/2*-1+100],globals.screen,globals.languagesdict['bosshealth'],40,buttoncolour=(255,0,0))
-        buttons.Button(globals.boss.shield*8,100,[0,globals.dimensions[1]/2*-1+100],globals.screen,globals.languagesdict['bosshealth'],40,buttoncolour=(0,0,0))
-        if globals.boss.shield%10 == 0 and globals.boss.shield != 50:
+        buttons.Button(400,100,[0,globals.dimensions[1]/2*-1+50],globals.screen,globals.languagesdict['bosshealth'],40,buttoncolour=(255,0,0))
+        buttons.Button(globals.boss.shield*8,100,[0,globals.dimensions[1]/2*-1+50],globals.screen,globals.languagesdict['bosshealth'],40,buttoncolour=(0,0,0))
+        if globals.boss.shield%10 == 0 and globals.boss.shield != 50: # Spawn waves of enemies, each time that the boss loses 10 shields. Doesn't trigger upon level start.
             globals.boss.shield -= 1
             globals.powerups.add(powerUp(500,0,50,50))
             globals.powerups.add(powerUp(600,700,50,50))
@@ -154,6 +154,6 @@ def updateGame(keys):
         globals.playerspaceship.firerate = globals.playercurrentship[4]
         globals.leveltime = 0
         playGame(globals.level)
-    if globals.playerspaceship.shields > 1:
-        globals.screen.blit(pygame.font.Font('resources/fonts/Roboto-Regular.ttf', 50).render(f"Shields: {globals.playerspaceship.shields}", True, (255,0,0)), (0,0))
+    if globals.playerspaceship.shields > 1: # Display how many shields the player has, but only when they have more than 1 shield remaining.
+        globals.screen.blit(pygame.font.Font('resources/fonts/Roboto-Regular.ttf', 50).render(f"{globals.languagesdict['shielding']}: {globals.playerspaceship.shields}", True, (255,0,0)), (0,0))
     return

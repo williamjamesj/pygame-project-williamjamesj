@@ -13,7 +13,7 @@ from persistantdata import load,save
 from settings import settingsScreen
 import random
 # Sets the language to whatever is stored in resources/localisation/lastlang and reads that language to globals.languagesdict
-globals.name = random.randint(0,99999)
+globals.name = str(f"Player{random.randint(0,9999)}")
 localisation.readlang()
 localisation.readtexts()
 # Defaults to Fullscreen Resolution 

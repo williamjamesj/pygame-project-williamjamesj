@@ -77,20 +77,18 @@ class settingsScreen():
             localisation.setlang("english")
             globals.lang = "english"
             localisation.readtexts()
-            print(globals.languagesdict)
             self.__init__() # Reloads all of the buttons on the screen, so that the language is changed.
         elif self.spanishButton.interacts(mouseposition):
             localisation.setlang("spanish")
             globals.lang = "spanish"
             localisation.readtexts()
-            print(globals.languagesdict)
             self.__init__()
         return
     def checkLanguageText(self,event):
         if event.key == K_BACKSPACE:
             globals.name = globals.name[:-1]
         elif event.key == K_RETURN:
-            print("enter")
+            globals.gamestage = "menu"
         else:
             if len(globals.name)<20:
                 globals.name += event.unicode

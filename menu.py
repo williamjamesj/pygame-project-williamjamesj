@@ -58,11 +58,11 @@ class MenuObject():
         buttons.Button(1000,40,[0,150-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionthree"],30,font="Roboto-Regular")
         buttons.Button(1000,40,[0,200-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionfour"],30,font="Roboto-Regular")
         buttons.Button(1000,40,[0,250-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionfive"],30,font="Roboto-Regular")
-        buttons.Button(1000,40,[0,300-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionsix"],30,font="Roboto-Regular")
+        buttons.Button(1000,40,[0,300-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionsix"],25,font="Roboto-Regular")
         buttons.Button(1000,40,[0,400-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionseven"],30,font="Roboto-Regular")
-        buttons.Button(1000,40,[0,450-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructioneight"],30,font="Roboto-Regular")
+        buttons.Button(1000,40,[0,450-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructioneight"],25,font="Roboto-Regular")
         buttons.Button(1000,40,[0,500-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionnine"],30,font="Roboto-Regular")
-        buttons.Button(1000,40,[0,550-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionten"],30,font="Roboto-Regular")
+        buttons.Button(1000,40,[0,550-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructionten"],25,font="Roboto-Regular")
         buttons.Button(1000,40,[0,600-globals.dimensions[1]/2],globals.screen,globals.languagesdict["instructioneleven"],30,font="Roboto-Regular")
         return
     def displayLevelOver(self):

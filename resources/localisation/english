@@ -19,7 +19,7 @@ firerate:Lasers Per Second
 yellowspaceship:Yelleroni 2000
 redspaceship:Zoominator 3000
 bigspaceship:The Cargonator
-blackspaceship:Bob
+blackspaceship:Zoominator 9000
 shielding:Shields
 instructionone:Use either the WASD keys or the arrow keys to move the spaceship.
 instructiontwo:Use the W key or Up arrow to increase the throttle.
@@ -37,7 +37,7 @@ sfxvol:Sound Effects Volume
 musicsettings:Music Settings
 languagesettings:Language Settings
 english:English
-spanish:Spanish
+spanish:Espanol
 credits:Credits
 creditsone:Background from wallpapercave.com
 creditstwo:Sound effects from soundfishing.eu and zapsplat.com

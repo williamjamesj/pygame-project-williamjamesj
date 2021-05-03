@@ -8,7 +8,7 @@ class Button():
         self.buttoncolour = buttoncolour
         x,y = position
         self.rectangle = pygame.Rect(0,0,width,height)
-        self.rectangle.center = (globals.dimensions[0]/2+x,globals.dimensions[1]/2+y)
+        self.rectangle.center = (globals.dimensions[0]/2+x,globals.dimensions[1]/2+y) # Draw the rectangle by default in the middle of the screen.
         pygame.draw.rect(surface, buttoncolour, self.rectangle, border_radius = 15)
         font = pygame.font.Font(f'resources/fonts/{font}.ttf', size)
         self.textobject = font.render(text, True, textcolour)

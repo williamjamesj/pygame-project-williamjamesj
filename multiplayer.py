@@ -70,6 +70,7 @@ class MultiplayerMenu():
                 pass
             elif i in self.otherplayers:
                 self.otherplayers[i].x, self.otherplayers[i].y, self.otherplayers[i].direction = globals.allplayers[i]
+                buttons.Button(0,0,[self.otherplayers[i].rect.x-400,self.otherplayers[i].rect.y-400],globals.screen,str(i),25,textcolour=(255,255,255),font="Roboto-Regular")
             else:
                 self.otherplayers[i] = DummySpaceship()
         for i in self.otherplayers:
