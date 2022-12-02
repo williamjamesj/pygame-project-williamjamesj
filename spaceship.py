@@ -114,8 +114,8 @@ class EnemySpaceship(PlayerSpaceship):
             self.y+=y*self.speed*-1
         return
 class DummySpaceship(PlayerSpaceship):
-    def __init__(self):
-        super().__init__([0,0], "yellowspaceship", 0, 0, 0, 0, 0)
+    def __init__(self,appearance="yellowspaceship"):
+        super().__init__([0,0], appearance, 0, 0, 0, 0, 0)
         self.x = 0
         self.y = 0
         return

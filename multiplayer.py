@@ -47,6 +47,7 @@ class MultiplayerMenu():
         globals.playerspaceship = PlayerSpaceship([globals.dimensions[0]/2,globals.dimensions[1]/2],globals.playercurrentship[0],globals.playercurrentship[1],globals.playercurrentship[2],0,globals.playercurrentship[3],globals.playercurrentship[6],firerate=globals.playercurrentship[4])
         globals.gamestage = "multiplayer"
         self.connection = HostConnectionHandler()
+        self.shooting = False
         return
     def joinGame(self):
         globals.allplayers = {}
@@ -55,21 +56,28 @@ class MultiplayerMenu():
         globals.playerspaceship = PlayerSpaceship([globals.dimensions[0]/2,globals.dimensions[1]/2],globals.playercurrentship[0],globals.playercurrentship[1],globals.playercurrentship[2],0,globals.playercurrentship[3],globals.playercurrentship[6],firerate=globals.playercurrentship[4])
         globals.gamestage = "multiplayer"
         self.connection = ClientConnectionHandler(self.stringInput)
+        self.shooting = False
         return
     def updateGame(self,keys):
+        self.shooting = False
         globals.screen.blit(globals.backgroundpicture, (0,0))
-        globals.allplayers[globals.name] = [globals.playerspaceship.percievedx,globals.playerspaceship.percievedy,globals.playerspaceship.direction]
+        globals.allplayers[globals.name] = [globals.playerspaceship.percievedx,globals.playerspaceship.percievedy,globals.playerspaceship.direction,"False"]
         if keys[pygame.K_ESCAPE]==1:
             globals.gamestage = "levelselect"
             globals.connecting = False
+        if keys[pygame.K_TAB] or keys[pygame.K_SPACE]:
+            self.shooting = True
         globals.playerspaceship.update(keys[pygame.K_UP]==1 or keys[pygame.K_w],keys[pygame.K_DOWN]==1 or keys[pygame.K_s],keys[pygame.K_LEFT]==1 or keys[pygame.K_a],keys[pygame.K_RIGHT] or keys[pygame.K_d]==1,False)
         globals.playerspaceship.draw(globals.screen)
-        self.connection.sayHello()
+        self.connection.sayHello(self.shooting)
         for i in globals.allplayers:
             if i == globals.name:
                 pass
+            elif i[0:5] == "bullet":
+                self.otherplayers[i] = DummySpaceship()
+                self.otherplayers[i].x, self.otherplayers[i].y, self.otherplayers[i].direction,shooting = globals.allplayers[i]
             elif i in self.otherplayers:
-                self.otherplayers[i].x, self.otherplayers[i].y, self.otherplayers[i].direction = globals.allplayers[i]
+                self.otherplayers[i].x, self.otherplayers[i].y, self.otherplayers[i].direction,shooting = globals.allplayers[i]
                 buttons.Button(0,0,[self.otherplayers[i].rect.x-400,self.otherplayers[i].rect.y-400],globals.screen,str(i),25,textcolour=(255,255,255),font="Roboto-Regular")
             else:
                 self.otherplayers[i] = DummySpaceship()

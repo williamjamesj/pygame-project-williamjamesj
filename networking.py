@@ -13,6 +13,7 @@ class HostConnectionHandler():
         _thread.start_new_thread(self.recvthread,()) # Starts a new thread so that messages can be recieved at all times.
         self.dataLog = [] # This is the list that all messages that the thread recieves are saved to.
         globals.connecting = True # Once this becomes False, the thread dies (probably). 
+        self.currentBullet = 0
         return # This is a return statement. It returns.
     def recvthread(self): # This is run as the second thread, which runs in parallel to the main PyGame code. 
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -29,7 +30,10 @@ class HostConnectionHandler():
         print("A sad day for socketkind")
         sock.close()
         return
-    def sayHello(self): # The host doesn't perform this operation, as it only responds to any messages it recieves with the complete array.
+    def sayHello(self,shooting): # The host doesn't perform this operation, as it only responds to any messages it recieves with the complete array.
+        if shooting:
+            globals.allplayers[f"bullet{self.currentBullet}"] = [globals.playerspaceship.percievedx,globals.playerspaceship.percievedy,globals.playerspaceship.direction,"False"]
+            self.currentBullet += 1
         self.updateList()
     def getData(self):
         tempdata = self.dataLog
@@ -52,20 +56,18 @@ class ClientConnectionHandler():
     def recvthread(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.bind(("0.0.0.0", 5006))
-        try:
-            while globals.connecting:
-                data, addr = sock.recvfrom(1024)
-                data = str(data.decode())
-                data = data.replace("'",'"')
-                data = json.loads(data)
-                self.dataLog.append(data)
-        except Exception as E:
-            print(E)
+        while globals.connecting:
+            data, addr = sock.recvfrom(1024)
+            data = str(data.decode())
+            data = data.replace("'",'"')
+            print(data)
+            data = json.loads(data)
+            self.dataLog.append(data)
         print("A sad day for socketkind")
         sock.close()
         return
-    def sayHello(self):
-        message = str.encode(f"{globals.name},{math.floor(globals.playerspaceship.percievedx)},{math.floor(globals.playerspaceship.percievedy)},{math.floor(globals.playerspaceship.direction)}")
+    def sayHello(self,shooting):
+        message = str.encode(f"{globals.name},{math.floor(globals.playerspaceship.percievedx)},{math.floor(globals.playerspaceship.percievedy)},{math.floor(globals.playerspaceship.direction)},{str(shooting)}")
         self.sock.sendto(message,(self.ip,5005))
         self.updateList()
         return

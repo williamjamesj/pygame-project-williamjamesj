@@ -1,4 +1,3 @@
-from networking import teacherTracker3000
 from multiplayer import MultiplayerMenu
 from audio import AudioHandler
 from shop import shopScreen
@@ -19,13 +18,13 @@ localisation.readtexts()
 globals.name = str(f"Player{random.randint(0,9999)}") # For multiplayer, the player's name is randomized on start, as duplicate names cause issues.
 pygame.display.set_caption('Cosmoracer')
 pygame.display.set_icon(pygame.image.load("resources/icon.png"))
-globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options (FULLSCREEN and NOFRAME) ensure compatibility across systems.
-# globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
+# globals.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN|pygame.NOFRAME) # Both of these options (FULLSCREEN and NOFRAME) ensure compatibility across systems.
+globals.screen = pygame.display.set_mode((1024,768)) # The display resolution that is minimum.
 # Retrieves the size of the fullscreen window, important for properly positioning things on the screen
 info = pygame.display.Info()
 globals.dimensions = [info.current_w, info.current_h] # Dimensions of the screen
 pygame.init() # Initializes all of the pygame functionality including fonts and audio
-FPS = 60 
+FPS = 60
 fpsClock = pygame.time.Clock()
 globals.backgroundpicture = pygame.image.load("resources/background.jpg")
 globals.coins,globals.unlockedlevel,globals.ownedShips,globals.playercurrentship,musicvol,sfxvol = load()
@@ -96,7 +95,6 @@ while globals.running: # The main loop can be stopped from any file, allowing fo
         globals.screen.blit(textobject, (0,500))
     pygame.display.flip() # Display everything.
     fpsClock.tick(FPS) # Wait the correct amount of time so that 60 frames per second is maintained.
-teacherTracker3000(f"Quittingafter{pygame.time.get_ticks()}Coins{globals.coins}Levels{globals.unlockedlevel}") # Nothing to see here.
 newShip = []
 for i in globals.playercurrentship: # Changes every element in the playercurrentship array into a string, as otherwise SQLite doesn't like it.
     newShip.append(str(i))
